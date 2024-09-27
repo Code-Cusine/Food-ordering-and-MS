@@ -1,10 +1,9 @@
-import React, { useContext, useState, useCallback, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import './Navbar.css';
 import logo from '../assets/l3.png';
 import cartIcon from '../assets/cart_icon.png';
 import { Link } from 'react-router-dom';
-import LoginPage from '../LoginPage/LoginPage'; 
-import Register from '../Register/Register';
+import axios from 'axios'; // For making API calls to the backend
 import { ShopContext } from '../../context/ShopContext';
 import { FaUser, FaBars, FaTimes } from 'react-icons/fa'; // Import icons
 
@@ -12,89 +11,76 @@ const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState("shop");
   const { getTotalCartItems } = useContext(ShopContext);
   const [isLoginPageOpen, setIsLoginPageOpen] = useState(false);
-  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogoutOverlay, setShowLogoutOverlay] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Mobile menu state
   const [showLoginOptions, setShowLoginOptions] = useState(false); // For displaying login options
-  const [isLoginTriggered, setIsLoginTriggered] = useState(false); // To handle actual login trigger
-  const [showAdminPasswordInput, setShowAdminPasswordInput] = useState(false); // For admin password input
-  const [adminPassword, setAdminPassword] = useState(''); // For storing admin password
+  const [isRegistering, setIsRegistering] = useState(false); // Toggle for forms
+  const [showFormOverlay, setShowFormOverlay] = useState(false); // Show/Hide Form Overlay
+
+  // Form States
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const openLoginPage = () => {
     setShowLoginOptions(true); // Display login options overlay
   };
 
   const closeOverlay = () => {
-    setIsLoginPageOpen(false);
-    setShowAdminPasswordInput(false);
     setShowLoginOptions(false);
+    setShowFormOverlay(false);
+    setName('');
+    setEmail('');
+    setPassword('');
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
   };
 
-  useEffect(() => {
-    // Set logged in state if user is authenticated
-  }, [isLoggedIn]);
-
-  const handleProfileClick = useCallback(() => {
-    setShowLogoutOverlay(true);
-  }, []);
-
-  const handleCancel = () => {
-    setShowLogoutOverlay(false);
-  };
-
-  const handleOverlayClick = (e) => {
-    e.stopPropagation();
+  const handleMenuClick = (menuName) => {
+    setActiveMenu(menuName);
+    setIsMobileMenuOpen(false); // Close mobile menu when an item is clicked
   };
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen); // Toggle mobile menu open/close
   };
 
-  useEffect(() => {
-    setShowLogoutOverlay(false);
-  }, [isLoggedIn]);
-
-  const handleMenuClick = (menuName) => {
-    setActiveMenu(menuName);
-    setIsMobileMenuOpen(false); // Close mobile menu when an item is clicked
-  };
-
-  const handleLoginOptionClick = (loginType) => {
-    setShowLoginOptions(false); // Close the login options overlay
-    if (loginType === 'admin') {
-      // Show admin password input
-      setShowAdminPasswordInput(true);
-    } else if (loginType === 'user') {
-      // Trigger user login
-      setIsLoginTriggered(true); // Set login trigger
-      setIsLoginPageOpen(true); // Open the user login page or handle Google sign-in
-    }
-  };
-
-  // Handle login process after the user has selected login as user
-  useEffect(() => {
-    if (isLoginTriggered) {
-      // Call Google login or your custom login method here
-      // Example: handleGoogleLogin();
-      console.log('User login triggered');
-    }
-  }, [isLoginTriggered]);
-
-  const handleAdminPasswordSubmit = () => {
-    // Replace with actual admin password validation logic
-    const correctPassword = 'admin123'; // Example password, replace with secure validation
-    if (adminPassword === correctPassword) {
-      console.log('Admin login successful');
+  const handleLoginSubmit = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/login', { email, password });
+      alert(response.data.message); // Show success message
       setIsLoggedIn(true); // Set logged in state
-      setShowAdminPasswordInput(false); // Close admin password input
-    } else {
-      alert('Incorrect password. Please try again.');
+      closeOverlay();
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data.message); // Show error message
+      } else {
+        alert('An unexpected error occurred.'); // Handle unexpected errors
+      }
     }
+  };
+
+  const handleRegisterSubmit = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/register', { name, email, password });
+      alert(response.data.message); // Show success message
+      closeOverlay();
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data.message); // Show error message
+      } else {
+        alert('An unexpected error occurred.'); // Handle unexpected errors
+      }
+    }
+  };
+
+  const handleAdminLogin = () => {
+    // Redirect or show admin login form
+    alert("Redirecting to Admin Login Page..."); // Replace with actual redirection logic
+    // For example: window.location.href = '/admin/login'; or set another state to display admin login form
   };
 
   return (
@@ -135,9 +121,9 @@ const Navbar = () => {
       <div className="nav-login-cart">
         {isLoggedIn ? (
           <div className="profile-wrapper">
-            <FaUser onClick={handleProfileClick} />
+            <FaUser onClick={() => setShowLogoutOverlay(true)} />
             {showLogoutOverlay && (
-              <div className="logout-overlay" onClick={handleCancel}>
+              <div className="logout-overlay" onClick={closeOverlay}>
                 <div className="logout-content" onClick={e => e.stopPropagation()}>
                   <button onClick={handleLogout}>Logout</button>
                 </div>
@@ -145,7 +131,7 @@ const Navbar = () => {
             )}
           </div>
         ) : (
-          <button onClick={openLoginPage}>Login</button>  
+          <button onClick={openLoginPage}>Login</button>
         )}
         <Link to='/cart'>
           <img src={cartIcon} alt="Cart" />
@@ -154,34 +140,49 @@ const Navbar = () => {
       </div>
 
       {showLoginOptions && (
-        <div className="login-options-overlay" onClick={() => setShowLoginOptions(false)}>
-          <div className="login-options-content" onClick={handleOverlayClick}>
-          <FaTimes className="close-icon" onClick={closeOverlay} style={{ cursor: 'pointer', position: 'absolute', top: '275px', right: '620px' }} />
-            <button onClick={() => handleLoginOptionClick('admin')}>Login as Admin</button>
-            <button onClick={() => handleLoginOptionClick('user')}>Login as User</button>
+        <div className="login-options-overlay" onClick={closeOverlay}>
+          <div className="login-options-content" onClick={e => e.stopPropagation()}>
+            <FaTimes className="close-icon" onClick={closeOverlay} style={{ cursor: 'pointer', top: '-20px', right:'-185px' }} />
+            <button onClick={handleAdminLogin} style={{background:'#FF8C00' }}>Login as Admin</button> {/* New admin login button */}
+            <button onClick={() => { setIsRegistering(false); setShowFormOverlay(true); setShowLoginOptions(false); }} style={{background:'#3EB489' }}>Login as Existing User</button>
+            <button onClick={() => { setIsRegistering(true); setShowFormOverlay(true); setShowLoginOptions(false); } } style={{background:'#007BFF' }}>Register as New User</button>
+            
           </div>
         </div>
       )}
 
-      {showAdminPasswordInput && (
-        <div className="admin-password-overlay" onClick={closeOverlay}>
-          <div className="admin-password-content" onClick={handleOverlayClick}>
-          <FaTimes className="close-icon1" onClick={closeOverlay} style={{ cursor: 'pointer', position: 'absolute', top: '250px', right: '570px' }} />
-            <h3>Please enter admin password</h3>
-            <input 
-              type="password"
-              value={adminPassword}
-              onChange={(e) => setAdminPassword(e.target.value)}
-              placeholder="Admin Password"
-              className="password-input"
+      {showFormOverlay && (
+        <div className="login-form-overlay" onClick={closeOverlay}>
+          <div className="login-form-content" onClick={e => e.stopPropagation()}>
+            <FaTimes className="close-icon" onClick={closeOverlay} style={{ cursor: 'pointer', right : '-350px', top:'-10px' }} />
+            <h2>{isRegistering ? 'Register' : 'Login'}</h2>
+            {isRegistering && (
+              <input
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            )}
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            <button onClick={handleAdminPasswordSubmit}>Submit</button>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {isRegistering ? (
+              <button onClick={handleRegisterSubmit}>Register</button>
+            ) : (
+              <button onClick={handleLoginSubmit}>Login</button>
+            )}
           </div>
         </div>
-      )}
-
-      {isLoginPageOpen && (
-        <LoginPage onClose={closeOverlay} setIsLoggedIn={setIsLoggedIn} />
       )}
     </div>
   );

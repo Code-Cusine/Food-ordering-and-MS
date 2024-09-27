@@ -294,6 +294,94 @@
         background-color: #333; /* Ensure visible color */
         border-radius: 2px;
     }
+    /* Overlay for login and registration forms */
+.login-options-overlay,
+.login-form-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+/* Content container for forms */
+.login-options-content,
+.login-form-content {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative; /* For close icon positioning */
+}
+
+/* Close icon */
+
+
+/* Title styling */
+.login-form-content h2 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+/* Input fields */
+.login-form-content input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0; /* Spacing between inputs */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.login-form-content input:focus {
+    border-color: #007bff; /* Highlight border color on focus */
+    outline: none;
+}
+
+/* Button styling */
+.login-form-content button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff; /* Primary button color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-form-content button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Login options overlay buttons */
+.login-options-content button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0; /* Spacing between buttons */
+    background-color: #28a745; /* Green for success actions */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-options-content button:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
 
     
     
