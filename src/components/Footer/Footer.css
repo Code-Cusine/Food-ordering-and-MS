@@ -1,0 +1,127 @@
+.footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    padding: 20px;
+}
+
+.footer-logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    size: 8px;
+}
+
+.footer-logo p{
+    color: #383838;
+    font-size: 46px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.footer-links{
+    display: flex;
+    list-style: none;
+    gap: 50px;
+    color: #252525;
+    font-size: 20px;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.footer-links li{
+    cursor: pointer;
+}
+
+.footer-social-icon{
+    display: flex;
+    gap: 20px;
+}
+
+.footer-icons-container{
+    padding: 10px;
+    padding-bottom: 6px;
+    background: #fbfbfb;
+    border: 1px solid #ebebeb;
+}
+
+.footer-copyright{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    margin-bottom: 30px;
+    color: #1a1a1a;
+    font-size: 20px;
+    text-align: center;
+}
+
+.footer-copyright hr{
+    width: 80%;
+    border: none;
+    border-radius: 10px;
+    height: 3px;
+    background: #c7c7c7;
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .footer{
+        gap: 30px;
+    }
+    
+    .footer-logo p{
+        font-size: 28px;
+        padding-right: 36px;
+        
+    }
+
+    .footer-logo{
+        gap: 8px; /* Reduced gap for smaller screens */
+    }
+
+    .footer-links{
+        gap: 30px;
+        font-size: 18px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-social-icon{
+        gap: 15px;
+    }
+    
+    .footer-copyright{
+        gap: 20px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-logo p{
+        font-size: 25px;
+        margin-right: auto;
+    }
+
+    .footer-links{
+        gap: 20px;
+        font-size: 16px;
+    }
+
+    .footer-logo{
+        gap: 5px; /* Even smaller gap for mobile screens */
+    }
+
+    .footer-social-icon{
+        gap: 10px;
+    }
+    
+    .footer-copyright{
+        gap: 15px;
+        font-size: 16px;
+    }
+}
