@@ -1,0 +1,144 @@
+/* Container styles */
+.items-container,
+.shop-category {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+/* Item box styles */
+.item-box,
+.food-box {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    padding: 15px;
+    margin: 20px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+/* Image styles */
+.item-image,
+.food-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    border: 2px solid #ddd;
+    flex-shrink: 0;
+}
+
+.item-price {
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0;
+    font-size: 1.1rem;
+}
+
+/* Item details styles */
+.item-details,
+.food-details {
+    flex-grow: 1;
+}
+
+.item-details h3,
+.food-details h3 {
+    font-size: 1.1rem;
+    margin: 0 0 10px 0;
+}
+
+.item-details p,
+.food-details p {
+    color: #555;
+    font-size: 0.9rem;
+    margin: 5px 0;
+}
+
+/* Price styles */
+.item-price-new,
+.food-price {
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0;
+}
+
+.item-price-old {
+    text-decoration: line-through;
+    color: #999;
+}
+
+/* Button styles */
+.add-item-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.add-item-button:hover {
+    background-color: #45a049;
+}
+
+/* Mobile Version */
+@media (max-width: 768px) {
+    .items-container,
+    .shop-category {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .item-box,
+    .food-box {
+        width: 90%;
+        height: auto;
+        padding: 10px;
+        margin: 20px auto;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .item-image,
+    .food-image {
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 70px;
+        height: 70px;
+    }
+
+    .item-details h3,
+    .food-details h3 {
+        font-size: 1rem;
+        margin: 5px 0;
+    }
+
+    .item-details p,
+    .food-details p {
+        font-size: 0.85rem;
+    }
+
+    .item-price-new,
+    .item-price-old,
+    .food-price {
+        font-size: 0.85rem;
+    }
+
+    .add-item-button {
+        width: 100%;
+        font-size: 0.85rem;
+        padding: 10px;
+        margin-top: 10px;
+    }
+}

@@ -59,9 +59,82 @@ let all_product = [
     name: "Java Chip Frappuccino",
     description: "Mocha sauce and Frappuccino chips blended with Frappu...",
     price: "₹ 325.50",
-    image: kids_removebg_preview,
-    category : 'Drinks',
+    image: kids_removebg_preview ,
+    category : 'Food',
 },
+
+{
+    id: 4,
+    name: "Masala Chai",
+    description: "A spiced, flavorful tea made by brewing black tea with aromatic Indian spices...",
+    price: "₹ 150.00",
+    image: kids_removebg_preview, // Replace with appropriate image
+    category: 'Drinks',
+},
+{
+    id: 5,
+    name: "Filter Coffee",
+    description: "Traditional South Indian coffee brewed to perfection with a smooth and rich taste...",
+    price: "₹ 120.00",
+    image: kids_removebg_preview, // Replace with appropriate image
+    category: 'Drinks',
+},
+{
+    id: 6,
+    name: "Hot Chocolate",
+    description: "Rich and creamy hot chocolate made from premium cocoa for a comforting drink...",
+    price: "₹ 180.00",
+    image: kids_removebg_preview, // Replace with appropriate image
+    category: 'Drinks',
+},
+{
+    id: 7,
+    name: "Green Tea",
+    description: "A soothing cup of antioxidant-rich green tea with delicate earthy flavors...",
+    price: "₹ 130.00",
+    image: kids_removebg_preview, // Replace with appropriate image
+    category: 'Drinks',
+},
+{
+    id: 8,
+    name: "Iced Tea",
+    description: "Chilled and refreshing iced tea, available in lemon or peach flavor...",
+    price: "₹ 160.00",
+    image: kids_removebg_preview, // Replace with appropriate image
+    category: 'Drinks',
+},
+{
+    id: 9,
+    name: "Lemonade",
+    description: "A zesty and refreshing lemonade made with freshly squeezed lemons...",
+    price: "₹ 100.00",
+    image: kids_removebg_preview, // Replace with appropriate image
+    category: 'Drinks',
+},
+{
+    id: 10,
+    name: "Buttermilk",
+    description: "A cool and refreshing buttermilk spiced with traditional Indian flavors...",
+    price: "₹ 90.00",
+    image: kids_removebg_preview, // Replace with appropriate image
+    category: 'Drinks',
+},
+{
+    id: 11,
+    name: "Mango Smoothie",
+    description: "A creamy mango smoothie made with ripe mangoes and yogurt for a tropical treat...",
+    price: "₹ 200.00",
+    image: kids_removebg_preview, // Replace with appropriate image
+    category: 'Drinks',
+},
+{
+    id: 12,
+    name: "Sweet Lassi",
+    description: "A thick and creamy yogurt-based drink sweetened with sugar and flavored with cardamom...",
+    price: "₹ 110.00",
+    image: kids_removebg_preview, // Replace with appropriate image
+    category: 'Drinks',
+}
 ];
 
 export default all_product;

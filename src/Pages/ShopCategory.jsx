@@ -1,38 +1,23 @@
-import React, {useContext} from 'react'
-import './CSS/ShopCategory.css'
-import { ShopContext } from '../context/ShopContext'
-
-import Item from '../components/Items/Item'
-
+import React, { useContext } from 'react';
+import '../components/Items/combined-item-styles.css';
+import { ShopContext } from '../context/ShopContext';
+import Item from '../components/Items/Item';
 
 const ShopCategory = (props) => {
-const {all_product} = useContext(ShopContext);
-return (
-  <div className='shop-category'>
-    <br/>
-      <div className="shopcategory-indexSort">
-        
-        
-      </div>
+    const { all_product } = useContext(ShopContext);
 
-      <div className="shopcategory-products">
-        {all_product.map((item,i) => {
-          if(props.category === item.category){
-            return <Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price} />
+    // Filter products based on the category
+    const categoryProducts = all_product.filter(item => item.category === props.category);
 
-          }
-          else{
-            return null;
-          }
+    return (
+        <div className="shop-category">
+            <div className="items-container">
+                {categoryProducts.map((item, i) => (
+                    <Item key={i} {...item} />
+                ))}
+            </div>
+        </div>
+    );
+};
 
-        
-        })}
-      </div>
-      
-     </div>
-
-
-)
-
-}
 export default ShopCategory;
