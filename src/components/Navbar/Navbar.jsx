@@ -97,13 +97,13 @@ const Navbar = () => {
           <Link style={{ textDecoration: 'none' }} to='/'>Bestseller</Link>
           {activeMenu === "shop" ? <hr /> : null}
         </li>
-        <li onClick={() => handleMenuClick("men")} className={activeMenu === "men" ? "active" : ""}>
-          <Link style={{ textDecoration: 'none' }} to='/mens'>Drinks</Link>
-          {activeMenu === "men" ? <hr /> : null}
+        <li onClick={() => handleMenuClick("drink")} className={activeMenu === "drink" ? "active" : ""}>
+          <Link style={{ textDecoration: 'none' }} to='/drinks'>Drinks</Link>
+          {activeMenu === "drink" ? <hr /> : null}
         </li>
-        <li onClick={() => handleMenuClick("women")} className={activeMenu === "women" ? "active" : ""}>
-          <Link style={{ textDecoration: 'none' }} to='/womens'>Food</Link>
-          {activeMenu === "women" ? <hr /> : null}
+        <li onClick={() => handleMenuClick("food")} className={activeMenu === "food" ? "active" : ""}>
+          <Link style={{ textDecoration: 'none' }} to='/foods'>Food</Link>
+          {activeMenu === "food" ? <hr /> : null}
         </li>
         <li onClick={() => handleMenuClick("merchandise")} className={activeMenu === "merchandise" ? "active" : ""}>
           <Link style={{ textDecoration: 'none' }} to='/kids'>Merchandise</Link>

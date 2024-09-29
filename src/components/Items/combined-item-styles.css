@@ -76,18 +76,44 @@
 
 /* Button styles */
 .add-item-button {
-    background-color: #4CAF50;
+    background-color: #4CAF50; /* Green */
     color: white;
     border: none;
     padding: 8px 15px;
     font-size: 0.9rem;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
+    flex: 1;
+    text-align: center;
 }
 
 .add-item-button:hover {
-    background-color: #45a049;
+    background-color: #45a049; /* Slightly darker green on hover */
+}
+
+/* Add to Cart Button */
+.add-to-cart-button {
+    background-color: #FF9800; /* Orange color for Add to Cart */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+    flex: 1;
+    text-align: center;
+}
+
+.add-to-cart-button:hover {
+    background-color: #FB8C00; /* Slightly darker orange on hover */
+}
+
+/* Container for actions */
+.item-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
 }
 
 /* Mobile Version */

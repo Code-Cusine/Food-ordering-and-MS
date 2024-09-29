@@ -44,19 +44,46 @@
   margin: 10px 0;
 }
 
-.add-item-button {
+.item-actions1 {
+  display: flex;
+  gap: 10px; /* Creates a gap between the buttons */
+  margin-top: 10px;
+  width: 100%;
+}
+
+/* Add Item Button */
+.add-item-button1 {
   background-color: #4CAF50;
   color: white;
   border: none;
-  padding: 8px 15px; /* Adjust the button size */
-  font-size: 0.9rem; /* Adjust font size */
+  padding: 8px 15px;
+  font-size: 0.9rem;
   border-radius: 5px;
   cursor: pointer;
+  flex: 1; /* Equal space for both buttons */
 }
 
-.add-item-button:hover {
+.add-item-button1:hover {
   background-color: #45a049;
 }
+
+/* Add to Cart Button */
+.add-to-cart-button1 {
+  background-color: #FF9800; /* Orange color for Add to Cart */
+  color: white;
+  border: none;
+  padding: 8px 13px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  cursor: pointer;
+  flex: 1; /* Equal space for both buttons */
+  text-align: center;
+}
+
+.add-to-cart-button1:hover {
+  background-color: #FB8C00;
+}
+
 
 /* Mobile Version */
 @media (max-width: 768px) {
