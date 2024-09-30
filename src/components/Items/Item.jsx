@@ -1,8 +1,22 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './combined-item-styles.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { ShopContext } from '../../context/ShopContext';
+
 
 const Item = (props) => {
+    const { addToCart } = useContext(ShopContext);
+    const navigate = useNavigate(); // Create a navigate instance
+    
+    const handleAddToCart = () => {
+        addToCart(props.id); // Add the item without any size
+    };
+
+    const handleBuyNow = () => {
+        // Navigate to the payment page when Buy Item is clicked
+        navigate('/payment');
+    };
+
     return (
         <div className='item-box'>
             <Link to={`/product/${props.id}`}>
@@ -18,12 +32,12 @@ const Item = (props) => {
                 <p>{props.description}</p>
                 <div className='item-prices'>
                     {props.price && (
-                        <p className='item-price'>{props.price}</p>
+                        <p className='item-price'>₹{props.price}</p>
                     )}
                 </div>
                 <div className='item-actions'>
-                    <button className='add-item-button'>Buy Item</button>
-                    <button className='add-to-cart-button'>Add to Cart</button>
+                    <button className='add-item-button' onClick={handleBuyNow}>Buy Item</button> {/* Buy Now button */}
+                    <button className='add-to-cart-button' onClick={handleAddToCart}>Add to Cart</button>
                 </div>
             </div>
         </div>

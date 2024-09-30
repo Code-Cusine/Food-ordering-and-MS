@@ -1,88 +1,68 @@
 import React, { createContext, useState } from 'react';
 import all_product from '../components/assets/all_product';
 
-// Create the ShopContext
 const ShopContext = createContext();
 
-// Create the ShopProvider component
 const ShopProvider = (props) => {
-    // State to manage cart items
-    const [cartItems, setCartItems] = useState({});
+  const [cartItems, setCartItems] = useState({});
 
-    // Function to increment item quantity in the cart
-    const incrementItemQuantity = (itemId, size) => {
-        const key = `${itemId}-${size}`;
-        setCartItems((prevCartItems) => ({
-            ...prevCartItems,
-            [key]: (prevCartItems[key] || 0) + 1,
-        }));
-    };
+  const incrementItemQuantity = (itemId) => {
+    setCartItems((prevCartItems) => ({
+      ...prevCartItems,
+      [itemId]: (prevCartItems[itemId] || 0) + 1,
+    }));
+  };
 
-    // Function to decrement item quantity in the cart
-    const decrementItemQuantity = (itemId, size) => {
-        const key = `${itemId}-${size}`;
-        if (cartItems[key] > 0) {
-            setCartItems((prevCartItems) => ({
-                ...prevCartItems,
-                [key]: prevCartItems[key] - 1,
-            }));
-        }
-    };
+  const decrementItemQuantity = (itemId) => {
+    if (cartItems[itemId] > 0) {
+      setCartItems((prevCartItems) => ({
+        ...prevCartItems,
+        [itemId]: prevCartItems[itemId] - 1,
+      }));
+    }
+  };
 
-    // Function to add items to the cart
-    const addToCart = (itemId, size) => {
-        setCartItems((prev) => ({
-            ...prev,
-            [`${itemId}-${size}`]: (prev[`${itemId}-${size}`] || 0) + 1,
-        }));
-    };
+  const addToCart = (itemId) => {
+    setCartItems((prev) => ({
+      ...prev,
+      [itemId]: (prev[itemId] || 0) + 1,
+    }));
+  };
 
-    // Function to remove items from the cart
-    const removeFromCart = (itemId, size) => {
-        setCartItems((prev) => ({
-            ...prev,
-            [`${itemId}-${size}`]: (prev[`${itemId}-${size}`] || 0) - 1,
-        }));
-    };
+  const removeFromCart = (itemId) => {
+    setCartItems((prev) => ({
+      ...prev,
+      [itemId]: 0,
+    }));
+  };
 
-    // Function to get the total cart amount
-    const getTotalCartAmount = () => {
-        let totalAmount = 0;
-        for (const item in cartItems) {
-            if (cartItems[item] > 0) {
-                const [itemId, size] = item.split("-");
-                const itemInfo = all_product.find((product) => product.id === Number(itemId));
-                totalAmount += itemInfo.new_price * cartItems[item];
-            }
-        }
-        return totalAmount;
-    };
+  const getTotalCartAmount = () => {
+    let totalAmount = 0;
+    for (const item in cartItems) {
+      if (cartItems[item] > 0) {
+        const itemInfo = all_product.find((product) => product.id === Number(item));
+        totalAmount += itemInfo.price * cartItems[item];
+      }
+    }
+    return totalAmount;
+  };
 
-    // Function to get the total cart items
-    const getTotalCartItems = () => {
-        let totalItem = 0;
-        for (const item in cartItems) {
-            if (cartItems[item] > 0) {
-                totalItem += cartItems[item];
-            }
-        }
-        return totalItem;
-    };
+  const getTotalCartItems = () => {
+    return Object.values(cartItems).reduce((total, quantity) => total + quantity, 0);
+  };
 
-    // Provide cartItems and functions in the context value
-    const contextValue = {
-        cartItems,
-        incrementItemQuantity,
-        decrementItemQuantity,
-        addToCart,
-        removeFromCart,
-        getTotalCartAmount,
-        getTotalCartItems,
-        all_product,
-    };
+  const contextValue = {
+    cartItems,
+    incrementItemQuantity,
+    decrementItemQuantity,
+    addToCart,
+    removeFromCart,
+    getTotalCartAmount,
+    getTotalCartItems,
+    all_product,
+  };
 
-    // Return the ShopContext.Provider with the context value
-    return <ShopContext.Provider value={contextValue}>{props.children}</ShopContext.Provider>;
+  return <ShopContext.Provider value={contextValue}>{props.children}</ShopContext.Provider>;
 };
 
 export { ShopContext, ShopProvider };
