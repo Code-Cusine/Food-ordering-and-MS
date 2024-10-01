@@ -16,7 +16,18 @@ import cheese_tomato_pizza from '../assets/food_images_veg/Cheese_Tomato_Pizza.j
 import strips_with_dynamite_sauce from '../assets/food_images_veg/10pc_Strips_with_Dynamite_Sauce.jpg'
 import delhi_belly_pizza from '../assets/food_images_veg/10__Delhi_Belly_Pizza.jpg'
 import cheese_lover_pizza from '../assets/food_images_veg/11___Cheese_Lover_Pizza.jpg'
-
+import bangali_fish_thali from '../assets/food_images_non_veg/Bangali_Fish_Thali_Meal.jpg'
+import crispy_chicken_burger from '../assets/food_images_non_veg/2_x_Krispy_Chicken_Burger.jpg'
+import afghani_tikka from '../assets/food_images_non_veg/Afgani_Chicken_Tikka.jpg'
+import bbq_chicken from '../assets/food_images_non_veg/Bbq_Chicken_Burger.jpg'
+import afghani_murgh from '../assets/food_images_non_veg/Afghani_Murgh.jpg'
+import amritsar_fish from '../assets/food_images_non_veg/Amritsari_Fish_Pakoda__6_Pcs_.jpg'
+import anda_pasta from '../assets/food_images_non_veg/Anda_Pasta.jpg'
+import boiled_egg from '../assets/food_images_non_veg/Boiled_Egg__1_Pc_.jpg'
+import boneless_fish_fry from '../assets/food_images_non_veg/Boneless_Fish_Fry.jpg'
+import butter_egg_burger from '../assets/food_images_non_veg/Butter_Egg_Burger.jpg'
+import cheesy_chicken_shots from '../assets/food_images_non_veg/Cheesy_Chicken_Shots.jpg'
+import chicken65 from '../assets/food_images_non_veg/Chicken_65.jpg'
 
 let all_product = [
   {
@@ -124,6 +135,7 @@ let all_product = [
     price: 250.00, 
     image: onion_and_capsicum_pizza, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
+    isVeg : true,
 },
 {
     id: 14, 
@@ -132,6 +144,8 @@ let all_product = [
     price: 220.00, 
     image: tomato_pan_pizza, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
+    isVeg : true,
+    
 },
 {
     id: 15, 
@@ -140,6 +154,7 @@ let all_product = [
     price: 280.00, 
     image: cheese_corn_pizza, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
+    isVeg : true,
 },
 {
     id: 16, 
@@ -148,6 +163,7 @@ let all_product = [
     price: 300.00, 
     image: blackberry_pizza, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
+    isVeg : true,
 },
 {
     id: 17, 
@@ -156,6 +172,7 @@ let all_product = [
     price: 350.00, 
     image: caponito_pizza_medium, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
+    isVeg : true,
 },
 {
     id: 18, 
@@ -164,6 +181,7 @@ let all_product = [
     price: 320.00, 
     image: medium_onion_capscicum_pizza, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
+    isVeg : true,
 },
 {
     id: 19, 
@@ -172,6 +190,7 @@ let all_product = [
     price: 80.00, 
     image: aloo_paratha, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
+    isVeg : true,
 },
 {
     id: 20, 
@@ -180,6 +199,7 @@ let all_product = [
     price: 150.00, 
     image: aloo_tikki_burger, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
+    isVeg : true,
 },
 {
     id: 21, 
@@ -188,6 +208,7 @@ let all_product = [
     price: 70.00, 
     image: besan_paratha, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
+    isVeg : true,
 },
 {
     id: 22, 
@@ -196,6 +217,7 @@ let all_product = [
     price: 60.00, 
     image: butter_naan, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
+    isVeg : true,
 },
 {
     id: 23, 
@@ -204,6 +226,7 @@ let all_product = [
     price: 120.00, 
     image: cheese_podi_masala_dosa, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
+    isVeg : true,
 },
 {
     id: 24, 
@@ -212,6 +235,7 @@ let all_product = [
     price: 240.00, 
     image: cheese_tomato_pizza, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
+    isVeg : true,
 },
 {
     id: 25, 
@@ -220,6 +244,7 @@ let all_product = [
     price: 299.00, 
     image: strips_with_dynamite_sauce, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
+    isVeg : true,
 },
 {
     id: 26, 
@@ -228,6 +253,7 @@ let all_product = [
     price: 499.00, 
     image: delhi_belly_pizza, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
+    isVeg : true,
 },
 {
     id: 27, 
@@ -236,7 +262,116 @@ let all_product = [
     price: 399.00, 
     image: cheese_lover_pizza, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
+    isVeg : true,
 },
+{
+    id: 28, 
+    name: "Crispy Chicken Burger", 
+    description: "A juicy chicken patty coated in a crispy batter, served with lettuce, tomato, and mayo on a soft bun", 
+    price: 180.00, 
+    image: crispy_chicken_burger, // Replace with appropriate image category: 'Pizzas',
+    category : 'Food',
+    isVeg : false,
+},
+{
+    id: 29, 
+    name: "Afghani Chicken Tikka", 
+    description: "Tender chicken marinated in a rich, creamy yogurt blend with Afghan spices, grilled to perfection.", 
+    price: 250.00, 
+    image: afghani_tikka, // Replace with appropriate image
+    category: 'Food',
+    isVeg: false,
+},
+{
+    id: 30, 
+    name: "Bbq Chicken Burger", 
+    description: "Grilled chicken breast smothered in smoky BBQ sauce, topped with cheese, lettuce, and onions on a soft bun.", 
+    price: 220.00, 
+    image: bbq_chicken, // Replace with appropriate image
+    category: 'Food',
+    isVeg: false,
+},
+{
+    id: 31, 
+    name: "Afghani Murgh", 
+    description: "Delicately spiced chicken simmered in a creamy, yogurt-based Afghan curry, served with a side of naan.", 
+    price: 280.00, 
+    image: afghani_murgh, // Replace with appropriate image
+    category: 'Food',
+    isVeg: false,
+},
+{
+    id: 32, 
+    name: "Bangali Fish Thali Meal", 
+    description: "A traditional Bengali meal with fried fish, rice, dal, and a variety of regional sides.", 
+    price: 350.00, 
+    image: bangali_fish_thali, // Replace with appropriate image
+    category: 'Food',
+    isVeg: false,
+},
+{
+    id: 33, 
+    name: "Amritsar Fish Pakoda", 
+    description: "Crispy, golden-brown fish fritters with a hint of Amritsari spices, served with mint chutney.", 
+    price: 190.00, 
+    image: amritsar_fish, // Replace with appropriate image
+    category: 'Food',
+    isVeg: false,
+},
+{
+    id: 34, 
+    name: "Anda Pasta", 
+    description: "Creamy, cheesy pasta topped with soft-boiled eggs and seasoned with herbs and spices.", 
+    price: 180.00, 
+    image: anda_pasta, // Replace with appropriate image
+    category: 'Food',
+    isVeg: false,
+},
+{
+    id: 35, 
+    name: "Boiled Egg", 
+    description: "Perfectly boiled eggs with a dash of salt and pepper, served with a side of toast.", 
+    price: 50.00, 
+    image: boiled_egg, // Replace with appropriate image
+    category: 'Food',
+    isVeg: false,
+},
+{
+    id: 36, 
+    name: "Boneless Fish Fry", 
+    description: "Crispy, boneless fish fillets fried to perfection, served with a tangy dipping sauce.", 
+    price: 230.00, 
+    image: boneless_fish_fry, // Replace with appropriate image
+    category: 'Food',
+    isVeg: false,
+},
+{
+    id: 37, 
+    name: "Butter Egg Burger", 
+    description: "Buttery soft bun filled with a fried egg, melted cheese, lettuce, and a touch of mayonnaise.", 
+    price: 150.00, 
+    image: butter_egg_burger, // Replace with appropriate image
+    category: 'Food',
+    isVeg: false,
+},
+{
+    id: 38, 
+    name: "Cheesy Chicken Shots", 
+    description: "Bite-sized chicken pieces coated in cheese and breadcrumbs, fried till golden and crispy.", 
+    price: 200.00, 
+    image: cheesy_chicken_shots, // Replace with appropriate image
+    category: 'Food',
+    isVeg: false,
+},
+{
+    id: 39, 
+    name: "Chicken 65", 
+    description: "Spicy, deep-fried chicken chunks tossed in a flavorful South Indian marinade with curry leaves.", 
+    price: 220.00, 
+    image: chicken65, // Replace with appropriate image
+    category: 'Food',
+    isVeg: false,
+}
 
 
 ];
