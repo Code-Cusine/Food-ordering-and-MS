@@ -28,6 +28,18 @@ import boneless_fish_fry from '../assets/food_images_non_veg/Boneless_Fish_Fry.j
 import butter_egg_burger from '../assets/food_images_non_veg/Butter_Egg_Burger.jpg'
 import cheesy_chicken_shots from '../assets/food_images_non_veg/Cheesy_Chicken_Shots.jpg'
 import chicken65 from '../assets/food_images_non_veg/Chicken_65.jpg'
+import buttermilk from '../assets/drinks_images/Indian_Buttermilk.jpg'
+import cold_coffee  from '../assets/drinks_images/Cold_Coffee.jpg'
+import filter_coffee from '../assets/drinks_images/Indian_Filter_Coffee.jpg'
+import green_tea from '../assets/drinks_images/Indian_Green_Tea.jpg'
+import hot_chocolate from "../assets/drinks_images/Hot_Chocolate.jpg"
+import iced_tea from '../assets/drinks_images/Iced_Tea.jpg'
+import lemonade  from '../assets/drinks_images/Shikanji.jpg'
+import mango_smoothie  from '../assets/drinks_images/Mango_Smoothie.jpg'
+import masala_chai from '../assets/drinks_images/Masala_Chai.jpg'
+import sweet_lassi from '../assets/drinks_images/Sweet_Lassi.jpg'
+import caffe_americano from '../assets/drinks_images/American_Coffee.jpg'
+import java_chip_frappuccino from '../assets/drinks_images/Java_Chip_Frappuccino.jpg'
 
 let all_product = [
   {
@@ -35,7 +47,7 @@ let all_product = [
     name: "Caffe Americano",
     description: "Rich in flavour, full-bodied espresso with hot water.",
     price:  241.50,
-    image: boy_removebg_preview,
+    image: caffe_americano,
     category : 'Drinks',
 },
 {
@@ -43,7 +55,7 @@ let all_product = [
     name: "Cold Coffee",
     description: "Our signature rich in flavour espresso blended with delicate coffee.",
     price:  304.50,
-    image: girl_removebg_preview,
+    image: cold_coffee,
     category : 'Drinks',
 },
 {
@@ -51,7 +63,7 @@ let all_product = [
     name: "Java Chip Frappuccino",
     description: "Mocha sauce and Frappuccino chips blended into one.",
     price:  325.50,
-    image: kids_removebg_preview ,
+    image: java_chip_frappuccino ,
     category : 'Drinks',
 },
 
@@ -60,7 +72,7 @@ let all_product = [
     name: "Masala Chai",
     description: "A spiced, flavorful tea made by brewing black tea with aromatic Indian spices.",
     price:  150.00,
-    image: kids_removebg_preview, // Replace with appropriate image
+    image: masala_chai, // Replace with appropriate image
     category: 'Drinks',
 },
 {
@@ -68,7 +80,7 @@ let all_product = [
     name: "Filter Coffee",
     description: "Traditional South Indian coffee brewed to perfection with a smooth and rich taste.",
     price:  120.00,
-    image: kids_removebg_preview, // Replace with appropriate image
+    image: filter_coffee, // Replace with appropriate image
     category: 'Drinks',
 },
 {
@@ -76,7 +88,7 @@ let all_product = [
     name: "Hot Chocolate",
     description: "Rich and creamy hot chocolate made from premium cocoa for a comforting drink.",
     price: 180.00,
-    image: kids_removebg_preview, // Replace with appropriate image
+    image: hot_chocolate, // Replace with appropriate image
     category: 'Drinks',
 },
 {
@@ -84,7 +96,7 @@ let all_product = [
     name: "Green Tea",
     description: "A soothing cup of antioxidant-rich green tea with delicate earthy flavors.",
     price: 130.00,
-    image: kids_removebg_preview, // Replace with appropriate image
+    image: green_tea, // Replace with appropriate image
     category: 'Drinks',
 },
 {
@@ -92,7 +104,7 @@ let all_product = [
     name: "Iced Tea",
     description: "Chilled and refreshing iced tea, available in lemon or peach flavor.",
     price: 160.00,
-    image: kids_removebg_preview, // Replace with appropriate image
+    image: iced_tea, // Replace with appropriate image
     category: 'Drinks',
 },
 {
@@ -100,7 +112,7 @@ let all_product = [
     name: "Lemonade",
     description: "A zesty and refreshing lemonade made with freshly squeezed lemons.",
     price: 100.00,
-    image: kids_removebg_preview, // Replace with appropriate image
+    image: lemonade, // Replace with appropriate image
     category: 'Drinks',
 },
 {
@@ -108,7 +120,7 @@ let all_product = [
     name: "Buttermilk",
     description: "A cool and refreshing buttermilk spiced with traditional Indian flavors.",
     price: 90.00,
-    image: kids_removebg_preview, // Replace with appropriate image
+    image: buttermilk, // Replace with appropriate image
     category: 'Drinks',
 },
 {
@@ -116,7 +128,7 @@ let all_product = [
     name: "Mango Smoothie",
     description: "A creamy mango smoothie made with ripe mangoes and yogurt for a tropical treat.",
     price: 200.00,
-    image: kids_removebg_preview, // Replace with appropriate image
+    image: mango_smoothie, // Replace with appropriate image
     category: 'Drinks',
 },
 {
@@ -124,7 +136,7 @@ let all_product = [
     name: "Sweet Lassi",
     description: "A thick and creamy yogurt-based drink sweetened with sugar and flavored with cardamom.",
     price: 110.00,
-    image: kids_removebg_preview, // Replace with appropriate image
+    image: sweet_lassi, // Replace with appropriate image
     category: 'Drinks',
 },
 
