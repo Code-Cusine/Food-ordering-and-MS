@@ -1,6 +1,3 @@
-import boy_removebg_preview from "../assets/boy_removebg_preview.png";
-import girl_removebg_preview from "../assets/girl_removebg_preview.png";
-import kids_removebg_preview from "../assets/kids_removebg_preview.png";
 import onion_and_capsicum_pizza from '../assets/food_images_veg/6__Onion_And_Capcicum_Pizza.jpg'
 import tomato_pan_pizza from '../assets/food_images_veg/7__Tomato_Pan_Pizza.jpg'
 import cheese_corn_pizza from '../assets/food_images_veg/8___Cheese_Corn_Pizza.jpg'

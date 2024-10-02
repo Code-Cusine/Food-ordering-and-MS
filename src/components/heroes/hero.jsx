@@ -1,32 +1,31 @@
 import React, { useContext } from "react";
-import boy_removebg_preview from '../assets/boy_removebg_preview.png';
-import girl_removebg_preview from '../assets/girl_removebg_preview.png';
-import kids_removebg_preview from '../assets/kids_removebg_preview.png';
 import '../heroes/hero.css';
 import { useNavigate } from 'react-router-dom';
 import { ShopContext } from "../../context/ShopContext"; // Adjust the import path as needed
-
+import java_chip_frappuccino from '../assets/drinks_images/Java_Chip_Frappuccino.jpg'
+import cold_coffee  from '../assets/drinks_images/Cold_Coffee.jpg'
+import caffe_americano from '../assets/drinks_images/American_Coffee.jpg'
 const foodItems = [
     {
         id: 1,
         name: "Caffe Americano",
         description: "Rich in flavour, full-bodied espresso with hot water.",
         price: 241.50,
-        image: boy_removebg_preview,
+        image: caffe_americano,
     },
     {
         id: 2,
         name: "Cold Coffee",
         description: "Our signature rich in flavour espresso blended with delicate coffee.",
         price: 304.50,
-        image: girl_removebg_preview,
+        image: cold_coffee,
     },
     {
         id: 3,
         name: "Java Chip Frappuccino",
         description: "Mocha sauce and Frappuccino chips blended into one.",
         price: 325.50,
-        image: kids_removebg_preview,
+        image: java_chip_frappuccino,
     },
 ];
 
