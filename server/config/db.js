@@ -19,4 +19,6 @@ pool.connect((err) => {
   console.log('Connected to the Neon PostgreSQL database.');
 });
 
-module.exports = pool;
+module.exports = {
+  query: (text, params) => pool.query(text, params),
+};
