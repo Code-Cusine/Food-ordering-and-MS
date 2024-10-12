@@ -46,6 +46,7 @@ let all_product = [
     price:  241.50,
     image: caffe_americano,
     category : 'Drinks',
+    foodtype : 'Drinks'
 },
 {
     id: 2,
@@ -54,6 +55,7 @@ let all_product = [
     price:  304.50,
     image: cold_coffee,
     category : 'Drinks',
+    foodtype : 'Drinks'
 },
 {
     id: 3,
@@ -62,6 +64,7 @@ let all_product = [
     price:  325.50,
     image: java_chip_frappuccino ,
     category : 'Drinks',
+    foodtype : 'Drinks'
 },
 
 {
@@ -71,6 +74,7 @@ let all_product = [
     price:  150.00,
     image: masala_chai, // Replace with appropriate image
     category: 'Drinks',
+    foodtype : 'Drinks'
 },
 {
     id: 5,
@@ -79,6 +83,7 @@ let all_product = [
     price:  120.00,
     image: filter_coffee, // Replace with appropriate image
     category: 'Drinks',
+    foodtype : 'Drinks'
 },
 {
     id: 6,
@@ -87,6 +92,7 @@ let all_product = [
     price: 180.00,
     image: hot_chocolate, // Replace with appropriate image
     category: 'Drinks',
+    foodtype : 'Drinks'
 },
 {
     id: 7,
@@ -95,6 +101,7 @@ let all_product = [
     price: 130.00,
     image: green_tea, // Replace with appropriate image
     category: 'Drinks',
+    foodtype : 'Drinks'
 },
 {
     id: 8,
@@ -103,6 +110,7 @@ let all_product = [
     price: 160.00,
     image: iced_tea, // Replace with appropriate image
     category: 'Drinks',
+    foodtype : 'Drinks'
 },
 {
     id: 9,
@@ -111,6 +119,7 @@ let all_product = [
     price: 100.00,
     image: lemonade, // Replace with appropriate image
     category: 'Drinks',
+    foodtype : 'Drinks'
 },
 {
     id: 10,
@@ -119,6 +128,7 @@ let all_product = [
     price: 90.00,
     image: buttermilk, // Replace with appropriate image
     category: 'Drinks',
+    foodtype : 'Drinks'
 },
 {
     id: 11,
@@ -127,6 +137,7 @@ let all_product = [
     price: 200.00,
     image: mango_smoothie, // Replace with appropriate image
     category: 'Drinks',
+    foodtype : 'Drinks'
 },
 {
     id: 12,
@@ -135,6 +146,7 @@ let all_product = [
     price: 110.00,
     image: sweet_lassi, // Replace with appropriate image
     category: 'Drinks',
+    foodtype : 'Drinks'
 },
 
 {
@@ -145,6 +157,7 @@ let all_product = [
     image: onion_and_capsicum_pizza, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
     isVeg : true,
+    foodtype : 'Veg'
 },
 {
     id: 14, 
@@ -154,7 +167,7 @@ let all_product = [
     image: tomato_pan_pizza, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
     isVeg : true,
-    
+    foodtype : 'Veg'
 },
 {
     id: 15, 
@@ -164,6 +177,7 @@ let all_product = [
     image: cheese_corn_pizza, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
     isVeg : true,
+    foodtype : 'Veg'
 },
 {
     id: 16, 
@@ -173,6 +187,7 @@ let all_product = [
     image: blackberry_pizza, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
     isVeg : true,
+    foodtype : 'Veg'
 },
 {
     id: 17, 
@@ -182,6 +197,7 @@ let all_product = [
     image: caponito_pizza_medium, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
     isVeg : true,
+    foodtype : 'Veg'
 },
 {
     id: 18, 
@@ -191,6 +207,7 @@ let all_product = [
     image: medium_onion_capscicum_pizza, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
     isVeg : true,
+    foodtype : 'Veg'
 },
 {
     id: 19, 
@@ -200,6 +217,7 @@ let all_product = [
     image: aloo_paratha, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
     isVeg : true,
+    foodtype : 'Veg'
 },
 {
     id: 20, 
@@ -209,6 +227,7 @@ let all_product = [
     image: aloo_tikki_burger, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
     isVeg : true,
+    foodtype : 'Veg'
 },
 {
     id: 21, 
@@ -218,6 +237,7 @@ let all_product = [
     image: besan_paratha, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
     isVeg : true,
+    foodtype : 'Veg'
 },
 {
     id: 22, 
@@ -227,6 +247,7 @@ let all_product = [
     image: butter_naan, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
     isVeg : true,
+    foodtype : 'Veg'
 },
 {
     id: 23, 
@@ -236,6 +257,7 @@ let all_product = [
     image: cheese_podi_masala_dosa, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
     isVeg : true,
+    foodtype : 'Veg'
 },
 {
     id: 24, 
@@ -245,6 +267,7 @@ let all_product = [
     image: cheese_tomato_pizza, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
     isVeg : true,
+    foodtype : 'Veg'
 },
 {
     id: 25, 
@@ -254,6 +277,7 @@ let all_product = [
     image: strips_with_dynamite_sauce, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
     isVeg : true,
+    foodtype : 'Veg'
 },
 {
     id: 26, 
@@ -263,6 +287,7 @@ let all_product = [
     image: delhi_belly_pizza, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
     isVeg : true,
+    foodtype : 'Veg'
 },
 {
     id: 27, 
@@ -272,6 +297,7 @@ let all_product = [
     image: cheese_lover_pizza, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
     isVeg : true,
+    foodtype : 'Veg'
 },
 {
     id: 28, 
@@ -281,6 +307,7 @@ let all_product = [
     image: crispy_chicken_burger, // Replace with appropriate image category: 'Pizzas',
     category : 'Food',
     isVeg : false,
+    foodtype : 'Non Veg'
 },
 {
     id: 29, 
@@ -290,6 +317,7 @@ let all_product = [
     image: afghani_tikka, // Replace with appropriate image
     category: 'Food',
     isVeg: false,
+    foodtype : 'Non Veg'
 },
 {
     id: 30, 
@@ -299,6 +327,7 @@ let all_product = [
     image: bbq_chicken, // Replace with appropriate image
     category: 'Food',
     isVeg: false,
+    foodtype : 'Non Veg'
 },
 {
     id: 31, 
@@ -308,6 +337,7 @@ let all_product = [
     image: afghani_murgh, // Replace with appropriate image
     category: 'Food',
     isVeg: false,
+    foodtype : 'Non Veg'
 },
 {
     id: 32, 
@@ -317,6 +347,7 @@ let all_product = [
     image: bangali_fish_thali, // Replace with appropriate image
     category: 'Food',
     isVeg: false,
+    foodtype : 'Non Veg'
 },
 {
     id: 33, 
@@ -326,6 +357,7 @@ let all_product = [
     image: amritsar_fish, // Replace with appropriate image
     category: 'Food',
     isVeg: false,
+    foodtype : 'Non Veg'
 },
 {
     id: 34, 
@@ -335,6 +367,7 @@ let all_product = [
     image: anda_pasta, // Replace with appropriate image
     category: 'Food',
     isVeg: false,
+    foodtype : 'Non Veg'
 },
 {
     id: 35, 
@@ -344,6 +377,7 @@ let all_product = [
     image: boiled_egg, // Replace with appropriate image
     category: 'Food',
     isVeg: false,
+    foodtype : 'Non Veg'
 },
 {
     id: 36, 
@@ -353,6 +387,7 @@ let all_product = [
     image: boneless_fish_fry, // Replace with appropriate image
     category: 'Food',
     isVeg: false,
+    foodtype : 'Non Veg'
 },
 {
     id: 37, 
@@ -362,6 +397,7 @@ let all_product = [
     image: butter_egg_burger, // Replace with appropriate image
     category: 'Food',
     isVeg: false,
+    foodtype : 'Non Veg'
 },
 {
     id: 38, 
@@ -371,6 +407,7 @@ let all_product = [
     image: cheesy_chicken_shots, // Replace with appropriate image
     category: 'Food',
     isVeg: false,
+    foodtype : 'Non Veg'
 },
 {
     id: 39, 
@@ -380,6 +417,7 @@ let all_product = [
     image: chicken65, // Replace with appropriate image
     category: 'Food',
     isVeg: false,
+    foodtype : 'Non Veg'
 }
 
 
