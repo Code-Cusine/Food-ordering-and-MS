@@ -7,7 +7,6 @@ import { FaTimes, FaMoneyBillAlt, FaAmazonPay, FaCreditCard, FaUniversity } from
 import axios from 'axios';
 import { useOrder } from '../../context/OrderContext';
 
-/* State control variables for various functionalities */
 const PaymentPage = () => {
   const {
     orderItems,
@@ -47,7 +46,7 @@ const PaymentPage = () => {
       } else if (method === 'netBanking') {
         setShowNetBankingOptions(!showNetBankingOptions);
       } else if (method === 'cashOnDelivery') {
-        handleCashPayment(); // Call handleCashPayment when Cash on Delivery is selected
+        handleCashPayment();
       } else if (['phonepe', 'paytm', 'googlepay'].includes(method)) {
         setUpiId('');
         setIsValidUpiId(true);
@@ -56,7 +55,6 @@ const PaymentPage = () => {
     }
   };
 
-  /* UPI ID type checking */
   const handleUpiIdChange = (e) => {
     const enteredUpiId = e.target.value;
     const isValid = /^[0-9]{10}@[a-z]{3,}$/.test(enteredUpiId);
@@ -64,27 +62,23 @@ const PaymentPage = () => {
     setUpiId(enteredUpiId);
   };
 
-  /* Successful Submission of UPI ID */
   const handleUpiIdSubmit = (e) => {
     e.preventDefault();
     if (/^[0-9]{10}@[a-z]{3,}$/.test(upiId)) {
-      setShowUpiSuccessOverlay(true);
-      setUpiId('');
+      processPayment('UPI');
     } else {
       alert('Invalid UPI ID');
     }
   };
 
   const handleCashPayment = () => {
-    processPayment('Cash'); // Process cash payment
+    processPayment('Cash');
   };
 
   const processPayment = async (paymentType, cardDetails = null) => {
     try {
-      // Calculate the grand total
       const grandtotal = orderItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
-      // Prepare order data
       const orderData = {
         custname: customerName,
         contactno: phoneNumber,
@@ -97,11 +91,9 @@ const PaymentPage = () => {
         }))
       };
 
-      // Create the order
       const orderResponse = await axios.post('http://localhost:5000/api/orders', orderData);
       const { custid, orderid } = orderResponse.data;
 
-      // Prepare payment data
       const paymentData = {
         orderid,
         custid,
@@ -110,18 +102,14 @@ const PaymentPage = () => {
         paymentstatus: 'Completed'
       };
 
-      // Add card details if applicable
       if (cardDetails) {
         paymentData.cardDetails = cardDetails;
       }
 
-      // Process the payment
       const paymentResponse = await axios.post('http://localhost:5000/api/payments', paymentData);
 
-      // Handle successful payment
       console.log('Order and payment processed successfully', { order: orderResponse.data, payment: paymentResponse.data });
 
-      // Show success overlay based on payment type
       if (paymentType === 'UPI') {
         setShowUpiSuccessOverlay(true);
       } else if (paymentType === 'Credit Card') {
@@ -132,7 +120,6 @@ const PaymentPage = () => {
         setShowCodOverlay(true);
       }
 
-      // Close the order overlay
       setShowOrderOverlay(false);
     } catch (error) {
       console.error('Error processing order and payment:', error);
@@ -144,21 +131,18 @@ const PaymentPage = () => {
     setShowUpiSuccessOverlay(false);
   };
 
-  /* Conditional displaying of credit/debit card overlay */
   const handleCloseCardDetailsModal = () => {
     setShowCardDetailsModal(false);
     setHighlightedPaymentMethod(null);
   };
 
-  /* Selection of net Banking option */
   const handleNetBankingOptionChange = (e) => {
     setSelectedNetBankingOption(e.target.value);
   };
 
-  /* Successful alert message for net banking */
   const handleContinueNetBanking = () => {
     if (selectedNetBankingOption && selectedNetBankingOption !== 'Select an option') {
-      setShowNetBankingSuccessOverlay(true);
+      processPayment('Net Banking');
     } else {
       alert('Please select a Net Banking option.');
     }
@@ -169,18 +153,14 @@ const PaymentPage = () => {
     setHighlightedPaymentMethod(null);
   };
 
-  /* Handling successful CVV Submit for Credit/Debit Card */
   const handleCvvSubmit = (cvv) => {
     if (cvv) {
-      setShowCardDetailsSuccessOverlay(true);
-      setShowCvvModal(false);
-      setHighlightedPaymentMethod(null);
+      processPayment('Credit Card', { cvv });
     } else {
       alert('Please enter the CVV');
     }
   };
 
-  /* Closing of CVV Overlay */
   const handleCloseCvvModal = () => {
     setShowCvvModal(false);
   };
@@ -259,14 +239,6 @@ const PaymentPage = () => {
                     onClick={() => handlePaymentMethodClick("googlepay")}
                   />
                 </div>
-                {showUpiSuccessOverlay && (
-                  <div className="upi-overlay">
-                    <div className="upi-overlay-content">
-                      <FaTimes className="close-icon" onClick={handleCloseUpiSuccessOverlay} />
-                      <h2>UPI ID Successfully Submitted</h2>
-                    </div>
-                  </div>
-                )}
               </div>
               <div
                 className={`circular-icon ${highlightedPaymentMethod === 'upi' ? 'highlighted' : ''}`}
@@ -275,7 +247,7 @@ const PaymentPage = () => {
                 <div className="inner-icon orange"></div>
               </div>
             </div>
-            {['phonepe', 'paytm', 'googlepay'].includes(selectedPaymentMethod) && (
+            {['phonepe', 'paytm', 'googlepay', 'upi'].includes(selectedPaymentMethod) && (
               <div className="upi-input-container">
                 <form onSubmit={handleUpiIdSubmit}>
                   <input
@@ -283,89 +255,275 @@ const PaymentPage = () => {
                     placeholder={upiInputPlaceholder}
                     value={upiId}
                     onChange={handleUpiIdChange}
-                    className={`upi-input ${isValidUpiId ? '' : 'invalid'}`}
+                    className={`upi-input ${isValidUpiId ? '' : 'invalid-input'}`}
                   />
                   <button type="submit" disabled={!isValidUpiId}>Submit</button>
                 </form>
+                {!isValidUpiId && (
+                  <p className="upi-error-message">
+                    Please enter a valid UPI ID (e.g:1234567890@bankname)
+                  </p>
+                )}
               </div>
             )}
           </div>
 
-          {/* Credit/Debit Card Payment */}
-          <div className="payment-method">
-            <div className="payment-icon">
-              <FaCreditCard />
-            </div>
-            <div className="payment-info">
-              <h3>Credit/Debit Card</h3>
-              {showCardDetailsModal && (
-                <div className="card-details-modal">
-                  <h4>Enter Card Details</h4>
-                  <button onClick={handleCloseCardDetailsModal}>Close</button>
-                  <input type="text" placeholder="Card Number" />
-                  <button onClick={() => setShowCvvModal(true)}>Proceed</button>
+          <div className="other-payment-container">
+            <h2>MORE WAYS TO PAY</h2>
+            <div className="payment-method">
+              <div className="payment-icon">
+                <FaCreditCard />
+              </div>
+              <div className="payment-info">
+                <h3>Credit or debit card</h3>
+              </div>
+              <div className="circular-icon-wrapper">
+                <div
+                  className={`circular-icon ${highlightedPaymentMethod === 'creditCard' ? 'highlighted' : ''}`}
+                  onClick={() => handlePaymentMethodClick('creditCard')}
+                >
+                  <div className="inner-icon blue"></div>
                 </div>
-              )}
-              {showCardDetailsSuccessOverlay && (
-                <div className="card-details-success-overlay">
-                  <div className="card-success-overlay-content">
-                    <FaTimes className="close-icon" onClick={handleCloseCardDetailsSuccessOverlay} />
-                    <h2>Card Payment Successful</h2>
-                  </div>
-                </div>
-              )}
+              </div>
             </div>
-            <div
-              className={`circular-icon ${highlightedPaymentMethod === 'creditCard' ? 'highlighted' : ''}`}
-              onClick={() => handlePaymentMethodClick('creditCard')}
-            >
-              <div className="inner-icon green"></div>
-            </div>
-          </div>
 
-          {/* CVV Modal */}
-          {showCvvModal && (
-            <div className="cvv-modal">
-              <input type="text" placeholder="CVV" onBlur={(e) => handleCvvSubmit(e.target.value)} />
-              <button onClick={handleCloseCvvModal}>Close</button>
-            </div>
-          )}
-
-          {/* Net Banking */}
-          <div className="payment-method">
-            <div className="payment-icon">
-              <FaUniversity />
-            </div>
-            <div className="payment-info">
-              <h3>Net Banking</h3>
-              {showNetBankingOptions && (
-                <div className="net-banking-options">
-                  <select value={selectedNetBankingOption} onChange={handleNetBankingOptionChange}>
-                    <option>Select an option</option>
-                    <option>Bank A</option>
-                    <option>Bank B</option>
-                    <option>Bank C</option>
-                  </select>
-                  <button onClick={handleContinueNetBanking}>Continue</button>
-                </div>
-              )}
-              {showNetBankingSuccessOverlay && (
-                <div className="net-banking-success-overlay">
-                  <div className="net-banking-success-overlay-content">
-                    <FaTimes className="close-icon" onClick={handleCloseNetBankingSuccessOverlay} />
-                    <h2>Net Banking Successful</h2>
+            <div className="payment-method">
+              <div className="payment-icon">
+                <FaUniversity />
+              </div>
+              <div className="payment-info">
+                <h3>Net Banking</h3>
+                {showNetBankingOptions && (
+                  <div className='net-banking-options'>
+                    <select onChange={handleNetBankingOptionChange}>
+                      <option>Select an option</option>
+                      <option>Airtel Payments Bank</option>
+                      <option>HDFC Bank</option>
+                      <option>State Bank of India</option>
+                      <option>Bank of Baroda</option>
+                      <option>Induslnd Bank</option>
+                    </select>
+                    <button className="net-banking-continue" onClick={handleContinueNetBanking}>Continue</button>
                   </div>
+                )}
+              </div>
+              <div className="circular-icon-wrapper">
+                <div
+                  className={`circular-icon ${highlightedPaymentMethod === 'netBanking' ? 'highlighted' : ''}`}
+                  onClick={() => handlePaymentMethodClick('netBanking')}
+                >
+                  <div className="inner-icon blue"></div>
                 </div>
-              )}
-            </div>
-            <div
-              className={`circular-icon ${highlightedPaymentMethod === 'netBanking' ? 'highlighted' : ''}`}
-              onClick={() => handlePaymentMethodClick('netBanking')}
-            >
-              <div className="inner-icon purple"></div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+
+      {showCardDetailsModal && (
+        <CardDetailsModal
+          onClose={handleCloseCardDetailsModal}
+          setShowCardDetailsModal={setShowCardDetailsModal}
+          setShowCvvModal={setShowCvvModal}
+        />
+      )}
+      {showCvvModal && <CvvModal onSubmit={handleCvvSubmit} onClose={handleCloseCvvModal} />}
+      {showUpiSuccessOverlay && (
+        <UpiSuccessOverlay onClose={handleCloseUpiSuccessOverlay} selectedPaymentMethod={selectedPaymentMethod} />
+      )}
+      {showCardDetailsSuccessOverlay && (
+        <CardDetailsSuccessOverlay onClose={handleCloseCardDetailsSuccessOverlay} />
+      )}
+      {showNetBankingSuccessOverlay && (
+        <NetBankingSuccessOverlay
+          onClose={handleCloseNetBankingSuccessOverlay}
+          selectedNetBankingOption={selectedNetBankingOption}
+        />
+      )}
+    </div>
+  );
+};
+
+const UpiSuccessOverlay = ({ onClose, selectedPaymentMethod }) => {
+  let paymentMethodName;
+  if (selectedPaymentMethod === 'phonepe') {
+    paymentMethodName = 'PhonePe';
+  } else if (selectedPaymentMethod === 'paytm') {
+    paymentMethodName = 'Paytm';
+  } else if (selectedPaymentMethod === 'googlepay') {
+    paymentMethodName = 'Google Pay';
+  } else {
+    paymentMethodName = 'UPI';
+  }
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <FaTimes className="close-icon-2" onClick={onClose} />
+        <h2>UPI Payment Successful</h2>
+        <p>Your payment through {paymentMethodName} has been processed successfully. Thank you!</p>
+      </div>
+    </div>
+  );
+};
+
+const CardDetailsModal = ({ onClose, setShowCardDetailsModal, setShowCvvModal }) => {
+  const [cardDetails, setCardDetails] = useState({
+    name: '',
+    number: '',
+    expiryMonth: '',
+    expiryYear: '',
+  });
+
+  const [isValidCardNumber, setIsValidCardNumber] = useState(true);
+
+  const handleCardDetailsChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'number') {
+      const isValid = /^[0-9]{4}\s[0-9]{4}\s[0-9]{4}\s[0-9]{4}$/.test(value);
+      setIsValidCardNumber(isValid);
+    }
+    setCardDetails((prevCardDetails) => ({
+      ...prevCardDetails,
+      [name]: value,
+    }));
+  };
+
+  const handleEnterCardDetails = () => {
+    if (cardDetails.name === '' || cardDetails.number === '' || cardDetails.expiryMonth === '' || cardDetails.expiryYear === '') {
+      alert('All fields are required.');
+    }
+    else if (!isValidCardNumber) {
+      alert('Please enter a valid card number.');
+    } else {
+      setShowCardDetailsModal(false);
+      setShowCvvModal(true);
+    }
+  };
+
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <FaTimes className='cvv-close-icon' onClick={onClose} />
+        <h2>Enter Card Details</h2>
+        <p>Please ensure your card is enabled for online transactions.</p>
+        <input
+          type="text"
+          name="name"
+          placeholder="Cardholder Name"
+          value={cardDetails.name}
+          onChange={handleCardDetailsChange}
+          required
+        />
+        <input
+          type="text"
+          name="number"
+          placeholder="Card Number"
+          value={cardDetails.number}
+          onChange={handleCardDetailsChange}
+          required
+          className={isValidCardNumber ? '' : 'invalid-input'}
+        />
+        <div className="expiry-date">
+          <select
+            name="expiryMonth"
+            value={cardDetails.expiryMonth}
+            onChange={handleCardDetailsChange} 
+            required
+          >
+            <option value="">Month</option>
+            <option value="01">January</option>
+            <option value="02">February</option>
+            <option value="03">March</option>
+            <option value="04">April</option>
+            <option value="05">May</option>
+            <option value="06">June</option>
+            <option value="07">July</option>
+            <option value="08">August</option>
+            <option value="09">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+          <select
+            name="expiryYear"
+            value={cardDetails.expiryYear}
+            onChange={handleCardDetailsChange}
+          >
+            <option value="">Year</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+            <option value="2029">2029</option>
+            <option value="2030">2030</option>
+          </select>
+        </div>
+        <button className="enter-card-details" onClick={handleEnterCardDetails}>Enter Card Details</button>
+        {!isValidCardNumber && <p className="error-message">Please enter a valid card number in the format "1234 5678 9012 3456"</p>}
+      </div>
+    </div>
+  );
+};
+
+const CvvModal = ({ onSubmit, onClose }) => {
+  const [cvv, setCvv] = useState('');
+  const [isValidCvv, setIsValidCvv] = useState(true);
+
+  const handleCvvChange = (e) => {
+    const enteredCvv = e.target.value;
+    const isValid = /^\d{3}$/.test(enteredCvv);
+    setIsValidCvv(isValid);
+    setCvv(enteredCvv);
+  };
+
+  const handleSubmit = () => {
+    if (/^\d{3}$/.test(cvv)) {
+      onSubmit(cvv);
+    } else {
+      setIsValidCvv(false);
+    }
+  };
+
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <FaTimes className='cvv-close-icon' onClick={onClose} />
+        <h2>Enter CVV</h2>
+        <input
+          type="text"
+          name="cvv"
+          placeholder="CVV"
+          value={cvv}
+          onChange={handleCvvChange}
+          className={isValidCvv ? '' : 'invalid-input'}
+        />
+        {!isValidCvv && <p className="error-message">Please enter a valid 3-digit CVV</p>}
+        <button className="proceed-button" onClick={handleSubmit} disabled={!isValidCvv}>Proceed</button>
+      </div>
+    </div>
+  );
+};
+
+const CardDetailsSuccessOverlay = ({ onClose }) => {
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <FaTimes className="close-icon-3" onClick={onClose} />
+        <h2>Card Payment Successful</h2>
+        <p>Your card payment has been processed successfully. Thank you for your purchase!</p>
+      </div>
+    </div>
+  );
+};
+
+const NetBankingSuccessOverlay = ({ onClose, selectedNetBankingOption }) => {
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <FaTimes className="close-icon-4" onClick={onClose} />
+        <h2>Net Banking Payment Successful</h2>
+        <p>Your payment through {selectedNetBankingOption} has been processed successfully. Thank you for your purchase!</p>
       </div>
     </div>
   );
