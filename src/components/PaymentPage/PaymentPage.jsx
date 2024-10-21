@@ -37,6 +37,8 @@ const PaymentPage = () => {
         setShowNetBankingOptions(false);
       } else if (method === 'cashOnDelivery') {
         setShowCodOverlay(false);
+      } else if (method === 'upi') {
+        setShowUpiSuccessOverlay(false);
       }
     } else {
       setSelectedPaymentMethod(method);
@@ -47,20 +49,31 @@ const PaymentPage = () => {
         setShowNetBankingOptions(!showNetBankingOptions);
       } else if (method === 'cashOnDelivery') {
         handleCashPayment();
-      } else if (['phonepe', 'paytm', 'googlepay'].includes(method)) {
-        setUpiId('');
-        setIsValidUpiId(true);
-        setUpiInputPlaceholder(`Enter ${method === 'phonepe' ? 'PhonePe' : method === 'paytm' ? 'Paytm' : 'Google Pay'} UPI ID`);
+      } else if (method === 'upi') {
+        handleUpiPayment(); // Trigger UPI payment process
       }
     }
   };
-
+  
+  
+  const handleUpiPayment = () => {
+    processPayment('UPI');
+  };
+  
   const handleUpiIdChange = (e) => {
     const enteredUpiId = e.target.value;
     const isValid = /^[0-9]{10}@[a-z]{3,}$/.test(enteredUpiId);
     setIsValidUpiId(isValid);
     setUpiId(enteredUpiId);
   };
+
+  const handleUpiMethodClick = (method) => {
+    // Set the selected UPI method and process payment
+    setSelectedPaymentMethod(method);
+    setHighlightedPaymentMethod(method);
+    handleUpiPayment(); // This triggers UPI payment process
+  };
+  
 
   const handleUpiIdSubmit = (e) => {
     e.preventDefault();
@@ -78,7 +91,8 @@ const PaymentPage = () => {
   const processPayment = async (paymentType, cardDetails = null) => {
     try {
       const grandtotal = orderItems.reduce((total, item) => total + item.price * item.quantity, 0);
-
+  
+      // Create order request
       const orderData = {
         custname: customerName,
         contactno: phoneNumber,
@@ -87,31 +101,36 @@ const PaymentPage = () => {
           itemname: item.name,
           quantity: item.quantity,
           price: item.price,
-          foodtype: item.foodtype
-        }))
+          foodtype: item.foodtype,
+        })),
       };
-
+  
       const orderResponse = await axios.post('http://localhost:5000/api/orders', orderData);
       const { custid, orderid } = orderResponse.data;
-
+  
+      // Proceed with payment only if the order creation is successful
       const paymentData = {
         orderid,
         custid,
         grandtotal,
         paymenttype: paymentType,
-        paymentstatus: 'Completed'
+        paymentstatus: 'Completed',
       };
-
+  
       if (cardDetails) {
         paymentData.cardDetails = cardDetails;
       }
-
+  
       const paymentResponse = await axios.post('http://localhost:5000/api/payments', paymentData);
-
-      console.log('Order and payment processed successfully', { order: orderResponse.data, payment: paymentResponse.data });
-
+  
+      console.log('Order and payment processed successfully', {
+        order: orderResponse.data,
+        payment: paymentResponse.data,
+      });
+  
+      // Show relevant success overlay based on payment type
       if (paymentType === 'UPI') {
-        setShowUpiSuccessOverlay(true);
+        setShowUpiSuccessOverlay(true); // Show UPI success message
       } else if (paymentType === 'Credit Card') {
         setShowCardDetailsSuccessOverlay(true);
       } else if (paymentType === 'Net Banking') {
@@ -119,8 +138,9 @@ const PaymentPage = () => {
       } else if (paymentType === 'Cash') {
         setShowCodOverlay(true);
       }
-
+  
       setShowOrderOverlay(false);
+  
     } catch (error) {
       console.error('Error processing order and payment:', error);
       alert('There was an error processing your order. Please try again.');
@@ -224,48 +244,38 @@ const PaymentPage = () => {
                     src={phonepe}
                     alt="PhonePe"
                     className="upi-icon"
-                    onClick={() => handlePaymentMethodClick("phonepe")}
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent parent click
+                      handleUpiMethodClick("phonepe");
+                    }}
                   />
                   <img
                     src={paytm}
                     alt="Paytm"
                     className="upi-icon"
-                    onClick={() => handlePaymentMethodClick("paytm")}
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent parent click
+                      handleUpiMethodClick("phonepe");
+                    }}
                   />
                   <img
                     src={googlepay}
                     alt="Google Pay"
                     className="upi-icon"
-                    onClick={() => handlePaymentMethodClick("googlepay")}
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent parent click
+                      handleUpiMethodClick("phonepe");
+                    }}
                   />
                 </div>
               </div>
               <div
                 className={`circular-icon ${highlightedPaymentMethod === 'upi' ? 'highlighted' : ''}`}
-                onClick={() => handlePaymentMethodClick('upi')}
+               
               >
                 <div className="inner-icon orange"></div>
               </div>
             </div>
-            {['phonepe', 'paytm', 'googlepay', 'upi'].includes(selectedPaymentMethod) && (
-              <div className="upi-input-container">
-                <form onSubmit={handleUpiIdSubmit}>
-                  <input
-                    type="text"
-                    placeholder={upiInputPlaceholder}
-                    value={upiId}
-                    onChange={handleUpiIdChange}
-                    className={`upi-input ${isValidUpiId ? '' : 'invalid-input'}`}
-                  />
-                  <button type="submit" disabled={!isValidUpiId}>Submit</button>
-                </form>
-                {!isValidUpiId && (
-                  <p className="upi-error-message">
-                    Please enter a valid UPI ID (e.g:1234567890@bankname)
-                  </p>
-                )}
-              </div>
-            )}
           </div>
 
           <div className="other-payment-container">

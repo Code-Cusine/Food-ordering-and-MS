@@ -57,7 +57,7 @@
         background: #ff4141;
     }
     
-    .nav-login-cart {
+    /*.nav-login-cart {
         display: flex;
         align-items: center;
         gap: 45px;
@@ -76,7 +76,7 @@
     
     .nav-login-cart button:active {
         background: #f3f3f3;
-    }
+    }*/
     
     .nav-cart-count {
         position: absolute; /* Add absolute positioning */

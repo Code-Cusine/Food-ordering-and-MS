@@ -131,7 +131,8 @@ const Navbar = () => {
             )}
           </div>
         ) : (
-          <button onClick={openLoginPage}>Login</button>
+           //Login button commented for now //
+          <button onClick={openLoginPage}></button>
         )}
         <Link to='/cart'>
           <img src={cartIcon} alt="Cart" />
