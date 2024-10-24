@@ -4,10 +4,20 @@
   justify-content: space-around;
   flex-wrap: wrap;
   margin-top: 100px;
+  width: 325%;
+  margin-left: -659px;
+}
+
+.hero-image {
+  width: 250%; /* Full width */
+  max-height: 400px; /* Limit height */
+  object-fit: cover; /* Maintain aspect ratio */
+  margin-bottom: 20px; /* Space below the hero image */
+  height: 400px;
 }
 
 .food-box {
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   width: 350px; /* Width for desktop */
