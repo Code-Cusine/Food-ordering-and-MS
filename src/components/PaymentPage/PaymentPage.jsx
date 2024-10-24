@@ -15,27 +15,19 @@ const PaymentPage = () => {
     setShowOrderOverlay
   } = useOrder();
 
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
-  const [upiId, setUpiId] = useState('');
-  const [showCardDetailsModal, setShowCardDetailsModal] = useState(false);
-  const [showCvvModal, setShowCvvModal] = useState(false);
-  const [showNetBankingOptions, setShowNetBankingOptions] = useState(false);
-  const [selectedNetBankingOption, setSelectedNetBankingOption] = useState('');
-  const [isValidUpiId, setIsValidUpiId] = useState(true);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null); 
   const [highlightedPaymentMethod, setHighlightedPaymentMethod] = useState(null);
   const [showCodOverlay, setShowCodOverlay] = useState(false);
   const [showUpiSuccessOverlay, setShowUpiSuccessOverlay] = useState(false);
   const [showCardDetailsSuccessOverlay, setShowCardDetailsSuccessOverlay] = useState(false);
   const [showNetBankingSuccessOverlay, setShowNetBankingSuccessOverlay] = useState(false);
-  const [upiInputPlaceholder, setUpiInputPlaceholder] = useState('Enter UPI ID');
+ 
 
   const handlePaymentMethodClick = (method) => {
     if (selectedPaymentMethod === method) {
       setSelectedPaymentMethod(null);
       setHighlightedPaymentMethod(null);
-      if (method === 'netBanking') {
-        setShowNetBankingOptions(false);
-      } else if (method === 'cashOnDelivery') {
+      if (method === 'cashOnDelivery') {
         setShowCodOverlay(false);
       } else if (method === 'upi') {
         setShowUpiSuccessOverlay(false);
@@ -44,13 +36,11 @@ const PaymentPage = () => {
       setSelectedPaymentMethod(method);
       setHighlightedPaymentMethod(method);
       if (method === 'creditCard') {
-        setShowCardDetailsModal(true);
-      } else if (method === 'netBanking') {
-        setShowNetBankingOptions(!showNetBankingOptions);
+        handleCardPayment();
       } else if (method === 'cashOnDelivery') {
         handleCashPayment();
       } else if (method === 'upi') {
-        handleUpiPayment(); // Trigger UPI payment process
+        handleUpiPayment();
       }
     }
   };
@@ -60,12 +50,7 @@ const PaymentPage = () => {
     processPayment('UPI');
   };
   
-  const handleUpiIdChange = (e) => {
-    const enteredUpiId = e.target.value;
-    const isValid = /^[0-9]{10}@[a-z]{3,}$/.test(enteredUpiId);
-    setIsValidUpiId(isValid);
-    setUpiId(enteredUpiId);
-  };
+  
 
   const handleUpiMethodClick = (method) => {
     // Set the selected UPI method and process payment
@@ -81,15 +66,6 @@ const PaymentPage = () => {
     handleCardPayment(); // This triggers UPI payment process
   };
   
-
-  const handleUpiIdSubmit = (e) => {
-    e.preventDefault();
-    if (/^[0-9]{10}@[a-z]{3,}$/.test(upiId)) {
-      processPayment('UPI');
-    } else {
-      alert('Invalid UPI ID');
-    }
-  };
 
   const handleCashPayment = () => {
     processPayment('Cash');
@@ -160,38 +136,9 @@ const PaymentPage = () => {
     setShowUpiSuccessOverlay(false);
   };
 
-  const handleCloseCardDetailsModal = () => {
-    setShowCardDetailsModal(false);
-    setHighlightedPaymentMethod(null);
-  };
-
-  const handleNetBankingOptionChange = (e) => {
-    setSelectedNetBankingOption(e.target.value);
-  };
-
-  const handleContinueNetBanking = () => {
-    if (selectedNetBankingOption && selectedNetBankingOption !== 'Select an option') {
-      processPayment('Net Banking');
-    } else {
-      alert('Please select a Net Banking option.');
-    }
-  };
-
   const handleCloseNetBankingSuccessOverlay = () => {
     setShowNetBankingSuccessOverlay(false);
     setHighlightedPaymentMethod(null);
-  };
-
-  const handleCvvSubmit = (cvv) => {
-    if (cvv) {
-      processPayment('Credit Card', { cvv });
-    } else {
-      alert('Please enter the CVV');
-    }
-  };
-
-  const handleCloseCvvModal = () => {
-    setShowCvvModal(false);
   };
 
   const handleCloseCardDetailsSuccessOverlay = () => {
@@ -352,7 +299,6 @@ const PaymentPage = () => {
       {showNetBankingSuccessOverlay && (
         <NetBankingSuccessOverlay
           onClose={handleCloseNetBankingSuccessOverlay}
-          selectedNetBankingOption={selectedNetBankingOption}
         />
       )}
     </div>
