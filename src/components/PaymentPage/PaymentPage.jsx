@@ -309,7 +309,7 @@ const PaymentPage = () => {
                  </div>
                  </div>
 
-            <div className="payment-method">
+           {/* <div className="payment-method">
               <div className="payment-icon">
                 <FaUniversity />
               </div>
@@ -337,7 +337,7 @@ const PaymentPage = () => {
                   <div className="inner-icon blue"></div>
                 </div>
               </div>
-            </div>
+            </div>*/}
           </div>
         </div>
       </div>

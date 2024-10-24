@@ -4,6 +4,7 @@
     align-items: center;
     height: 100vh;
     width: 100vw;
+    padding-top: 5px;
 }
 
 .payment-page {
@@ -11,8 +12,12 @@
     width: 100vw;
     max-width: 1200px;
     margin: 0 auto;
+    padding-top: 20px;
 }
 
+.payment-container {
+    padding-top: 60px; /* Space for the navbar */
+}
 
 .recommended-container,
 .amazon-pay-container,
