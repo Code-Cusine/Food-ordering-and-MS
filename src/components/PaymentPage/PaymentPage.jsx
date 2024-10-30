@@ -3,7 +3,7 @@ import './PaymentPage.css';
 import phonepe from '../assets/phonepe-logo-icon.svg';
 import paytm from '../assets/paytm-icon_1.png';
 import googlepay from '../assets/google-pay-icon.webp';
-import { FaTimes, FaMoneyBillAlt, FaAmazonPay, FaCreditCard, FaUniversity } from 'react-icons/fa';
+import { FaTimes, FaMoneyBillAlt, FaAmazonPay, FaCreditCard } from 'react-icons/fa';
 import axios from 'axios';
 import { useOrder } from '../../context/OrderContext';
 
@@ -21,7 +21,8 @@ const PaymentPage = () => {
   const [showUpiSuccessOverlay, setShowUpiSuccessOverlay] = useState(false);
   const [showCardDetailsSuccessOverlay, setShowCardDetailsSuccessOverlay] = useState(false);
   const [showNetBankingSuccessOverlay, setShowNetBankingSuccessOverlay] = useState(false);
- 
+  const [isPaymentProcessed, setIsPaymentProcessed] = useState(false);
+  const [showPaymentProcessedOverlay, setShowPaymentProcessedOverlay] = useState(false);
 
   const handlePaymentMethodClick = (method) => {
     if (selectedPaymentMethod === method) {
@@ -77,6 +78,11 @@ const PaymentPage = () => {
   };
 
   const processPayment = async (paymentType) => {
+    if (isPaymentProcessed) {
+      setShowPaymentProcessedOverlay(true);
+      return;
+    }
+  
     try {
       const grandtotal = orderItems.reduce((total, item) => total + item.price * item.quantity, 0);
   
@@ -112,6 +118,9 @@ const PaymentPage = () => {
         payment: paymentResponse.data,
       });
   
+      // Set payment as processed
+      setIsPaymentProcessed(true);
+  
       // Show the relevant success overlay based on payment type
       if (paymentType === 'Card') {
         setShowCardDetailsSuccessOverlay(true); // Show card payment success overlay
@@ -144,6 +153,19 @@ const PaymentPage = () => {
   const handleCloseCardDetailsSuccessOverlay = () => {
     setShowCardDetailsSuccessOverlay(false);
   };
+
+  const PaymentProcessedOverlay = ({ onClose }) => {
+    return (
+      <div className="modal-overlay">
+        <div className="modal-content">
+          <FaTimes className="close-icon1" onClick={onClose} />
+          <h2>Payment Already Processed</h2>
+          <p>This order has already been paid for. Thank you!</p>
+        </div>
+      </div>
+    );
+  };
+  
 
   return (
     <div className="payment-page-container">
@@ -300,6 +322,10 @@ const PaymentPage = () => {
         <NetBankingSuccessOverlay
           onClose={handleCloseNetBankingSuccessOverlay}
         />
+      )}
+      {/* Payment Already Processed Overlay */}
+      {showPaymentProcessedOverlay && (
+        <PaymentProcessedOverlay onClose={() => setShowPaymentProcessedOverlay(false)} />
       )}
     </div>
   );

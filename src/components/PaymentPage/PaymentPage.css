@@ -126,6 +126,20 @@
 
 }
 
+.close-icon1 {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #888;
+    cursor: pointer;
+    z-index: 1000; /* Ensure it appears above other content in the overlay */
+}
+
+.close-icon1:hover {
+    color: #555;
+}
+
 .modal-content {
     background-color: #fff;
     padding: 2rem;
