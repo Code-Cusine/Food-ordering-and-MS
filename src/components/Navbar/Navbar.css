@@ -498,9 +498,17 @@
         .hamburger {
             display: none;
         }
+        .navbar {
+            justify-content: flex-start; /* Align navbar items to the left */
+          }
+        .nav-menu {
+            margin-left: 30px; /* Optional: add margin to position it slightly from the edge */
+          }
     
         .nav-login-cart {
             display: flex;
+            align-items: center;
+            margin-left: auto;
         }
     }
     

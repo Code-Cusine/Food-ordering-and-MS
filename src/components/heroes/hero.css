@@ -1,11 +1,13 @@
 /* PC (Desktop) Version */
 .hero {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   margin-top: 100px;
-  width: 325%;
-  margin-left: -659px;
+  width: 100vw;/* Full viewport width */
+  overflow: hidden;/* Hide any overflow to prevent unwanted scroll bars */
+  
 }
 
 .hero-image {
@@ -100,6 +102,11 @@
   .hero {
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    margin: 0;
+  }
+  .hero-image {
+    height: 2%; /* Reduced height for mobile */
   }
 
   .food-box {
