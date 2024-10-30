@@ -82,12 +82,12 @@ const Navbar = () => {
     alert("Redirecting to Admin Login Page..."); // Replace with actual redirection logic
     // For example: window.location.href = '/admin/login'; or set another state to display admin login form
   };
-
+/* <p>Cuisine Code</p>  put this in the 90th line if u want name near the logo*/
   return (
     <div className='navbar'>
       <div className="nav-logo">
         <img src={logo} alt="Cuisine Code Logo" />
-        <p>Cuisine Code</p>
+         
       </div>
       <div className="hamburger" onClick={toggleMobileMenu}>
         {isMobileMenuOpen ? <FaTimes /> : <FaBars />} {/* Toggle between hamburger and close icon */}
