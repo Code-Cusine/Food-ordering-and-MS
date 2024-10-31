@@ -12,6 +12,7 @@ import LoginPage from './components/LoginPage/LoginPage';
 import Register from './components/Register/Register';
 import PaymentPage from './components/PaymentPage/PaymentPage';
 import OrderOverlay from './components/Items/OrderOverlay'; // Correct path
+import Aboutus from './components/Aboutus/Aboutus';
 
 function App() {
   return (
@@ -25,8 +26,9 @@ function App() {
           <Route path='/drinks' element={<ShopCategory category="Drinks" />} />
           <Route path='/foods' element={<ShopCategory  category="Food" />} />
           <Route path='/cart' element={<Cart />} />
-          <Route path='/login' element={<LoginPage onClose={() => console.log('Close button clicked')} />} />
-          <Route path='/register' element={<Register onClose={() => console.log('Close button clicked')} />} />
+          <Route path='/aboutus' element={<Aboutus />}/>
+          {/*<Route path='/login' element={<LoginPage onClose={() => console.log('Close button clicked')} />} />
+          <Route path='/register' element={<Register onClose={() => console.log('Close button clicked')} />} />*/}
           <Route path='/payment' element={<PaymentPage />} />
         </Routes>
         <Footer />

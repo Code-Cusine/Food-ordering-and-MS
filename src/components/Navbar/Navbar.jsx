@@ -10,10 +10,13 @@ import { FaUser, FaBars, FaTimes } from 'react-icons/fa'; // Import icons
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState("shop");
   const { getTotalCartItems } = useContext(ShopContext);
+  /*
   const [isLoginPageOpen, setIsLoginPageOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogoutOverlay, setShowLogoutOverlay] = useState(false);
+  */
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Mobile menu state
+  /*
   const [showLoginOptions, setShowLoginOptions] = useState(false); // For displaying login options
   const [isRegistering, setIsRegistering] = useState(false); // Toggle for forms
   const [showFormOverlay, setShowFormOverlay] = useState(false); // Show/Hide Form Overlay
@@ -22,7 +25,9 @@ const Navbar = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  */
 
+  /*
   const openLoginPage = () => {
     setShowLoginOptions(true); // Display login options overlay
   };
@@ -38,6 +43,7 @@ const Navbar = () => {
   const handleLogout = () => {
     setIsLoggedIn(false);
   };
+  */
 
   const handleMenuClick = (menuName) => {
     setActiveMenu(menuName);
@@ -48,6 +54,7 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen); // Toggle mobile menu open/close
   };
 
+  /*
   const handleLoginSubmit = async () => {
     try {
       const response = await axios.post('http://localhost:5000/api/login', { email, password });
@@ -82,7 +89,8 @@ const Navbar = () => {
     alert("Redirecting to Admin Login Page..."); // Replace with actual redirection logic
     // For example: window.location.href = '/admin/login'; or set another state to display admin login form
   };
-/* <p>Cuisine Code</p>  put this in the 90th line if u want name near the logo*/
+  */
+  
   return (
     <div className='navbar'>
       <div className="nav-logo">
@@ -105,20 +113,14 @@ const Navbar = () => {
           <Link style={{ textDecoration: 'none' }} to='/foods'>Food</Link>
           {activeMenu === "food" ? <hr /> : null}
         </li>
-        <li onClick={() => handleMenuClick("merchandise")} className={activeMenu === "merchandise" ? "active" : ""}>
-          <Link style={{ textDecoration: 'none' }} to='/kids'>Merchandise</Link>
-          {activeMenu === "merchandise" ? <hr /> : null}
-        </li>
-        <li onClick={() => handleMenuClick("coffeeHome")} className={activeMenu === "coffeeHome" ? "active" : ""}>
-          <Link style={{ textDecoration: 'none' }} to='/kids'>Coffee at Home</Link>
-          {activeMenu === "coffeeHome" ? <hr /> : null}
-        </li>
-        <li onClick={() => handleMenuClick("readyToEat")} className={activeMenu === "readyToEat" ? "active" : ""}>
-          <Link style={{ textDecoration: 'none' }} to='/kids'>Ready to Eat</Link>
-          {activeMenu === "readyToEat" ? <hr /> : null}
+        <li onClick={() => handleMenuClick("merchandise")} className={activeMenu === "aboutus" ? "active" : ""}>
+          <Link style={{ textDecoration: 'none' }} to='/aboutus'>About Us</Link>
+          {activeMenu === "aboutus" ? <hr /> : null}
         </li>
       </ul>
       <div className="nav-login-cart">
+        {/* Commented out login logic */}
+        {/* 
         {isLoggedIn ? (
           <div className="profile-wrapper">
             <FaUser onClick={() => setShowLogoutOverlay(true)} />
@@ -131,20 +133,22 @@ const Navbar = () => {
             )}
           </div>
         ) : (
-           //Login button commented for now //
           <button onClick={openLoginPage}></button>
         )}
+        */}
+        
         <Link to='/cart'>
           <img src={cartIcon} alt="Cart" />
           <div className="nav-cart-count">{getTotalCartItems()}</div>
         </Link>
       </div>
 
+      {/* 
       {showLoginOptions && (
         <div className="login-options-overlay" onClick={closeOverlay}>
           <div className="login-options-content" onClick={e => e.stopPropagation()}>
             <FaTimes className="close-icon" onClick={closeOverlay} style={{ cursor: 'pointer', top: '-20px', right:'-185px' }} />
-            <button onClick={handleAdminLogin} style={{background:'#FF8C00' }}>Login as Admin</button> {/* New admin login button */}
+            <button onClick={handleAdminLogin} style={{background:'#FF8C00' }}>Login as Admin</button> 
             <button onClick={() => { setIsRegistering(false); setShowFormOverlay(true); setShowLoginOptions(false); }} style={{background:'#3EB489' }}>Login as Existing User</button>
             <button onClick={() => { setIsRegistering(true); setShowFormOverlay(true); setShowLoginOptions(false); } } style={{background:'#007BFF' }}>Register as New User</button>
             
@@ -185,6 +189,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
+      */}
     </div>
   );
 };
