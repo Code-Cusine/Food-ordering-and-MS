@@ -113,7 +113,7 @@ const Navbar = () => {
           <Link style={{ textDecoration: 'none' }} to='/foods'>Food</Link>
           {activeMenu === "food" ? <hr /> : null}
         </li>
-        <li onClick={() => handleMenuClick("merchandise")} className={activeMenu === "aboutus" ? "active" : ""}>
+        <li onClick={() => handleMenuClick("aboutus")} className={activeMenu === "aboutus" ? "active" : ""}>
           <Link style={{ textDecoration: 'none' }} to='/aboutus'>About Us</Link>
           {activeMenu === "aboutus" ? <hr /> : null}
         </li>

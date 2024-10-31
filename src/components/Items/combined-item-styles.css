@@ -12,9 +12,9 @@
 /* Item box styles */
 .item-box,
 .food-box {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(45deg,#ffd782, #e1f28bc2 );
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 350px;
     padding: 15px;
     margin: 20px;
@@ -77,11 +77,11 @@
 /* Button styles */
 .add-item-button {
     background-color: #4CAF50; /* Green */
-    color: white;
+    color: rgb(0, 0, 0);
     border: none;
     padding: 8px 15px;
     font-size: 0.9rem;
-    border-radius: 5px;
+    border-radius: 25px;
     cursor: pointer;
     flex: 1;
     text-align: center;
@@ -94,11 +94,11 @@
 /* Add to Cart Button */
 .add-to-cart-button {
     background-color: #FF9800; /* Orange color for Add to Cart */
-    color: white;
+    color: rgb(0, 0, 0);
     border: none;
     padding: 8px 15px;
     font-size: 0.9rem;
-    border-radius: 5px;
+    border-radius: 25px;
     cursor: pointer;
     flex: 1;
     text-align: center;
