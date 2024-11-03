@@ -11,7 +11,7 @@
     justify-content: space-between;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
     border-bottom: 2px solid #ff1919; /* Adds a line below the navbar */
-    background: linear-gradient(45deg,#ffee82, #e1f28bc2 );
+    background: linear-gradient(45deg,#ffd782, #defa5300 );
     backdrop-filter: blur(10px);
     border-radius: 5px;
     padding: 8px 20px;
