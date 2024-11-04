@@ -1,0 +1,23 @@
+/* AboutUs.css */
+
+.about-container {
+    max-width: 900px;
+    margin: 0 auto; /* Centers the container horizontally */
+    padding: 20px;
+    padding-top: 100px; /* Adds space between the navbar and the content */
+    text-align: center; /* Centers text inside the container */
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #0056b3;
+}
+
+p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
