@@ -7,11 +7,12 @@
     width: 100%;
     padding: 8px 20px;
     display: flex;
+    height: 80px;
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
     border-bottom: 2px solid #ff1919; /* Adds a line below the navbar */
-    background: linear-gradient(45deg,#ffd782, #defa5300 );
+    background: linear-gradient(45deg,#defa5300 ,#ffd782 );
     backdrop-filter: blur(10px);
     border-radius: 5px;
     padding: 8px 20px;
