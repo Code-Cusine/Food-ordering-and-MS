@@ -121,7 +121,7 @@
     
     .nav-cart-count {
         position: absolute; /* Add absolute positioning */
-        top: 15px; /* Adjust this value to move the icon higher above the cart icon */
+        top: 3px; /* Adjust this value to move the icon higher above the cart icon */
         right:7px; /* Adjust this value to align horizontally */
         width: 22px;
         height: 22px;
