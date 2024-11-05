@@ -10,40 +10,15 @@ import { FaUser, FaBars, FaTimes } from 'react-icons/fa'; // Import icons
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState("shop");
   const { getTotalCartItems } = useContext(ShopContext);
-  /*
-  const [isLoginPageOpen, setIsLoginPageOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showLogoutOverlay, setShowLogoutOverlay] = useState(false);
-  */
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Mobile menu state
-  /*
-  const [showLoginOptions, setShowLoginOptions] = useState(false); // For displaying login options
-  const [isRegistering, setIsRegistering] = useState(false); // Toggle for forms
-  const [showFormOverlay, setShowFormOverlay] = useState(false); // Show/Hide Form Overlay
+  const [isUpdateOverlayOpen, setIsUpdateOverlayOpen] = useState(false); // State for the Update overlay
 
-  // Form States
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  */
-
-  /*
-  const openLoginPage = () => {
-    setShowLoginOptions(true); // Display login options overlay
-  };
-
-  const closeOverlay = () => {
-    setShowLoginOptions(false);
-    setShowFormOverlay(false);
-    setName('');
-    setEmail('');
-    setPassword('');
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
-  */
+  // Fields for the item form
+  const [itemName, setItemName] = useState('');
+  const [itemDescription, setItemDescription] = useState('');
+  const [itemImage, setItemImage] = useState(null);
+  const [itemCategory, setItemCategory] = useState('Veg');
+  const [itemPrice, setItemPrice] = useState('');
 
   const handleMenuClick = (menuName) => {
     setActiveMenu(menuName);
@@ -54,48 +29,40 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen); // Toggle mobile menu open/close
   };
 
-  /*
-  const handleLoginSubmit = async () => {
-    try {
-      const response = await axios.post('http://localhost:5000/api/login', { email, password });
-      alert(response.data.message); // Show success message
-      setIsLoggedIn(true); // Set logged in state
-      closeOverlay();
-    } catch (error) {
-      if (error.response) {
-        alert(error.response.data.message); // Show error message
-      } else {
-        alert('An unexpected error occurred.'); // Handle unexpected errors
-      }
-    }
+  const openUpdateOverlay = () => {
+    setIsUpdateOverlayOpen(true);
   };
 
-  const handleRegisterSubmit = async () => {
-    try {
-      const response = await axios.post('http://localhost:5000/api/register', { name, email, password });
-      alert(response.data.message); // Show success message
-      closeOverlay();
-    } catch (error) {
-      if (error.response) {
-        alert(error.response.data.message); // Show error message
-      } else {
-        alert('An unexpected error occurred.'); // Handle unexpected errors
-      }
-    }
+  const closeUpdateOverlay = () => {
+    setIsUpdateOverlayOpen(false);
+    resetFormFields();
   };
 
-  const handleAdminLogin = () => {
-    // Redirect or show admin login form
-    alert("Redirecting to Admin Login Page..."); // Replace with actual redirection logic
-    // For example: window.location.href = '/admin/login'; or set another state to display admin login form
+  const resetFormFields = () => {
+    setItemName('');
+    setItemDescription('');
+    setItemImage(null);
+    setItemCategory('Veg');
+    setItemPrice('');
   };
-  */
-  
+
+  const handleUpdateItem = () => {
+    // Logic to handle the "Update Item" action (e.g., making an API call to update the item)
+    console.log("Updating item with data:", {
+      itemName,
+      itemDescription,
+      itemImage,
+      itemCategory,
+      itemPrice,
+    });
+    // Here, you can add an API call to save the updated item
+    closeUpdateOverlay(); // Close the overlay after updating
+  };
+
   return (
     <div className='navbar'>
       <div className="nav-logo">
         <img src={logo} alt="Cuisine Code Logo" />
-         
       </div>
       <div className="hamburger" onClick={toggleMobileMenu}>
         {isMobileMenuOpen ? <FaTimes /> : <FaBars />} {/* Toggle between hamburger and close icon */}
@@ -119,23 +86,7 @@ const Navbar = () => {
         </li>
       </ul>
       <div className="nav-login-cart">
-        {/* Commented out login logic */}
-        {/* 
-        {isLoggedIn ? (
-          <div className="profile-wrapper">
-            <FaUser onClick={() => setShowLogoutOverlay(true)} />
-            {showLogoutOverlay && (
-              <div className="logout-overlay" onClick={closeOverlay}>
-                <div className="logout-content" onClick={e => e.stopPropagation()}>
-                  <button onClick={handleLogout}>Logout</button>
-                </div>
-              </div>
-            )}
-          </div>
-        ) : (
-          <button onClick={openLoginPage}></button>
-        )}
-        */}
+        <button onClick={openUpdateOverlay} className="update-menu-button">Update Menu Items</button>
         
         <Link to='/cart'>
           <img src={cartIcon} alt="Cart" />
@@ -143,53 +94,48 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* 
-      {showLoginOptions && (
-        <div className="login-options-overlay" onClick={closeOverlay}>
-          <div className="login-options-content" onClick={e => e.stopPropagation()}>
-            <FaTimes className="close-icon" onClick={closeOverlay} style={{ cursor: 'pointer', top: '-20px', right:'-185px' }} />
-            <button onClick={handleAdminLogin} style={{background:'#FF8C00' }}>Login as Admin</button> 
-            <button onClick={() => { setIsRegistering(false); setShowFormOverlay(true); setShowLoginOptions(false); }} style={{background:'#3EB489' }}>Login as Existing User</button>
-            <button onClick={() => { setIsRegistering(true); setShowFormOverlay(true); setShowLoginOptions(false); } } style={{background:'#007BFF' }}>Register as New User</button>
-            
+      {isUpdateOverlayOpen && (
+        <div className="update-overlay" onClick={closeUpdateOverlay}>
+          <div className="update-overlay-content" onClick={(e) => e.stopPropagation()}>
+            <h2>Update Menu Item</h2>
+            <input
+              type="text"
+              placeholder="Item Name"
+              value={itemName}
+              onChange={(e) => setItemName(e.target.value)}
+              required
+            />
+            <textarea
+              placeholder="Item Description (Optional)"
+              value={itemDescription}
+              onChange={(e) => setItemDescription(e.target.value)}
+            ></textarea>
+            <input
+              type="file"
+              onChange={(e) => setItemImage(e.target.files[0])}
+            />
+            <select
+              value={itemCategory}
+              onChange={(e) => setItemCategory(e.target.value)}
+            >
+              <option value="Veg">Veg</option>
+              <option value="Non-Veg">Non-Veg</option>
+              <option value="Drinks">Drinks</option>
+            </select>
+            <input
+              type="number"
+              placeholder="Item Price"
+              value={itemPrice}
+              onChange={(e) => setItemPrice(e.target.value)}
+              required
+            />
+            <div className="overlay-buttons">
+              <button onClick={handleUpdateItem}>Update Item</button>
+              <button onClick={closeUpdateOverlay}>Cancel</button>
+            </div>
           </div>
         </div>
       )}
-
-      {showFormOverlay && (
-        <div className="login-form-overlay" onClick={closeOverlay}>
-          <div className="login-form-content" onClick={e => e.stopPropagation()}>
-            <FaTimes className="close-icon" onClick={closeOverlay} style={{ cursor: 'pointer', right : '-350px', top:'-10px' }} />
-            <h2>{isRegistering ? 'Register' : 'Login'}</h2>
-            {isRegistering && (
-              <input
-                type="text"
-                placeholder="Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            )}
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {isRegistering ? (
-              <button onClick={handleRegisterSubmit}>Register</button>
-            ) : (
-              <button onClick={handleLoginSubmit}>Login</button>
-            )}
-          </div>
-        </div>
-      )}
-      */}
     </div>
   );
 };
