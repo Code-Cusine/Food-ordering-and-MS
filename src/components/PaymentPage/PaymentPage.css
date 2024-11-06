@@ -15,6 +15,38 @@
     padding-top: 20px;
 }
 
+.loading-bar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+   
+    overflow: hidden;
+  }
+  
+  .loading-bar-inner {
+    height: 100%;
+    width: 0%;
+    background-color: #4caf50;
+    animation: progress-bar-stripes 2ms linear infinite;
+  }
+  
+  .fast-animation {
+    animation: progress-bar-stripes 1ms linear infinite;
+  }
+  
+  @keyframes progress-bar-stripes {
+    from { width: 0%; }
+    to { width: 100%; }
+  }
+  
+  @keyframes loading {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  
+
 .payment-container {
     padding-top: 60px; /* Space for the navbar */
 }
