@@ -1,3 +1,47 @@
+/* combined-item-styles.css */
+
+.background-drinks {
+    background-image: url('../assets/drinks.jpg'); /* Replace with the path to your image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    width: 100%;
+    padding: 20px; /* Add some padding to keep content away from the edges */
+    box-sizing: border-box;
+  }
+  
+  .background-food {
+    background-image: url('../assets/food.jpg'); /* Replace with the path to your image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .background-aboutus {
+    background-color: #f0f0f0; /* Fallback color if you don't have a background image */
+    min-height: 100vh;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Optional: Add a default background */
+  .background-default {
+    background-color: #ffffff;
+    min-height: 100vh;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+
+
+
 /* Container styles */
 .items-container,
 .shop-category {
@@ -6,13 +50,14 @@
     justify-content: center;
     gap: 20px;
     padding: 20px;
+    opacity: 1;
     margin-top: 30px;
 }
 
 /* Item box styles */
 .item-box,
 .food-box {
-    background: linear-gradient(45deg,#ffd782, #defa5300 );
+    background: linear-gradient(85deg,#ffffff,#ffd78200 );
     border-radius: 25px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 350px;
@@ -56,7 +101,8 @@
 
 .item-details p,
 .food-details p {
-    color: #555;
+    color: #000000;
+    font-weight: 600;
     font-size: 0.9rem;
     margin: 5px 0;
 }
@@ -288,7 +334,7 @@ input[type="text"]:focus {
 /* Animations */
 @keyframes fadeIn {
     from {
-        opacity: 0;
+        opacity: 5;
     }
     to {
         opacity: 1;

@@ -1,0 +1,22 @@
+/* src/components/PageWrapper/PageWrapper.css */
+
+.background-drinks  {
+    background-image: url('../assets/drinks.jpg'); /* Replace with actual path */
+    background-size: 5%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment:local;
+    background-size: 100% 100%;
+    min-height: 100vh;
+  }
+
+  .background-aboutus {
+    background-color: #f0f0f0;
+    min-height: 100vh;
+  }
+  
+  .background-default {
+    background-color: #ffffff; /* Default background color */
+    min-height: 100vh;
+  }
+  

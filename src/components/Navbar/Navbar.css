@@ -13,7 +13,7 @@
     justify-content: space-between;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
     border-bottom: 2px solid #ff1919; /* Adds a line below the navbar */
-    background: linear-gradient(45deg,#defa5300 ,#ffd782 );
+    background: linear-gradient(45deg,#defa5300 ,#faf3e2 );
     /*backdrop-filter: blur(10px);*/
     border-radius: 5px;
     padding: 8px 20px;
@@ -429,7 +429,7 @@
 /* CSS for the Update Menu Items overlay */
 
 .update-menu-button {
-    background-color: #f3e379; /* Matching gradient color scheme */
+    background: linear-gradient(85deg,#ffffff,#ffd78200 ); /* Matching gradient color scheme */
     color: #252121; /* Font color matching nav menu */
     border:#000000;
     font-family: 'Roboto', sans-serif;
