@@ -1,23 +1,79 @@
 /* AboutUs.css */
 
+/* Full page container with gradient background */
 .about-container {
-    max-width: 900px;
-    margin: 0 auto; /* Centers the container horizontally */
-    padding: 20px;
-    padding-top: 100px; /* Adds space between the navbar and the content */
-    text-align: center; /* Centers text inside the container */
-    font-family: Arial, sans-serif;
-    color: #333;
-    line-height: 1.6;
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    flex-direction: column; /* Stack content vertically */
+    max-width: 1200px; /* Increased max-width for larger container */
+    width: 500%; /* Full width of the viewport */
+    height: 100vh; /* Full viewport height */
+    padding: 40px;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    color: #f4f4f9; /* Light color for text */
+    font-family: 'Helvetica Neue', sans-serif; /* More modern font */
+    line-height: 1.7;
+    text-align: center; /* Center the text */
+    margin: 0 auto; /* Center container horizontally */
+    margin-top: 55px;
 }
 
+/* Header Styles */
 h2 {
-    font-size: 2em;
-    margin-bottom: 20px;
-    color: #0056b3;
+    font-size: 2.5em;
+    margin-bottom: 25px;
+    color: #ffffff; /* White color for the header text */
+    font-weight: 700; /* Bold text */
+    text-transform: uppercase; /* All caps for emphasis */
+    letter-spacing: 1px; /* Slight space between letters */
 }
 
+/* Paragraph Styles */
 p {
     font-size: 1.1em;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    color: #e0e0e0; /* Lighter gray color for better readability */
+    line-height: 1.8;
+    font-weight: 300; /* Lighter weight for body text */
+    max-width: 900px; /* Increased max-width for paragraph */
+    margin: 0 auto; /* Center the paragraph */
+}
+
+/* Add a button or link styling */
+.about-container a {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 25px;
+    background-color: #ff6f61; /* Soft red-orange color */
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover Effect for Links */
+.about-container a:hover {
+    background-color: #ff4e40; /* Slightly darker shade on hover */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .about-container {
+        padding: 20px;
+        margin-top: 80px; /* Less space on mobile */
+        max-width: 100%; /* Allow full width on smaller screens */
+    }
+
+    h2 {
+        font-size: 2em; /* Slightly smaller header for mobile */
+    }
+
+    p {
+        font-size: 1em; /* Smaller text for mobile */
+    }
 }
