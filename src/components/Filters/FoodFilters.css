@@ -8,58 +8,73 @@
 
 .filter-btn {
     padding: 10px 18px;
-    border: 2px solid #ccc;
+    border: 2px solid #ddd;
     background-color: white;
     cursor: pointer;
     border-radius: 8px;
     font-size: 16px;
     font-weight: bold;
     transition: all 0.3s ease;
-    color: black; /* Ensure text color is black */
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
 }
 
-/* Ensure active buttons have black text */
+/* Active button styles */
 .filter-btn.active {
-    background-color: #ADD8E6; /* Set a background color for active button */
-    color: black; /* Ensure active button text color is black */
-    border-color: #4CAF50; /* Match border to the active color */
+    background-color: #ADD8E6;
+    color: #333;
+    border-color: #4CAF50;
 }
 
+/* Veg button styles */
 .filter-btn.veg-active {
-    background-color: #4CAF50; /* Green background for active veg button */
-    color: black; /* Black text */
-}
-
-.filter-btn.nonveg-active {
-    background-color: #FF4D4D; /* Red background for active non-veg button */
-    color: black; /* Black text */
+    background-color: #4CAF50;
+    color: white;
+    border-color: #388E3C;
+    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4); /* Green shadow for veg */
 }
 
 .filter-btn.veg {
-    color: #a5d6a7; /* Light green color for non-active veg button */
+    color: #388E3C; /* Darker green for non-active veg button */
+    border-color: #C8E6C9; /* Light green border */
+}
+
+/* Non-Veg button styles */
+.filter-btn.nonveg-active {
+    background-color: #FF4D4D;
+    color: white;
+    border-color: #D32F2F;
+    box-shadow: 0 4px 10px rgba(255, 77, 77, 0.4); /* Red shadow for non-veg */
 }
 
 .filter-btn.nonveg {
-    color: #ef9a9a; /* Light red color for non-active non-veg button */
+    color: #D32F2F; /* Darker red for non-active non-veg button */
+    border-color: #FFCDD2; /* Light red border */
 }
 
+/* Hover effects */
 .filter-btn:hover {
-    background-color: #f0f0f0;
+    background-color: #f7f7f7;
+    color: black; /* Ensure text color is black on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .filter-btn.veg:hover {
-    color: black; /* Ensure text is black on hover */
+    color: black; /* Text becomes black on hover */
+    border-color: #81C784;
 }
 
 .filter-btn.nonveg:hover {
-    color: black; /* Ensure text is black on hover */
+    color: black; /* Text becomes black on hover */
+    border-color: #FF8A80;
 }
 
-
 .filter-btn.veg-active:hover {
-    background-color: #43a047; /* Darker green when active veg button is hovered */
+    background-color: #388E3C; /* Darker green */
+    color: black; /* Text becomes black on hover */
 }
 
 .filter-btn.nonveg-active:hover {
-    background-color: #ff6666; /* Darker red when active non-veg button is hovered */
+    background-color: #E53935; /* Darker red */
+    color: black; /* Text becomes black on hover */
 }
