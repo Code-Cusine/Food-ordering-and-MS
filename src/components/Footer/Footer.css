@@ -3,7 +3,7 @@
     justify-content: space-between; /* Space out sections to each end */
     align-items: center;
     padding: 20px; /* Adjust padding as needed */
-    background: linear-gradient(180deg, #c49d4a, #6062c4);
+    background: linear-gradient(45deg, #efcb7c, #6062c4);
     width: 100%;
     flex-wrap: wrap; /* Allow wrapping on small screens */
     gap: 10px; /* Add some space between elements */

@@ -57,7 +57,7 @@
 /* Item box styles */
 .item-box,
 .food-box {
-    background: linear-gradient(85deg,#ffffff,#ffd78200 );
+    background: linear-gradient(85deg,#ffffff,#ffffff );
     border-radius: 25px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 350px;
