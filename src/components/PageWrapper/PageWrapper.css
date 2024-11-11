@@ -20,3 +20,11 @@
     min-height: 100vh;
   }
   
+  .background-foods  {
+    background-image: url('../assets/drinks.jpg'); /* Replace with actual path */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment:local;
+    background-size: 100% 100%;
+    margin-top: -50px;
+  }
