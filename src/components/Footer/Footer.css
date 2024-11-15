@@ -1,7 +1,9 @@
+/* Footer Container */
 .footer {
     display: flex;
-    justify-content: space-between; /* Space out sections to each end */
+    justify-content: center; /* Center the main content */
     align-items: center;
+
     padding: 20px; /* Adjust padding as needed */
     background: linear-gradient(45deg, #efcb7c, #6062c4);
     width: 100%;
@@ -9,128 +11,149 @@
     gap: 10px; /* Add some space between elements */
     padding: 10px 0; /* Reduce top and bottom padding */
     gap: 5px; /* Reduce the gap between footer elements */
+
+    flex-wrap: wrap;
+    padding: 10px 20px; /* Adjusted padding for better centering */
+    width: 100vw;
+    max-width: 100%;
+    background: linear-gradient(180deg, #f9d976, #f39f86);
+    color: #4b4b4b;
+    border-top: 3px solid #f39f86;
+    gap: 0px; /* Increased gap for spacing */
+
 }
 
+/* Logo Section */
 .footer-logo {
     display: flex;
     align-items: center;
-    gap: 5px;
-    margin-left: 450px;
+    gap: 10px;
 }
 
 .footer-logo img {
-    width: 80px; /* Adjust width as needed */
-    height: 50px; /* Adjust height as needed */
+    width: 120px; /* Larger logo size */
+    height: 80px;
     object-fit: contain;
 }
 
 .footer-logo p {
-    color: #383838;
-    font-size: 36px;
+    color: #4b4b4b;
+    font-size: 28px;
     font-weight: 700;
 }
 
+/* Links Section */
 .footer-links {
     display: flex;
     list-style: none;
-    gap: 50px;
-    color: #252525;
-    font-size: 15px;
-    text-align: center;
+    gap: 25px; /* Increased gap for better spacing */
+    font-size: 18px;
+    color: #4b4b4b;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
+/* Individual Link Item */
 .footer-links li {
     cursor: pointer;
+    transition: color 0.3s;
 }
 
+.footer-links li:hover {
+    color: #ff6b6b;
+}
+
+/* Social Icons Section */
 .footer-social-icon {
     display: flex;
-    gap: 20px;
-    margin-right: auto;
-    margin-left: 10px;
+    gap: 20px; /* Increased gap */
+    justify-content: center; /* Center the icons */
 }
 
+.footer-social-icon a {
+    color: #4b4b4b;
+    font-size: 20px; /* Larger icon size */
+    transition: transform 0.3s, color 0.3s;
+}
+
+.footer-social-icon a:hover {
+    color: #ff6b6b;
+    transform: scale(1.2);
+}
+
+/* Separator */
 .footer-logo::after {
     content: "|";
-    margin-left: 30px; /* Space between logo and separator */
-    margin-right: 15px; /* Space between separator and social icons */
-    color: #383838; /* Adjust color as needed */
-    font-size: 24px; /* Adjust size as needed */
-    align-self: center; /* Aligns separator vertically */
+    margin-left: 15px;
+    margin-right: 15px;
+    color: #4b4b4b;
+    font-size: 24px;
 }
 
-/* Container for social icons with padding and background */
+/* Icons Container */
 .footer-icons-container {
-    padding: 10px;
-    background: #bb891c;
-    border: 0px solid #ffffff;
+    padding: 5px;
+    background: #ffecd2;
+    border-radius: 10px;
 }
 
+/* Copyright Section */
 .footer-copyright {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: -30px;
+    gap: 5px;
     width: 100%;
-    color: #1a1a1a;
-    font-size: 20px;
+    color: #4b4b4b;
+    font-size: 16px;
+    margin-top: 10px;
     text-align: center;
-    margin-top: 20px;
-}
-
-.footer-copyright hr {
-    width: 60%;
-    border: none;
-    border-radius: 10px;
-    height: 3px;
-    background: #000000;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .footer {
         flex-direction: column;
-        gap: 30px;
+        align-items: center;
+        padding: 10px 20px;
     }
 
     .footer-logo p {
-        font-size: 28px;
+        font-size: 24px;
     }
 
     .footer-links {
-        gap: 30px;
-        font-size: 18px;
+        gap: 20px;
         flex-direction: column;
         align-items: center;
+        font-size: 16px;
     }
 
     .footer-social-icon {
         gap: 15px;
+        font-size: 22px;
     }
-    
+
     .footer-copyright {
-        gap: 20px;
-        font-size: 18px;
+        font-size: 14px;
     }
 }
 
 @media (max-width: 480px) {
     .footer-logo p {
-        font-size: 25px;
+        font-size: 22px;
     }
 
     .footer-links {
-        gap: 20px;
-        font-size: 16px;
+        gap: 15px;
+        font-size: 14px;
     }
 
-    .footer-social-icon {
-        gap: 10px;
+    .footer-social-icon a {
+        font-size: 20px;
     }
-    
+
     .footer-copyright {
-        gap: 15px;
-        font-size: 16px;
+        font-size: 12px;
     }
 }
