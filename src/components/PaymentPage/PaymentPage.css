@@ -122,11 +122,24 @@
     padding-top: 60px; /* Space for the navbar */
 }
 
-.recommended-container,
-.amazon-pay-container,
-.other-payment-container {
-    margin-bottom: 4rem;
+
+.other-payment-container h2 {
+    margin-bottom: 2rem;
+    font-size: 35px;
+    color:#000000;
 }
+.recommended-container h2 {
+    margin-bottom: 2rem;
+    font-size: 35px;
+    color:#000000; /* Original color */
+  }
+  
+  .amazon-pay-container h2{
+    margin-bottom: 2rem;
+    font-size: 35px;
+    color:#000000;
+
+  }
 
 .payment-method {
     display: flex;
@@ -166,10 +179,11 @@
 
 .payment-info h3 {
     margin-bottom: 0.5rem;
+    color: #000000;
 }
 
 .payment-info p {
-    color: #666;
+    color: #000000;
     font-size: 0.875rem;
 }
 
@@ -263,7 +277,7 @@
 }
 
 .close-button:hover {
-    color: #555;
+    color: #ff0000;
 }
 
 .modal-content h2 {
