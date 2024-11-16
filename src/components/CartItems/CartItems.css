@@ -1,10 +1,11 @@
 .cartitems {
     margin: 100px 170px;
+    color: #000000;
 }
 
 .cartitems hr {
     height: 3px;
-    background: #e2e2e2;
+    background: #050505;
     border: 0;
 }
 
@@ -14,14 +15,21 @@
     align-items: center;
     gap: 80px;
     padding: 20px 0px;
-    color: #454545;
     font-size: 18px;
     font-weight: 600;
+    color: #000000;
+}
+.cartitems-format-main p {
+    margin: 0;
+    font-weight: 600;
+    font-size: 18px;
+    color: #000000; /* Ensure all text in <p> is black */
 }
 
 .cartitems-format {
     font-size: 17px;
     font-weight: 500;
+    color: #000000
 }
 
 .carticon-product-icon {
@@ -67,6 +75,19 @@
     flex-direction: column;
     margin-right: 200px;
     gap: 40px;
+    color: #000000;
+}
+
+.cartitems-total-item p,
+.cartitems-total-item h3 {
+    color: #000000; /* Specifically targets text in Subtotal, Total, Shipping Fee */
+    font-weight: 600;
+    flex: 1;
+    flex-direction: column;
+    margin-right: 200px;
+    display: flex;
+    font-size: 18px;
+
 }
 
 .cartitems-total-item {

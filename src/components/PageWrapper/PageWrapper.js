@@ -1,4 +1,5 @@
 // src/components/PageWrapper/PageWrapper.js
+// src/components/PageWrapper/PageWrapper.js
 
 import React from 'react';
 import { useLocation } from 'react-router-dom';
@@ -24,4 +25,7 @@ const PageWrapper = ({ children }) => {
   return <div className={getBackgroundClass()}>{children}</div>;
 };
 
+
 export default PageWrapper;
+
+

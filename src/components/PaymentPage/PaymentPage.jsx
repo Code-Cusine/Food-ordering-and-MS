@@ -6,6 +6,7 @@ import googlepay from '../assets/google-pay-icon.webp';
 import { FaTimes, FaMoneyBillAlt, FaAmazonPay, FaCreditCard } from 'react-icons/fa';
 import axios from 'axios';
 import { useOrder } from '../../context/OrderContext';
+import LoadingOverlay from './LoadingOverlay';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -17,21 +18,43 @@ const PaymentPage = () => {
     setShowOrderOverlay
   } = useOrder();
 
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null); 
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
   const [highlightedPaymentMethod, setHighlightedPaymentMethod] = useState(null);
   const [showCodOverlay, setShowCodOverlay] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [showUpiSuccessOverlay, setShowUpiSuccessOverlay] = useState(false);
   const [showCardDetailsSuccessOverlay, setShowCardDetailsSuccessOverlay] = useState(false);
   const [showNetBankingSuccessOverlay, setShowNetBankingSuccessOverlay] = useState(false);
   const [isPaymentProcessed, setIsPaymentProcessed] = useState(false);
   const [showPaymentProcessedOverlay, setShowPaymentProcessedOverlay] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  
+ // New handleProcessPayment function
+ const handleProcessPayment = async () => {
+  setIsProcessing(true); // Show loading screen
+
+  try {
+    // Simulate a payment API call (replace with actual API logic)
+    await new Promise((resolve) => setTimeout(resolve, 3000)); // 3 seconds
+
+    setIsProcessing(false); // Hide loading screen
+    toast.success('Payment processed successfully!', { position: 'top-right' });
+  } catch (error) {
+    setIsProcessing(false); // Hide loading screen
+    toast.error('There was an error processing your payment. Please try again.', {
+      position: 'top-right',
+    });
+  }
+};
+
 
   const handlePaymentMethodClick = (method) => {
     setIsLoading(true);
     if (selectedPaymentMethod === method) {
       setSelectedPaymentMethod(null);
       setHighlightedPaymentMethod(null);
+      setSelectedPaymentMethod(method);
+      setHighlightedPaymentMethod(method);
       if (method === 'cashOnDelivery') {
         setShowCodOverlay(false);
       } else if (method === 'upi') {
@@ -111,27 +134,22 @@ const PaymentPage = () => {
       };
 
       await axios.post('http://localhost:5000/api/payments', paymentData);
+      setShowOrderOverlay(false);
+      setIsLoading(false); 
+    
 
-      setIsPaymentProcessed(true);
-
+    
+      toast.success('Payment processed successfully!', { position: "top-right" });
       if (paymentType === 'Card') {
         setShowCardDetailsSuccessOverlay(true);
       } else if (paymentType === 'UPI') {
         setShowUpiSuccessOverlay(true);
-      } else if (paymentType === 'Net Banking') {
-        setShowNetBankingSuccessOverlay(true);
       } else if (paymentType === 'Cash') {
         setShowCodOverlay(true);
       }
-
-      setShowOrderOverlay(false);
-      
-      toast.success('Payment processed successfully!', { position: "top-right" });
     } catch (error) {
-      console.error('Error processing order and payment:', error);
+      setIsLoading(false);
       toast.error('There was an error processing your order. Please try again.', { position: "top-right" });
-    } finally {
-      setIsLoading(false); // Hide loading bar
     }
   };
 
@@ -174,7 +192,7 @@ const PaymentPage = () => {
         </div>
       )}
       
-      <div className="payment-page">
+      <div className="payment-page">        
         <div className="payment-container">
           <div className="recommended-container">
             <h2>RECOMMENDED</h2>
@@ -183,15 +201,17 @@ const PaymentPage = () => {
                 <FaMoneyBillAlt />
               </div>
               <div className="payment-info">
-                <h3>Cash</h3>
+                <h3>Cash </h3>
                 {showCodOverlay && (
                   <div className="cod-overlay">
                     <div className="cod-overlay-content">
                       <FaTimes
                         className="close-icon-1"
                         onClick={() => {
+                          
                           setShowCodOverlay(false);
                           handlePaymentMethodClick('cashOnDelivery');
+                          
                         }}
                       />
                       <h2>Payment Successful</h2>
@@ -286,14 +306,15 @@ const PaymentPage = () => {
       </div>
 
       {showUpiSuccessOverlay && (
-        <UpiSuccessOverlay onClose={handleCloseUpiSuccessOverlay} selectedPaymentMethod={selectedPaymentMethod} />
-      )}
-      {showCardDetailsSuccessOverlay && (
-        <CardDetailsSuccessOverlay onClose={handleCloseCardDetailsSuccessOverlay} />
-      )}
-      {showPaymentProcessedOverlay && (
-        <PaymentProcessedOverlay onClose={() => setShowPaymentProcessedOverlay(false)} />
-      )}
+  <UpiSuccessOverlay onClose={() => setShowUpiSuccessOverlay(false)} />
+)}
+{showCardDetailsSuccessOverlay && (
+  <CardDetailsSuccessOverlay onClose={() => setShowCardDetailsSuccessOverlay(false)} />
+)}
+{showPaymentProcessedOverlay && (
+  <PaymentProcessedOverlay onClose={() => setShowPaymentProcessedOverlay(false)} />
+)}
+
     </div>
   );
 };
@@ -346,5 +367,7 @@ const NetBankingSuccessOverlay = ({ onClose, selectedNetBankingOption }) => {
     </div>
   );
 };
+
+  
 
 export default PaymentPage;
