@@ -24,42 +24,32 @@ const PaymentPage = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [showUpiSuccessOverlay, setShowUpiSuccessOverlay] = useState(false);
   const [showCardDetailsSuccessOverlay, setShowCardDetailsSuccessOverlay] = useState(false);
-  const [showNetBankingSuccessOverlay, setShowNetBankingSuccessOverlay] = useState(false);
-  const [isPaymentProcessed, setIsPaymentProcessed] = useState(false);
-  const [showPaymentProcessedOverlay, setShowPaymentProcessedOverlay] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   
- // New handleProcessPayment function
- const handleProcessPayment = async () => {
-  setIsProcessing(true); // Show loading screen
+  const [isPaymentProcessed, setIsPaymentProcessed] = useState(false);
+  const [showPaymentProcessedOverlay, setShowPaymentProcessedOverlay] = useState(false);
 
-  try {
-    // Simulate a payment API call (replace with actual API logic)
-    await new Promise((resolve) => setTimeout(resolve, 3000)); // 3 seconds
-
-    setIsProcessing(false); // Hide loading screen
-    toast.success('Payment processed successfully!', { position: 'top-right' });
-  } catch (error) {
-    setIsProcessing(false); // Hide loading screen
-    toast.error('There was an error processing your payment. Please try again.', {
-      position: 'top-right',
-    });
-  }
-};
-
+  // New handleProcessPayment function
+  const handleProcessPayment = async () => {
+    setIsProcessing(true); // Show loading screen
+    try {
+      // Simulate a payment API call (replace with actual API logic)
+      await new Promise((resolve) => setTimeout(resolve, 3000)); // 3 seconds
+      setIsProcessing(false); // Hide loading screen
+      toast.success('Payment processed successfully!', { position: 'top-right' });
+    } catch (error) {
+      setIsProcessing(false); // Hide loading screen
+      toast.error('There was an error processing your payment. Please try again.', {
+        position: 'top-right',
+      });
+    }
+  };
 
   const handlePaymentMethodClick = (method) => {
     setIsLoading(true);
     if (selectedPaymentMethod === method) {
       setSelectedPaymentMethod(null);
       setHighlightedPaymentMethod(null);
-      setSelectedPaymentMethod(method);
-      setHighlightedPaymentMethod(method);
-      if (method === 'cashOnDelivery') {
-        setShowCodOverlay(false);
-      } else if (method === 'upi') {
-        setShowUpiSuccessOverlay(false);
-      }
       setIsLoading(false);
     } else {
       setSelectedPaymentMethod(method);
@@ -101,16 +91,16 @@ const PaymentPage = () => {
 
   const processPayment = async (paymentType) => {
     if (isPaymentProcessed) {
-      setShowPaymentProcessedOverlay(true);
+      setShowPaymentProcessedOverlay(true); // Show overlay indicating payment is already processed
       setIsLoading(false);
-      return;
+      return; // Prevent further processing if the payment is already done
     }
-
-    setIsLoading(true); // Show loading bar
-
+  
+    setIsLoading(true); // Show loading bar while processing payment
+  
     try {
       const grandtotal = orderItems.reduce((total, item) => total + item.price * item.quantity, 0);
-
+  
       const orderData = {
         custname: customerName,
         contactno: phoneNumber,
@@ -122,10 +112,10 @@ const PaymentPage = () => {
           foodtype: item.foodtype,
         })),
       };
-
+  
       const orderResponse = await axios.post('http://localhost:5000/api/orders', orderData);
       const { custid, orderid } = orderResponse.data;
-
+  
       const paymentData = {
         orderid,
         custid,
@@ -133,14 +123,15 @@ const PaymentPage = () => {
         paymenttype: paymentType,
         paymentstatus: 'Completed',
       };
-
+  
       await axios.post('http://localhost:5000/api/payments', paymentData);
       setShowOrderOverlay(false);
       setIsLoading(false); 
-    
-
-    
+      
       toast.success('Payment processed successfully!', { position: "top-right" });
+      
+      setIsPaymentProcessed(true); // Mark payment as processed
+      
       if (paymentType === 'Card') {
         setShowCardDetailsSuccessOverlay(true);
       } else if (paymentType === 'UPI') {
@@ -153,18 +144,18 @@ const PaymentPage = () => {
       toast.error('There was an error processing your order. Please try again.', { position: "top-right" });
     }
   };
+  
 
   const handleCloseUpiSuccessOverlay = () => {
     setShowUpiSuccessOverlay(false);
   };
 
-  const handleCloseNetBankingSuccessOverlay = () => {
-    setShowNetBankingSuccessOverlay(false);
-    setHighlightedPaymentMethod(null);
-  };
-
   const handleCloseCardDetailsSuccessOverlay = () => {
     setShowCardDetailsSuccessOverlay(false);
+  };
+
+  const handleClosePaymentProcessedOverlay = () => {
+    setShowPaymentProcessedOverlay(false);
   };
 
   const PaymentProcessedOverlay = ({ onClose }) => {
@@ -188,17 +179,17 @@ const PaymentPage = () => {
     <div className="payment-page-container">
       <ToastContainer />
       {isLoading && (
-  <div className="loading-overlay">
-    <div className="loading-box">
-      <div className="loading-bar">
-        <div className="loading-bar-inner" />
-      </div>
-      <p>Payment Processing</p>
-    </div>
-  </div>
-)}
-      
-      <div className="payment-page">        
+        <div className="loading-overlay">
+          <div className="loading-box">
+            <div className="loading-bar">
+              <div className="loading-bar-inner" />
+            </div>
+            <p>Payment Processing</p>
+          </div>
+        </div>
+      )}
+
+      <div className="payment-page">
         <div className="payment-container">
           <div className="recommended-container">
             <h2>RECOMMENDED</h2>
@@ -207,17 +198,15 @@ const PaymentPage = () => {
                 <FaMoneyBillAlt />
               </div>
               <div className="payment-info">
-                <h3>Cash </h3>
+                <h3>Cash</h3>
                 {showCodOverlay && (
                   <div className="cod-overlay">
                     <div className="cod-overlay-content">
                       <FaTimes
                         className="close-icon-1"
                         onClick={() => {
-                          
                           setShowCodOverlay(false);
                           handlePaymentMethodClick('cashOnDelivery');
-                          
                         }}
                       />
                       <h2>Payment Successful</h2>
@@ -241,7 +230,7 @@ const PaymentPage = () => {
             <h2>PAYMENT METHODS</h2>
             <div
               className="payment-method"
-              onClick={() => handlePaymentMethodClick("upi")}
+              onClick={() => handlePaymentMethodClick('upi')}
             >
               <div className="payment-icon">
                 <FaAmazonPay />
@@ -255,7 +244,7 @@ const PaymentPage = () => {
                     className="upi-icon"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleUpiMethodClick("phonepe");
+                      handleUpiMethodClick('phonepe');
                     }}
                   />
                   <img
@@ -264,7 +253,7 @@ const PaymentPage = () => {
                     className="upi-icon"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleUpiMethodClick("paytm");
+                      handleUpiMethodClick('paytm');
                     }}
                   />
                   <img
@@ -273,7 +262,7 @@ const PaymentPage = () => {
                     className="upi-icon"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleUpiMethodClick("googlepay");
+                      handleUpiMethodClick('googlepay');
                     }}
                   />
                 </div>
@@ -293,63 +282,48 @@ const PaymentPage = () => {
                 <FaCreditCard />
               </div>
               <div className="payment-info">
-                <h3>Credit or debit card</h3>
+                <h3>Credit or Debit Card</h3>
               </div>
               <div className="circular-icon-wrapper">
-              <div
-              className={`circular-icon ${highlightedPaymentMethod === 'creditCard' ? 'highlighted' : ''}`}
+                <div
+                  className={`circular-icon ${highlightedPaymentMethod === 'creditCard' ? 'highlighted' : ''}`}
                   onClick={(e) => { 
-                  e.stopPropagation();
-                  handleCardMethodClick("creditCard");
-  }}
-  
->
-                 <div className="inner-icon blue"></div>
-                 </div>
-                 </div>
-                 </div>
+                    e.stopPropagation();
+                    handleCardMethodClick('creditCard');
+                  }}
+                >
+                  <div className="inner-icon blue"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       {showUpiSuccessOverlay && (
-  <UpiSuccessOverlay onClose={() => setShowUpiSuccessOverlay(false)} />
-)}
-{showCardDetailsSuccessOverlay && (
-  <CardDetailsSuccessOverlay onClose={() => setShowCardDetailsSuccessOverlay(false)} />
-)}
-{showPaymentProcessedOverlay && (
-  <PaymentProcessedOverlay onClose={() => setShowPaymentProcessedOverlay(false)} />
-)}
-
+        <UpiSuccessOverlay onClose={() => setShowUpiSuccessOverlay(false)} />
+      )}
+      {showCardDetailsSuccessOverlay && (
+        <CardDetailsSuccessOverlay onClose={() => setShowCardDetailsSuccessOverlay(false)} />
+      )}
+      {showPaymentProcessedOverlay && (
+        <PaymentProcessedOverlay onClose={() => setShowPaymentProcessedOverlay(false)} />
+      )}
     </div>
   );
 };
 
-
-
-const UpiSuccessOverlay = ({ onClose, selectedPaymentMethod }) => {
-  let paymentMethodName;
-  if (selectedPaymentMethod === 'phonepe') {
-    paymentMethodName = 'PhonePe';
-  } else if (selectedPaymentMethod === 'paytm') {
-    paymentMethodName = 'Paytm';
-  } else if (selectedPaymentMethod === 'googlepay') {
-    paymentMethodName = 'Google Pay';
-  } else {
-    paymentMethodName = 'UPI';
-  }
+const UpiSuccessOverlay = ({ onClose }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
         <FaTimes className="close-icon-2" onClick={onClose} />
         <h2>UPI Payment Successful</h2>
-        <p>Your payment through {paymentMethodName} has been processed successfully. Thank you!</p>
+        <p>Your payment through UPI has been processed successfully. Thank you!</p>
       </div>
     </div>
   );
 };
-
 
 const CardDetailsSuccessOverlay = ({ onClose }) => {
   return (
@@ -374,7 +348,5 @@ const NetBankingSuccessOverlay = ({ onClose, selectedNetBankingOption }) => {
     </div>
   );
 };
-
-  
 
 export default PaymentPage;
