@@ -85,6 +85,7 @@ const PaymentPage = () => {
   };
 
   const handleCardMethodClick = (method) => {
+    setIsLoading(true);
     setSelectedPaymentMethod(method);
     setHighlightedPaymentMethod(method);
     handleCardPayment();
@@ -187,10 +188,15 @@ const PaymentPage = () => {
     <div className="payment-page-container">
       <ToastContainer />
       {isLoading && (
-        <div className="loading-bar-container">
-          <div className="loading-bar-inner" />
-        </div>
-      )}
+  <div className="loading-overlay">
+    <div className="loading-box">
+      <div className="loading-bar">
+        <div className="loading-bar-inner" />
+      </div>
+      <p>Payment Processing</p>
+    </div>
+  </div>
+)}
       
       <div className="payment-page">        
         <div className="payment-container">
@@ -296,6 +302,7 @@ const PaymentPage = () => {
                   e.stopPropagation();
                   handleCardMethodClick("creditCard");
   }}
+  
 >
                  <div className="inner-icon blue"></div>
                  </div>
