@@ -3,23 +3,18 @@
     display: flex;
     justify-content: center; /* Center the main content */
     align-items: center;
-
-    padding: 20px; /* Adjust padding as needed */
-    background: linear-gradient(45deg, #efcb7c, #6062c4);
-    width: 100%;
-    flex-wrap: wrap; /* Allow wrapping on small screens */
-    gap: 10px; /* Add some space between elements */
-    padding: 10px 0; /* Reduce top and bottom padding */
-    gap: 5px; /* Reduce the gap between footer elements */
-
-    flex-wrap: wrap;
-    padding: 10px 20px; /* Adjusted padding for better centering */
-    width: 100vw;
-    max-width: 100%;
+    
+    padding: 10px 20px; /* Adjusted padding to ensure it fits */
     background: linear-gradient(180deg, #f9d976, #f39f86);
+    width: 100%; /* Ensure it takes full width of the screen */
+    max-width: 100%; /* Limit the width to 100% of the viewport */
     color: #4b4b4b;
     border-top: 3px solid #f39f86;
-    gap: 0px; /* Increased gap for spacing */
+    gap: 5px; /* Space between footer elements */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+
+    box-sizing: border-box; /* Include padding and borders in element's total width/height */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 
 }
 

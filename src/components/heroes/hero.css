@@ -1,17 +1,19 @@
 /* PC (Desktop) Version */
 .hero {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-top: 100px;
-  width: 100vw;/* Full viewport width */
-  overflow: hidden;/* Hide any overflow to prevent unwanted scroll bars */
+    justify-content: center;
+    align-items: center;
+
+    margin-top: -94px;
+    width: 100%; /* Full width of the viewport */
+    height: 100vh; /* Full height of the viewport */
+    overflow: hidden; /* Prevent scrolling */
+    box-sizing: border-box; /* Include padding and borders in the total width/height */
   
 }
 
 .hero-image {
-  width: 100%; /* Full width */
+  width: 112%; /* Full width */
   max-height: 500px; /* Limit height */
   /* object-fit: cover;  Maintain aspect ratio */
   margin-bottom: 20px; /* Space below the hero image */
