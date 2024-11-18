@@ -46,7 +46,7 @@ const Navbar = () => {
     setItemPrice('');
   };
 
-  const handleUpdateItem = () => {
+  {/*const handleUpdateItem = () => {
     // Logic to handle the "Update Item" action (e.g., making an API call to update the item)
     console.log("Updating item with data:", {
       itemName,
@@ -57,7 +57,7 @@ const Navbar = () => {
     });
     // Here, you can add an API call to save the updated item
     closeUpdateOverlay(); // Close the overlay after updating
-  };
+  };*/}
 
   return (
     <div className='navbar'>
@@ -86,7 +86,7 @@ const Navbar = () => {
         </li>
       </ul>
       <div className="nav-login-cart">
-        <button onClick={openUpdateOverlay} className="update-menu-button">Update Menu Items</button>
+       {/* <button onClick={openUpdateOverlay} className="update-menu-button">Update Menu Items</button>*/}
         
         <Link to='/cart'>
           <img src={cartIcon} alt="Cart" />
@@ -94,7 +94,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {isUpdateOverlayOpen && (
+      {/*{isUpdateOverlayOpen && (
         <div className="update-overlay" onClick={closeUpdateOverlay}>
           <div className="update-overlay-content" onClick={(e) => e.stopPropagation()}>
             <h2>Update Menu Item</h2>
@@ -135,7 +135,7 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-      )}
+      )}*/}
     </div>
   );
 };
