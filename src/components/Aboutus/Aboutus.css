@@ -5,23 +5,50 @@
     display: flex;
     justify-content: center; /* Center content horizontally */
     align-items: center; /* Center content vertically */
-    flex-direction: column; /* Stack content vertically */
-    max-width: 1200px; /* Increased max-width for larger container */
-    width: 500%; /* Full width of the viewport */
+    flex-direction: column;
+     /* Restrict the maximum width */
+   
+    width: 100vw; /* Use the full width of the viewport */
     height: 100vh; /* Full viewport height */
-    padding: 40px;
-    background: linear-gradient(135deg, #6a11cb 25%, #2575fc 100%); /* Gradient background */
-    border-radius: 12px; /* Rounded corners */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-    color: #f4f4f9; /* Light color for text */
-    font-family: 'Helvetica Neue', sans-serif; /* More modern font */
+    padding: 0;
+    margin:0;
+    background: linear-gradient(135deg, #6a11cb 25%, #2575fc 100%);
+    border-radius: 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    color: #f4f4f9;
+    font-family: 'Helvetica Neue', sans-serif;
     line-height: 1.7;
-    text-align: center; /* Center the text */
-    margin: 0 auto; /* Center container horizontally */
+    text-align: center;
     margin-top: 60px;
-    margin-bottom: -19px;
+    margin-bottom: -20px;
+
 
 }
+
+body, html {
+    margin: 0 ;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+/* Footer Container */
+.footer {
+    display: flex;
+    justify-content: center; /* Spread out the elements */
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    padding: 10px 20px; /* Increased padding */
+    background: linear-gradient(180deg, #f9d976, #f39f86);
+    width: 110vw; /* Ensure it spans the full width of the viewport */
+    box-sizing: border-box; /* Include padding/borders in dimensions */
+    color: #4b4b4b;
+    border-top: 3px solid #f39f86;
+    margin-right: -190px;
+    gap: 20px; /* Space between elements */
+    position: relative; /* Ensure proper placement */
+    z-index: 1; /* Prevent overlap issues */
+    overflow: hidden;
+}
+
 
 /* Header Styles */
 h2 {

@@ -3,16 +3,14 @@
     display: flex;
     justify-content: center; /* Center the main content */
     align-items: center;
-    
     padding: 10px 20px; /* Adjusted padding to ensure it fits */
-    background: linear-gradient(180deg, #f9d976, #f39f86);
+    background: linear-gradient(180deg, #f1f0ec, #fab39d);
     width: 100%; /* Ensure it takes full width of the screen */
-    max-width: 100%; /* Limit the width to 100% of the viewport */
+   /* max-width: 100%; *//* Limit the width to 100% of the viewport */
     color: #4b4b4b;
     border-top: 3px solid #f39f86;
     gap: 5px; /* Space between footer elements */
     flex-wrap: wrap; /* Allow wrapping on small screens */
-
     box-sizing: border-box; /* Include padding and borders in element's total width/height */
     overflow-x: hidden; /* Prevent horizontal scrolling */
 

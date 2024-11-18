@@ -13,10 +13,11 @@
 }
 
 .hero-image {
-  width: 112%; /* Full width */
+  width: 100vw; /* Full width */
   max-height: 500px; /* Limit height */
   /* object-fit: cover;  Maintain aspect ratio */
-  margin-bottom: 20px; /* Space below the hero image */
+  margin-left: 10px;
+  margin-bottom: 30px; /* Space below the hero image */
   height: 400px;
 }
 
