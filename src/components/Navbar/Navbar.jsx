@@ -69,7 +69,7 @@ const Navbar = () => {
       </div>
       <ul className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
         <li onClick={() => handleMenuClick("shop")} className={activeMenu === "shop" ? "active" : ""}>
-          <Link style={{ textDecoration: 'none' }} to='/'>Bestseller</Link>
+          <Link style={{ textDecoration: 'none' }} to='/'>Home</Link>
           {activeMenu === "shop" ? <hr /> : null}
         </li>
         <li onClick={() => handleMenuClick("drink")} className={activeMenu === "drink" ? "active" : ""}>
