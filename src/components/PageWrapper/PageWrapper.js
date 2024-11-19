@@ -17,6 +17,8 @@ const PageWrapper = ({ children }) => {
         return 'background-foods';
       case '/aboutus':
         return 'background-aboutus';
+      case '/cart':
+        return 'background-cart';
       default:
         return 'background-default';
     }

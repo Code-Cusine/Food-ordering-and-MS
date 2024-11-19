@@ -8,14 +8,12 @@
     width: 100%;
     padding: 8px 20px;
     display: flex;
-    height: 80px;
+    height: 60px;
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
     border-bottom: 2px solid #ff1919; /* Adds a line below the navbar */
-    background: linear-gradient(45deg,#defa5300 ,#faf3e2 );
-    /*backdrop-filter: blur(10px);*/
-    border-radius: 5px;
+    background: linear-gradient(120deg,#fffdf7,#ffc9f2  );
     padding: 8px 20px;
     
   }
@@ -35,8 +33,14 @@
     .nav-logo {
         display: flex;
         align-items: center;
-        size: 2px;
+        size: 1px;
         gap: 10px;
+    }
+
+    .nav-logo img {
+        height: 70px;
+        margin-right: 10px; /* Adjust as needed for your logo size */
+
     }
 
     .nav-menu li:hover {
@@ -45,12 +49,7 @@
         transform: scale(1.5);
       }
     
-    .nav-logo p {
-        color: #2c2a2a;
-        font-size: 20px;
-        
-        font-weight: 650;
-    }
+   
     .nav-menu li {
         position: relative;
         transition: color 0.3s ease, transform 0.3s ease; /* Smooth color transitions */
@@ -76,16 +75,6 @@
         color: #000000; /* Text color transition on hover */
       }
     
-    .nav-logo li {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        
-        gap: 3px;
-        
-        cursor: pointer;
-    }
 
    
     .nav-menu hr {
@@ -572,8 +561,9 @@
         }
        
         .nav-logo img {
-            height: 30px;
+            height: 20px;
             margin-right: 10px; /* Adjust as needed for your logo size */
+
         }
     
         .nav-logo p {

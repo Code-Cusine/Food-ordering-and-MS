@@ -15,12 +15,25 @@
   background-color: #f0f0f0;
   min-height: 100vh;
 }
+.background-cart{
+  background-color: #f0f0f0;
+  min-height: 100vh;
+}
 
 
 
 .background-default {
   background-color: #ffffff; /* Default background color */
   min-height: 100vh;
+  background-image: url('../assets/heroimages.jpeg'); /* Replace with actual path */
+  background-position: center 0px;
+  background-repeat: no-repeat;
+  background-attachment:fixed;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex; /* Optional: Flex for aligning content */
+  align-items: flex-start; /* Optional: Content alignment */ 
+
 }
 
 .background-foods  {
@@ -35,7 +48,10 @@
   padding-top: 0; /* Remove any padding */
 }
 
+.background-hero{
+  background-image: url('../assets/drinks.webp');
 
+}
 
 @media (max-width: 768px) {
   .background-foods {
