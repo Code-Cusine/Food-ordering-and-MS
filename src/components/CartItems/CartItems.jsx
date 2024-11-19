@@ -54,12 +54,7 @@ const CartItems = () => {
               <p>Subtotal</p>
               <p>₹{getTotalCartAmount().toFixed(2)}</p>
             </div>
-            <hr />
-            <div className="cartitems-total-item">
-              <p>Shipping Fee</p>
-              <p>Free</p>
-            </div>
-            <hr />
+            <hr></hr>
             <div className="cartitems-total-item">
               <h3>Total</h3>
               <h3>₹{getTotalCartAmount().toFixed(2)}</h3>
