@@ -19,6 +19,8 @@ const PageWrapper = ({ children }) => {
         return 'background-aboutus';
       case '/cart':
         return 'background-cart';
+      case '/payment':
+       return 'background-payment';
       default:
         return 'background-default';
     }
