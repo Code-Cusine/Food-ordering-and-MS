@@ -21,7 +21,6 @@ const PaymentPage = () => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
   const [highlightedPaymentMethod, setHighlightedPaymentMethod] = useState(null);
   const [showCodOverlay, setShowCodOverlay] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false);
   const [showUpiSuccessOverlay, setShowUpiSuccessOverlay] = useState(false);
   const [showCardDetailsSuccessOverlay, setShowCardDetailsSuccessOverlay] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,22 +28,7 @@ const PaymentPage = () => {
   const [isPaymentProcessed, setIsPaymentProcessed] = useState(false);
   const [showPaymentProcessedOverlay, setShowPaymentProcessedOverlay] = useState(false);
 
-  // New handleProcessPayment function
-  const handleProcessPayment = async () => {
-    setIsProcessing(true); // Show loading screen
-    try {
-      // Simulate a payment API call (replace with actual API logic)
-      await new Promise((resolve) => setTimeout(resolve, 3000)); // 3 seconds
-      setIsProcessing(false); // Hide loading screen
-      toast.success('Payment processed successfully!', { position: 'top-right' });
-    } catch (error) {
-      setIsProcessing(false); // Hide loading screen
-      toast.error('There was an error processing your payment. Please try again.', {
-        position: 'top-right',
-      });
-    }
-  };
-
+  
   const handlePaymentMethodClick = (method) => {
     setIsLoading(true);
     if (selectedPaymentMethod === method) {
@@ -145,18 +129,6 @@ const PaymentPage = () => {
     }
   };
   
-
-  const handleCloseUpiSuccessOverlay = () => {
-    setShowUpiSuccessOverlay(false);
-  };
-
-  const handleCloseCardDetailsSuccessOverlay = () => {
-    setShowCardDetailsSuccessOverlay(false);
-  };
-
-  const handleClosePaymentProcessedOverlay = () => {
-    setShowPaymentProcessedOverlay(false);
-  };
 
   const PaymentProcessedOverlay = ({ onClose }) => {
     return (
@@ -337,16 +309,5 @@ const CardDetailsSuccessOverlay = ({ onClose }) => {
   );
 };
 
-const NetBankingSuccessOverlay = ({ onClose, selectedNetBankingOption }) => {
-  return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <FaTimes className="close-icon-4" onClick={onClose} />
-        <h2>Net Banking Payment Successful</h2>
-        <p>Your payment through {selectedNetBankingOption} has been processed successfully. Thank you for your purchase!</p>
-      </div>
-    </div>
-  );
-};
 
 export default PaymentPage;

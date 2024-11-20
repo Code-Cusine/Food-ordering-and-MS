@@ -3,9 +3,8 @@ import './Navbar.css';
 import logo from '../assets/l3.png';
 import cartIcon from '../assets/cart_icon.png';
 import { Link } from 'react-router-dom';
-import axios from 'axios'; // For making API calls to the backend
 import { ShopContext } from '../../context/ShopContext';
-import { FaUser, FaBars, FaTimes } from 'react-icons/fa'; // Import icons
+import { FaBars, FaTimes } from 'react-icons/fa'; // Import icons
 
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState("shop");

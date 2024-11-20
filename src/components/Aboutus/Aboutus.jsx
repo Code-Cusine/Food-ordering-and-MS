@@ -1,5 +1,5 @@
 import React from "react";
-import "./Aboutus.css"; // Import the CSS file for styling
+import "./Aboutus.css"; 
 
 const AboutUs = () => {
     return (

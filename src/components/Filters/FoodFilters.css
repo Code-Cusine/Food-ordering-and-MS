@@ -16,65 +16,65 @@
     font-weight: bold;
     transition: all 0.3s ease;
     color: #333;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); 
 }
 
-/* Active button styles */
+
 .filter-btn.active {
     background-color: #ADD8E6;
     color: #333;
     border-color: #4CAF50;
 }
 
-/* Veg button styles */
+
 .filter-btn.veg-active {
     background-color: #4CAF50;
     color: white;
     border-color: #388E3C;
-    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4); /* Green shadow for veg */
+    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4); 
 }
 
 .filter-btn.veg {
-    color: #388E3C; /* Darker green for non-active veg button */
-    border-color: #C8E6C9; /* Light green border */
+    color: #388E3C; 
+    border-color: #C8E6C9; 
 }
 
-/* Non-Veg button styles */
+
 .filter-btn.nonveg-active {
     background-color: #FF4D4D;
     color: white;
     border-color: #D32F2F;
-    box-shadow: 0 4px 10px rgba(255, 77, 77, 0.4); /* Red shadow for non-veg */
+    box-shadow: 0 4px 10px rgba(255, 77, 77, 0.4); 
 }
 
 .filter-btn.nonveg {
-    color: #D32F2F; /* Darker red for non-active non-veg button */
-    border-color: #FFCDD2; /* Light red border */
+    color: #D32F2F; 
+    border-color: #FFCDD2; 
 }
 
-/* Hover effects */
+
 .filter-btn:hover {
     background-color: #f7f7f7;
-    color: black; /* Ensure text color is black on hover */
+    color: black; 
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .filter-btn.veg:hover {
-    color: black; /* Text becomes black on hover */
+    color: black; 
     border-color: #81C784;
 }
 
 .filter-btn.nonveg:hover {
-    color: black; /* Text becomes black on hover */
+    color: black; 
     border-color: #FF8A80;
 }
 
 .filter-btn.veg-active:hover {
-    background-color: #388E3C; /* Darker green */
-    color: black; /* Text becomes black on hover */
+    background-color: #388E3C; 
+    color: black; 
 }
 
 .filter-btn.nonveg-active:hover {
-    background-color: #E53935; /* Darker red */
-    color: black; /* Text becomes black on hover */
+    background-color: #E53935; 
+    color: black;
 }

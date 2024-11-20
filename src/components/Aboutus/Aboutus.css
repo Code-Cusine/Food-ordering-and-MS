@@ -1,6 +1,4 @@
-/* AboutUs.css */
 
-/* Full page container with gradient background */
 .about-container {
     display: flex;
     justify-content: center; /* Center content horizontally */
@@ -90,19 +88,4 @@ p {
     background-color: #ff4e40; /* Slightly darker shade on hover */
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-    .about-container {
-        padding: 20px;
-        margin-top: 80px; /* Less space on mobile */
-        max-width: 100%; /* Allow full width on smaller screens */
-    }
 
-    h2 {
-        font-size: 2em; /* Slightly smaller header for mobile */
-    }
-
-    p {
-        font-size: 1em; /* Smaller text for mobile */
-    }
-}

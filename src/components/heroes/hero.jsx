@@ -1,13 +1,13 @@
 import React from "react";
 import '../heroes/hero.css';
-import heroImage from '../assets/Designer.jpeg'; // Ensure the path is correct and file name is valid
+import heroImage from '../assets/Designer.jpeg'; 
 
 const Hero = () => {
     return (
         <div className="hero">
-            {/* Hero Image */}
+           
             <img src={heroImage} alt="Hero" className="hero-image" />
-            {/* Description Section */}
+            
         </div>
     );
 };
