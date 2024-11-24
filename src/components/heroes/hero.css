@@ -34,6 +34,23 @@
   align-items: center;
 }
 
+.Bestseller {
+  display: flex;
+  justify-content: left; 
+  align-items: center; 
+  margin-top: 20px; 
+  width: 105%; 
+  margin-bottom: -50px;
+}
+
+.bestseller-image {
+  width: 380px;  
+  border-radius: 8px; 
+  object-fit: cover; 
+  margin-top: -205px;
+
+}
+
 .food-image {
   width: 80px; /* Set a fixed width for the image */
   height: 90px; /* Set a fixed height for the image */

@@ -1,0 +1,13 @@
+/* Spotlight effect */
+.spotlight {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 18px; /* Diameter of the dot */
+    height: 18px;
+    border-radius: 50%; /* Circular shape */
+    background: rgba(189, 6, 6, 1); /* Solid red dot */
+    pointer-events: none; /* Allow interactions below */
+    z-index: 9999; /* Place above all elements */
+    transform: translate(-50%, -50%); /* Center the dot around the cursor */
+}
