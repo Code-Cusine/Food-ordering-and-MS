@@ -1,453 +1,366 @@
 .payment-page-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
-    padding-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  padding-top: 5px;
 }
 
 .loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999; /* Ensure it's on top of everything */
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
 
-
-  /* Styling the box that holds the loading bar and text */
 .loading-box {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    max-width: 400px;
-    width: 100%;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Styling for the loading bar */
-  .loading-bar {
-    width: 100%;
-    height: 8px;
-    background-color: #f0f0f0;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  
- /* .loading-bar-inner {
-    width: 50%; 
-    height: 100%;
-    background-color: #007bff; 
-    animation: loadingAnimation 2s infinite ease-in-out;
-  }*/
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-  .loading-bar-inner {
-    width: 0;
-    height: 100%;
-    background: #4caf50;
-    animation: loadingAnimation 3s linear forwards; /* Adjust the duration here */
+.loading-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #f0f0f0;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.loading-bar-inner {
+  width: 0;
+  height: 100%;
+  background: #4caf50;
+  animation: loadingAnimation 3s linear forwards;
+}
+
+@keyframes loadingAnimation {
+  0% {
+    transform: translateX(-100%);
   }
-  
-  /* Keyframe animation for loading bar */
-  @keyframes loadingAnimation {
-    0% {
-      transform: translateX(-100%);
-    }
-    50% {
-      transform: translateX(100%);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
+  50% {
+    transform: translateX(100%);
   }
-  .qr-code-container {
-    text-align: center;
-    padding: 2rem;
+  100% {
+    transform: translateX(-100%);
   }
-  
-  .qr-code-image {
-    margin: 1.5rem auto;
-    border: 1px solid #ddd;
-    padding: 1rem;
-    background: white;
-    width: 100%;
-  }
-  
-  .qr-timer {
-    margin-top: 1rem;
-    color: #666;
-    font-size: 0.9rem;
-  }
-  
-  /* Styling for the "Payment Processing" text */
-  .loading-box p {
-    font-size: 16px;
-    color: #333;
-    font-weight: bold;
-    margin-top: 10px;
-  }
+}
+
+.qr-code-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.qr-code-image {
+  margin: 1.5rem auto;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  background: white;
+  width: 100%;
+}
+
+.qr-timer {
+  margin-top: 1rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.loading-box p {
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+  margin-top: 10px;
+}
 
 .payment-page {
-    max-height: 80vh;
-    width: 100vw;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-top: 20px;
+  max-height: 80vh;
+  width: 100vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 20px;
 }
 
 .loading-bar-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-   
-    overflow: hidden;
-  }
-  
-  .loading-bar-inner {
-    height: 100%;
-    width: 0%;
-    background-color: #4caf50;
-    animation: progress-bar-stripes 2ms linear infinite;
-  }
-  
-  .fast-animation {
-    animation: progress-bar-stripes 1ms linear infinite;
-  }
-  
-  @keyframes progress-bar-stripes {
-    from { width: 0%; }
-    to { width: 100%; }
-  }
-  
-  @keyframes loading {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  overflow: hidden;
+}
+
+.loading-bar-inner {
+  height: 100%;
+  width: 0%;
+  background-color: #4caf50;
+  animation: progress-bar-stripes 2ms linear infinite;
+}
+
+.fast-animation {
+  animation: progress-bar-stripes 1ms linear infinite;
+}
+
+@keyframes progress-bar-stripes {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+@keyframes loading {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
 
 .payment-container {
-    padding-top: 60px; /* Space for the navbar */
+  padding-top: 60px;
 }
 
-
-.other-payment-container h2 {
-    margin-bottom: 2rem;
-    font-size: 35px;
-    color:#000000;
+.other-payment-container h2,
+.recommended-container h2,
+.amazon-pay-container h2 {
+  margin-bottom: 2rem;
+  font-size: 35px;
+  color: #000000;
 }
-.recommended-container h2 {
-    margin-bottom: 2rem;
-    font-size: 35px;
-    color:#000000; /* Original color */
-  }
-  
-  .amazon-pay-container h2{
-    margin-bottom: 2rem;
-    font-size: 35px;
-    color:#000000;
-
-  }
 
 .payment-method {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem;
-    border-radius: 4px;
-    background-color: #f5f5f5;
-    margin-bottom: 1rem;
-    position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 4px;
+  background-color: #f5f5f5;
+  margin-bottom: 1rem;
+  position: relative;
 }
 
 .payment-info img {
-    height: 40px;
-    margin-left: 0.75rem;
-    margin-right: 0.75rem;
+  height: 40px;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
 }
 
 .payment-info .icon-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
 }
 
 .payment-info .icon-container img[src$="paytm-icon_1.png"] {
-    width: 50px;
-    margin: 0.5rem;
+  width: 50px;
+  margin: 0.5rem;
 }
 
 .payment-icon {
-    font-size: 2rem;
-    color: #007bff;
-    margin-right: 1rem;
-    cursor: pointer;
+  font-size: 2rem;
+  color: #007bff;
+  margin-right: 1rem;
+  cursor: pointer;
 }
 
 .payment-info h3 {
-    margin-bottom: 0.5rem;
-    color: #000000;
+  margin-bottom: 0.5rem;
+  color: #000000;
 }
 
 .payment-info p {
-    color: #000000;
-    font-size: 0.875rem;
+  color: #000000;
+  font-size: 0.875rem;
 }
 
 .payment-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    cursor: pointer;
-    
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  cursor: pointer;
 }
 
-
 .payment-info .icon-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    cursor: pointer;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
 }
 
 .payment-info .icon-container img {
-    width: 50px;
-    margin: 0 0.75rem;
+  width: 50px;
+  margin: 0 0.75rem;
 }
-
 
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
- 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.payment-close-icon{
-    position: absolute;
-        top: 0;
-        right: 3%;
-        height: 50px;
-        cursor: pointer;
-
+.payment-close-icon {
+  position: absolute;
+  top: 0;
+  right: 3%;
+  height: 50px;
+  cursor: pointer;
 }
 
 .close-icon1 {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    color: #888;
-    cursor: pointer;
-    z-index: 1000; /* Ensure it appears above other content in the overlay */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  color: #888;
+  cursor: pointer;
+  z-index: 1000;
 }
 
 .close-icon1:hover {
-    color: #555;
+  color: #555;
 }
 
 .modal-content {
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    max-width: 90%;
-    position: relative;
-}
-
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    color: #888;
-}
-
-.close-button:hover {
-    color: #ff0000;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  max-width: 90%;
+  position: relative;
 }
 
 .modal-content h2 {
-    margin-bottom: 1rem;
-    color: #333;
+  margin-bottom: 1rem;
+  color: #333;
 }
 
 .modal-content p {
-    color: #666;
-    margin-bottom: 1.5rem;
+  color: #666;
+  margin-bottom: 1.5rem;
 }
 
 .modal-content input[type="text"],
 .modal-content select {
-    width: 100%;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 0.875rem;
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.875rem;
 }
-
 
 .circular-icon {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background-color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        border: 2px solid black;
-       
-       position: relative;
-        
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 2px solid black;
+  position: relative;
 }
 
-
 .inner-icon {
-position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background-color: transparent;
-    border: 2px solid blue;
-    background-color: blue;
-    transition: background-color 0.3s ease;
-    display: none;
-    
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid blue;
+  background-color: blue;
+  transition: background-color 0.3s ease;
+  display: none;
 }
 
 .highlighted .inner-icon {
-    display: block;
+  display: block;
 }
 
-
-
 .highlighted .circular-icon .inner-icon {
-    display: block;
+  display: block;
 }
 
 .circular-icon-wrapper {
-
-position: absolute;
-    
-    top: 50%;
-    
-    transform: translateY(-50%);
-   
-    right: 1rem;
-    
-    
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1rem;
 }
 
 .cod-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
 
 .cod-overlay-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    position: relative;
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
 }
 
 .cod-overlay-content h2 {
-    margin-top: 0;
-    color: #333;
+  margin-top: 0;
+  color: #333;
 }
 
 .cod-overlay-content p {
-    color: #666;
-    line-height: 1.5;
+  color: #666;
+  line-height: 1.5;
 }
 
-.close-icon-1 {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    color: #999;
-    cursor: pointer;
-}
-
-.close-icon-1:hover {
-    color: #666;
-}
-
-.close-icon-2 {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    color: #888;
-    cursor: pointer;
-}
-
-.close-icon-2:hover {
-    color: #666;
-}
-
-.close-icon-3 {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    color: #888;
-    cursor: pointer;
-}
-
-.close-icon-3:hover {
-    color: #666;
-}
-
+.close-icon-1,
+.close-icon-2,
+.close-icon-3,
 .close-icon-4 {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    color: #888;
-    cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  color: #888;
+  cursor: pointer;
 }
 
+.close-icon-1:hover,
+.close-icon-2:hover,
+.close-icon-3:hover,
 .close-icon-4:hover {
-    color: #666;
+  color: #666;
 }
 
+/* Updated Receipt Modal Styles */
 .receipt-modal-overlay {
   position: fixed;
   top: 0;
@@ -459,88 +372,138 @@ position: absolute;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  }
-  
-  .receipt-modal {
-    background: #fff;
-  padding: 20px;
+}
+
+.receipt-modal {
+  background: #fff;
+  padding: 30px;
   border-radius: 8px;
-  width: 400px;
+  width: 450px;
+  height: 80vh;
+  max-height: 800px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   position: relative;
-  }
-  
-  .receipt-modal h2 {
-    margin: 20px 0;
-    text-align: center;
-    color: black;
-  }
-  
-  .receipt-content {
-    margin: 20px 0;
-    text-align: left;
-    font-size: 14px;
-  }
-  
-  .receipt-content .receipt-item {
-    margin-bottom: 10px;
-  }
-  
-  .receipt-content .receipt-item strong {
-    color: #555;
-  }
+  display: flex;
+  flex-direction: column;
+}
 
-  .receipt-content p {
-    color: #333; /* Darker shade for better visibility */
-    font-weight: 600; /* Slightly bold text */
-  }
-  
-  .receipt-content strong {
-    font-weight: 700; /* Stronger emphasis for headers like "Customer Name" and "Paid by" */
-    color: #000; /* Black color for better readability */
-  }
-  
-  .receipt-total {
-    font-size: 16px;
-    margin-top: 20px;
-    font-weight: bold;
-    color: #000;
-  }
-  
-  .download-button {
-    background-color: #4caf50;
+.receipt-modal h2 {
+  margin: 0 0 20px 0;
+  text-align: center;
+  color: black;
+  font-size: 24px;
+  background: #fff;
+  padding-bottom: 10px;
+  flex-shrink: 0;
+}
+
+.receipt-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+  /* Remove margin-bottom to prevent space after scrollable content */
+}
+
+.receipt-content .receipt-item {
+  margin-bottom: 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.receipt-content p {
+  color: #333;
+  font-weight: 500;
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+/* Move these sections out of receipt-content */
+.receipt-footer {
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+  background: #fff;
+  flex-shrink: 0;
+  margin-top: 20px;
+}
+
+.grand-total {
+  padding-top: 15px;
+  font-weight: bold;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  background: #fff;
+}
+
+.paid-by {
+  margin: 15px 0;
+  padding: 10px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.download-button {
+  background-color: #4caf50;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 25px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
-  }
-  
-  .download-button:hover {
-    background-color: #45a049;
-  }
-  
-  .close-button {
-    background-color: #f44336;
+  font-weight: 500;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.download-button:hover {
+  background-color: #45a049;
+}
+
+.close-button {
+  background-color: #f44336;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 25px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 14px; 
-  margin-top:355px;
-  margin-right: 60px;
-  }
-  
-  .close-button:hover {
-    background-color: #d32f2f;
-  }
-
-  .button-container {
-    display: flex;
-  justify-content: space-between;
-  padding: 0 20px;
-  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  flex: 1;
+  margin-left: 10px;
 }
-  
+
+.close-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Scrollbar styles */
+.receipt-content {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+.receipt-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.receipt-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.receipt-content::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.receipt-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
