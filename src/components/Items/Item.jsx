@@ -17,9 +17,14 @@ const Item = (props) => {
     const [isSingleItemOrder, setIsSingleItemOrder] = useState(false); // Track whether it's a single item order
     const navigate = useNavigate(); // To navigate to the PaymentPage
 
+    const validatePhoneNumber = (number) => {
+        const phoneRegex = /^[0-9]{10}$/; // Regular expression for 10 digits
+        return phoneRegex.test(number);
+    };
+
     const handleAddToCart = () => {
         setIsSingleItemOrder(false); // It's not a single item order
-        if (customerName && phoneNumber) {
+        if (customerName && phoneNumber && validatePhoneNumber(phoneNumber)) {
             setOrderItems(prevItems => {
                 // Check if the current item already exists in the cart by its ID
                 const existingItem = prevItems.find(item => item.id === props.id);
@@ -52,8 +57,16 @@ const Item = (props) => {
     };
 
     const handleCustomerSubmit = () => {
-        if (!customerName.trim() || !phoneNumber.trim()) {
-            alert('Please fill in all fields');
+        if (!customerName.trim()) {
+            alert('Please enter your name.');
+            return;
+        }
+        if (!phoneNumber.trim()) {
+            alert('Please enter your phone number.');
+            return;
+        }
+        if (!validatePhoneNumber(phoneNumber)) {
+            alert('Please enter a valid 10-digit phone number.');
             return;
         }
     

@@ -3,18 +3,32 @@ import './CartItems.css';
 import { ShopContext } from "../../context/ShopContext";
 import { useNavigate } from "react-router-dom";
 import remove_icon from '../assets/cart_cross_icon.png';
+import { useOrder } from "../../context/OrderContext";
 
 const CartItems = () => {
   const { getTotalCartAmount, all_product, cartItems, removeFromCart, incrementItemQuantity, decrementItemQuantity } = useContext(ShopContext);
   const navigate = useNavigate();
+  const { syncCartToOrder } = useOrder();
 
   const handleProceedToCheckout = () => {
     const totalCartAmount = getTotalCartAmount();
     if (totalCartAmount === 0) {
       alert("Your cart is empty. Please add items to your cart before proceeding to payment.");
     } else {
+      // Sync cart items to order before navigating to payment
+      syncCartToOrder(cartItems, all_product);
       navigate('/payment');
     }
+  };
+
+  const handleQuantityChange = (itemId, action) => {
+    if (action === 'increment') {
+      incrementItemQuantity(itemId);
+    } else {
+      decrementItemQuantity(itemId);
+    }
+    // Sync cart items to order after quantity change
+    syncCartToOrder(cartItems, all_product);
   };
 
   return (

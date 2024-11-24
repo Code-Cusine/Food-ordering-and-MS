@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './PaymentPage.css';
+
 import phonepe from '../assets/phonepe-logo-icon.svg';
 import paytm from '../assets/paytm-icon_1.png';
 import googlepay from '../assets/google-pay-icon.webp';
@@ -8,9 +9,9 @@ import axios from 'axios';
 import { useOrder } from '../../context/OrderContext';
 import LoadingOverlay from './LoadingOverlay';
 import { ToastContainer, toast } from 'react-toastify';
-import jsPDF from 'jspdf'; // Import jsPDF
+import jsPDF from 'jspdf';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 
 const PaymentPage = () => {
   const {
@@ -31,7 +32,7 @@ const PaymentPage = () => {
   const [isPaymentProcessed, setIsPaymentProcessed] = useState(false);
   const [showPaymentProcessedOverlay, setShowPaymentProcessedOverlay] = useState(false);
 
-  const navigate = useNavigate(); // Initialize navigate for redirection
+  const navigate = useNavigate();
 
   const handlePaymentMethodClick = (method) => {
     setIsLoading(true);
@@ -77,14 +78,43 @@ const PaymentPage = () => {
     processPayment('Card');
   };
 
+  const generateReceipt = (grandTotal, paymentType) => {
+    const doc = new jsPDF();
+    
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(16);
+    doc.text("Receipt", 10, 10);
+    
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(12);
+    doc.text(`Customer Name: ${customerName}`, 10, 20);
+    
+    doc.text("Order Details:", 10, 30);
+    
+    let yPosition = 40;
+    const maxWidth = 190;
+    orderItems.forEach((item, index) => {
+      const itemDetails = `${index + 1}. ${item.name} | Quantity: ${item.quantity} | Amount: ₹${item.price.toFixed(2)} | Total: ₹${(item.price * item.quantity).toFixed(2)}`;
+      doc.text(itemDetails, 10, yPosition, { maxWidth: maxWidth, align: "left" });
+      yPosition += 10;
+    });
+    
+    yPosition += 10;
+    doc.text(`Grand Total: ₹${grandTotal.toFixed(2)}`, 10, yPosition);
+    yPosition += 10;
+    doc.text(`Paid By: ${paymentType}`, 10, yPosition);
+    
+    doc.save(`receipt_${customerName}_${Date.now()}.pdf`);
+  };
+
   const processPayment = async (paymentType) => {
     if (isPaymentProcessed) {
-      setShowPaymentProcessedOverlay(true); // Show overlay indicating payment is already processed
+      setShowPaymentProcessedOverlay(true);
       setIsLoading(false);
-      return; // Prevent further processing if the payment is already done
+      return;
     }
 
-    setIsLoading(true); // Show loading bar while processing payment
+    setIsLoading(true);
 
     try {
       const grandtotal = orderItems.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -119,9 +149,8 @@ const PaymentPage = () => {
 
       toast.success('Payment processed successfully!', { position: "top-right" });
 
-      setIsPaymentProcessed(true); // Mark payment as processed
+      setIsPaymentProcessed(true);
 
-      // Show appropriate success overlay
       if (paymentType === 'Card') {
         setShowCardDetailsSuccessOverlay(true);
       } else if (paymentType === 'UPI') {
@@ -138,61 +167,17 @@ const PaymentPage = () => {
       });
 
       setShowReceiptModal(true);
-      // Redirect to the homepage after 3 seconds
+
       setTimeout(() => {
         setShowReceiptModal(false);
         navigate('/');
-      }, 25000);
+      }, 2500000);
 
     } catch (error) {
       setIsLoading(false);
       toast.error('There was an error processing your order. Please try again.', { position: "top-right" });
     }
   };
-
-  const generateReceipt = (grandTotal, paymentType) => {
-    const doc = new jsPDF();
-  
-    // Header
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(16);
-    doc.text("Receipt", 10, 10);
-  
-    // Customer details
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(12);
-    doc.text(`Customer Name: ${customerName}`, 10, 20);
-  
-    // Order details
-    doc.text("Order Details:", 10, 30);
-  
-    // Consistent line height and word wrapping for order details
-    let yPosition = 40; // Initial Y position for items
-    const maxWidth = 190; // Set a maximum text width to avoid stretching
-    orderItems.forEach((item, index) => {
-      const itemDetails = `${index + 1}. ${item.name} | Quantity: ${item.quantity} | Amount: ₹${item.price.toFixed(
-        2
-      )} | Total: ₹${(item.price * item.quantity).toFixed(2)}`;
-      doc.text(itemDetails, 10, yPosition, { maxWidth: maxWidth, align: "left" });
-      yPosition += 10; // Increment Y position for next line
-    });
-  
-    // Grand total and payment type
-    const formattedGrandTotal = grandTotal.toFixed(2);
-    const formattedPaymentType = paymentType || "N/A";
-  
-    yPosition += 10; // Add space for summary
-    doc.text(`Grand Total: ₹${formattedGrandTotal}`, 10, yPosition);
-    yPosition += 10;
-    doc.text(`Paid By: ${formattedPaymentType}`, 10, yPosition);
-  
-    // Save PDF
-    doc.save(`receipt_${customerName}_${Date.now()}.pdf`);
-  };
-  
-  
-  
-  
 
   const PaymentProcessedOverlay = ({ onClose }) => {
     return (
@@ -225,33 +210,40 @@ const PaymentPage = () => {
         </div>
       )}
 
-{showReceiptModal && receiptData && (
-  <div className="receipt-modal-overlay">
-    <div className="receipt-modal">
-      <h2>Payment Receipt</h2>
-      <div className="receipt-content">
-        <p><strong>Customer Name:</strong> {receiptData.customerName}</p>
-        <p><strong>Order Summary:</strong></p>
-        <ul>
-          {receiptData.orderItems.map((item, index) => (
-            <li key={index} className="receipt-item">
-              {item.name} - Quantity: {item.quantity}, Total: ₹{item.price * item.quantity}
-            </li>
-          ))}
-        </ul>
-        <p className="receipt-total"><strong>Grand Total:</strong> ₹{receiptData.grandtotal.toFixed(2)}</p>
-        <p><strong>Paid By:</strong> {receiptData.paymentType || "N/A"}</p>
-      </div>
-      <button
-        className="download-button"
-        onClick={() => generateReceipt(receiptData.grandtotal, receiptData.paymentType)}
-      >
-        Download Receipt
-      </button>
-      <button className="close-button" onClick={() => setShowReceiptModal(false)}>Close</button>
-    </div>
-  </div>
-)}
+      {showReceiptModal && receiptData && (
+        <div className="receipt-modal-overlay">
+          <div className="receipt-modal">
+            <h2>Payment Receipt</h2>
+            <div className="receipt-content">
+              <p><strong>Customer Name:</strong> {receiptData.customerName}</p>
+              <p><strong>Order Summary:</strong></p>
+              <ul>
+                {receiptData.orderItems.map((item, index) => (
+                  <li key={index} className="receipt-item">
+                    {item.name} - Quantity: {item.quantity}, Price: ₹{item.price}, Total: ₹{item.price * item.quantity}
+                  </li>
+                ))}
+              </ul>
+              <p className="receipt-total"><strong>Grand Total:</strong> ₹{receiptData.grandtotal.toFixed(2)}</p>
+              <p><strong>Paid By:</strong> {receiptData.paymentType || "N/A"}</p>
+            </div>
+            <div className="button-container">
+              <button
+                className="download-button"
+                onClick={() => generateReceipt(receiptData.grandtotal, receiptData.paymentType)}
+              >
+                Download Receipt
+              </button>
+              <button 
+                className="close-button"
+                onClick={() => setShowReceiptModal(false)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="payment-page">
         <div className="payment-container">
@@ -365,41 +357,30 @@ const PaymentPage = () => {
       </div>
 
       {showUpiSuccessOverlay && (
-        <UpiSuccessOverlay onClose={() => setShowUpiSuccessOverlay(false)} />
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <FaTimes className="close-icon-2" onClick={() => setShowUpiSuccessOverlay(false)} />
+            <h2>UPI Payment Successful</h2>
+            <p>Your payment through UPI has been processed successfully. Thank you!</p>
+          </div>
+        </div>
       )}
+
       {showCardDetailsSuccessOverlay && (
-        <CardDetailsSuccessOverlay onClose={() => setShowCardDetailsSuccessOverlay(false)} />
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <FaTimes className="close-icon-3" onClick={() => setShowCardDetailsSuccessOverlay(false)} />
+            <h2>Card Payment Successful</h2>
+            <p>Your card payment has been processed successfully. Thank you for your purchase!</p>
+          </div>
+        </div>
       )}
+
       {showPaymentProcessedOverlay && (
         <PaymentProcessedOverlay onClose={() => setShowPaymentProcessedOverlay(false)} />
       )}
     </div>
   );
 };
-
-const UpiSuccessOverlay = ({ onClose }) => {
-  return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <FaTimes className="close-icon-2" onClick={onClose} />
-        <h2>UPI Payment Successful</h2>
-        <p>Your payment through UPI has been processed successfully. Thank you!</p>
-      </div>
-    </div>
-  );
-};
-
-const CardDetailsSuccessOverlay = ({ onClose }) => {
-  return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <FaTimes className="close-icon-3" onClick={onClose} />
-        <h2>Card Payment Successful</h2>
-        <p>Your card payment has been processed successfully. Thank you for your purchase!</p>
-      </div>
-    </div>
-  );
-};
-
 
 export default PaymentPage;
