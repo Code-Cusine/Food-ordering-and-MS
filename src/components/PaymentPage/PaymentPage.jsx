@@ -12,6 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import jsPDF from 'jspdf';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import qrcode from "../assets/feb880db-a7c8-4411-a551-c40dcf083c0a_GooglePay_QR.png"
 
 const PaymentPage = () => {
   const {
@@ -31,6 +32,7 @@ const PaymentPage = () => {
   const [receiptData, setReceiptData] = useState(null);
   const [isPaymentProcessed, setIsPaymentProcessed] = useState(false);
   const [showPaymentProcessedOverlay, setShowPaymentProcessedOverlay] = useState(false);
+  const [showQRCode, setShowQRCode] = useState(false);
 
   const navigate = useNavigate();
 
@@ -54,7 +56,13 @@ const PaymentPage = () => {
   };
 
   const handleUpiPayment = () => {
+    setShowQRCode(true);
+  
+  // After 15 seconds, hide QR code and proceed with payment processing
+    setTimeout(() => {
+    setShowQRCode(false);
     processPayment('UPI');
+    }, 15000);
   };
 
   const handleUpiMethodClick = (method) => {
@@ -179,6 +187,24 @@ const PaymentPage = () => {
     }
   };
 
+  const QRCodeOverlay = () => {
+    return (
+      <div className="modal-overlay">
+        <div className="modal-content qr-code-container">
+          <FaTimes className="close-icon" onClick={() => setShowQRCode(false)} />
+          <h2>Scan QR Code to Pay</h2>
+          <img 
+            src={qrcode}
+            alt="Payment QR Code" 
+            className="qr-code-image"
+          />
+          <p>Please scan this QR code using your UPI app</p>
+          <div className="qr-timer">Time remaining: 15 seconds</div>
+        </div>
+      </div>
+    );
+  };
+
   const PaymentProcessedOverlay = ({ onClose }) => {
     return (
       <div className="modal-overlay">
@@ -199,6 +225,7 @@ const PaymentPage = () => {
   return (
     <div className="payment-page-container">
       <ToastContainer />
+       {showQRCode && <QRCodeOverlay />}
       {isLoading && (
         <div className="loading-overlay">
           <div className="loading-box">

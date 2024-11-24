@@ -68,6 +68,24 @@
       transform: translateX(-100%);
     }
   }
+  .qr-code-container {
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .qr-code-image {
+    margin: 1.5rem auto;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    background: white;
+    width: 100%;
+  }
+  
+  .qr-timer {
+    margin-top: 1rem;
+    color: #666;
+    font-size: 0.9rem;
+  }
   
   /* Styling for the "Payment Processing" text */
   .loading-box p {
