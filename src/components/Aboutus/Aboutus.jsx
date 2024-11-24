@@ -5,15 +5,22 @@ const AboutUs = () => {
     return (
         <div className="about-container">
             <h2>About Us</h2>
+            <strong>
             <p>
-                Our team, consisting of Ankith Hebbar, Nandan Upadhyaya, Sinchan A, and Tejas P Naik, are students from NMAM Institute of Technology (NMAMIT) in Nitte. Each team member brings a unique skill set to the table, enhancing our ability to tackle complex challenges and innovate effectively in our project.
+            Welcome to our Food Ordering Management System, your ultimate solution for seamless and efficient restaurant management. We are passionate about revolutionizing the dining experience for both customers and restaurant owners through cutting-edge technology and user-centric design.
             </p>
             <p>
-                Our project is focused on creating a Food Ordering Management System designed to simplify and improve the experience  restaurant management. The platform enables customers to easily browse menus, customize orders, and place requests efficiently. For restaurant owners, it provides a streamlined order management system that reduces errors and enhances productivity. The user-friendly interface and automated functionalities ensure a seamless experience, catering to the evolving needs of modern restaurants.
+            Our platform simplifies the way restaurants manage their operations and how customers interact with them. From browsing menus and customizing orders to managing reservations and payments, our system is built to cater to the dynamic needs of the modern food service industry.
             </p>
+            <p>For Customers it allows easy menu browsing, quick order customization and effortless checkout and secure payment options. </p>
+
+<p>For Restaurant owners it allows them to manage orders efficiently, analyze sales effectively through live connection of the database, established with PowerBI and enhance workflow. </p>
             <p>
-                Our project aims to deliver a highly efficient and accessible system that will not only improve user satisfaction but also boost operational efficiency for restaurants. The system will reduce order processing time, minimize human errors, and optimize the workflow from order placement to fulfillment. This project will not only equip us with valuable technical skills but will also contribute to the development of practical, industry-ready solutions in the food service sector.
+            At the core of our mission is a commitment to innovation and reliability. We aim to create solutions that not only meet the demands of today but also anticipate the needs of tomorrow. Whether you’re a restaurant owner looking to enhance efficiency or a customer seeking convenience, our Food Ordering Management System is here to transform your experience.
+            Thank you for choosing us as your partner in modern dining excellence. Together, let’s redefine how food is ordered, served, and enjoyed.
             </p>
+            </strong> 
+           
         </div>
     );
 };

@@ -8,7 +8,9 @@ import axios from 'axios';
 import { useOrder } from '../../context/OrderContext';
 import LoadingOverlay from './LoadingOverlay';
 import { ToastContainer, toast } from 'react-toastify';
+import jsPDF from 'jspdf'; // Import jsPDF
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const PaymentPage = () => {
   const {
@@ -24,11 +26,13 @@ const PaymentPage = () => {
   const [showUpiSuccessOverlay, setShowUpiSuccessOverlay] = useState(false);
   const [showCardDetailsSuccessOverlay, setShowCardDetailsSuccessOverlay] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  
+  const [showReceiptModal, setShowReceiptModal] = useState(false);
+  const [receiptData, setReceiptData] = useState(null);
   const [isPaymentProcessed, setIsPaymentProcessed] = useState(false);
   const [showPaymentProcessedOverlay, setShowPaymentProcessedOverlay] = useState(false);
 
-  
+  const navigate = useNavigate(); // Initialize navigate for redirection
+
   const handlePaymentMethodClick = (method) => {
     setIsLoading(true);
     if (selectedPaymentMethod === method) {
@@ -79,12 +83,12 @@ const PaymentPage = () => {
       setIsLoading(false);
       return; // Prevent further processing if the payment is already done
     }
-  
+
     setIsLoading(true); // Show loading bar while processing payment
-  
+
     try {
       const grandtotal = orderItems.reduce((total, item) => total + item.price * item.quantity, 0);
-  
+
       const orderData = {
         custname: customerName,
         contactno: phoneNumber,
@@ -96,10 +100,10 @@ const PaymentPage = () => {
           foodtype: item.foodtype,
         })),
       };
-  
+
       const orderResponse = await axios.post('http://localhost:5000/api/orders', orderData);
       const { custid, orderid } = orderResponse.data;
-  
+
       const paymentData = {
         orderid,
         custid,
@@ -107,15 +111,17 @@ const PaymentPage = () => {
         paymenttype: paymentType,
         paymentstatus: 'Completed',
       };
-  
+
       await axios.post('http://localhost:5000/api/payments', paymentData);
+      
       setShowOrderOverlay(false);
-      setIsLoading(false); 
-      
+      setIsLoading(false);
+
       toast.success('Payment processed successfully!', { position: "top-right" });
-      
+
       setIsPaymentProcessed(true); // Mark payment as processed
-      
+
+      // Show appropriate success overlay
       if (paymentType === 'Card') {
         setShowCardDetailsSuccessOverlay(true);
       } else if (paymentType === 'UPI') {
@@ -123,11 +129,69 @@ const PaymentPage = () => {
       } else if (paymentType === 'Cash') {
         setShowCodOverlay(true);
       }
+
+      setReceiptData({
+        customerName,
+        orderItems,
+        grandtotal,
+        paymentType,
+      });
+
+      setShowReceiptModal(true);
+      // Redirect to the homepage after 3 seconds
+      setTimeout(() => {
+        setShowReceiptModal(false);
+        navigate('/');
+      }, 25000);
+
     } catch (error) {
       setIsLoading(false);
       toast.error('There was an error processing your order. Please try again.', { position: "top-right" });
     }
   };
+
+  const generateReceipt = (grandTotal, paymentType) => {
+    const doc = new jsPDF();
+  
+    // Header
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(16);
+    doc.text("Receipt", 10, 10);
+  
+    // Customer details
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(12);
+    doc.text(`Customer Name: ${customerName}`, 10, 20);
+  
+    // Order details
+    doc.text("Order Details:", 10, 30);
+  
+    // Consistent line height and word wrapping for order details
+    let yPosition = 40; // Initial Y position for items
+    const maxWidth = 190; // Set a maximum text width to avoid stretching
+    orderItems.forEach((item, index) => {
+      const itemDetails = `${index + 1}. ${item.name} | Quantity: ${item.quantity} | Amount: ₹${item.price.toFixed(
+        2
+      )} | Total: ₹${(item.price * item.quantity).toFixed(2)}`;
+      doc.text(itemDetails, 10, yPosition, { maxWidth: maxWidth, align: "left" });
+      yPosition += 10; // Increment Y position for next line
+    });
+  
+    // Grand total and payment type
+    const formattedGrandTotal = grandTotal.toFixed(2);
+    const formattedPaymentType = paymentType || "N/A";
+  
+    yPosition += 10; // Add space for summary
+    doc.text(`Grand Total: ₹${formattedGrandTotal}`, 10, yPosition);
+    yPosition += 10;
+    doc.text(`Paid By: ${formattedPaymentType}`, 10, yPosition);
+  
+    // Save PDF
+    doc.save(`receipt_${customerName}_${Date.now()}.pdf`);
+  };
+  
+  
+  
   
 
   const PaymentProcessedOverlay = ({ onClose }) => {
@@ -160,6 +224,34 @@ const PaymentPage = () => {
           </div>
         </div>
       )}
+
+{showReceiptModal && receiptData && (
+  <div className="receipt-modal-overlay">
+    <div className="receipt-modal">
+      <h2>Payment Receipt</h2>
+      <div className="receipt-content">
+        <p><strong>Customer Name:</strong> {receiptData.customerName}</p>
+        <p><strong>Order Summary:</strong></p>
+        <ul>
+          {receiptData.orderItems.map((item, index) => (
+            <li key={index} className="receipt-item">
+              {item.name} - Quantity: {item.quantity}, Total: ₹{item.price * item.quantity}
+            </li>
+          ))}
+        </ul>
+        <p className="receipt-total"><strong>Grand Total:</strong> ₹{receiptData.grandtotal.toFixed(2)}</p>
+        <p><strong>Paid By:</strong> {receiptData.paymentType || "N/A"}</p>
+      </div>
+      <button
+        className="download-button"
+        onClick={() => generateReceipt(receiptData.grandtotal, receiptData.paymentType)}
+      >
+        Download Receipt
+      </button>
+      <button className="close-button" onClick={() => setShowReceiptModal(false)}>Close</button>
+    </div>
+  </div>
+)}
 
       <div className="payment-page">
         <div className="payment-container">
