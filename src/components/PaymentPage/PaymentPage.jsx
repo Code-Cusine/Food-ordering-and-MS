@@ -56,12 +56,23 @@ const PaymentPage = () => {
   };
 
   const handleUpiPayment = () => {
+    if (isPaymentProcessed) {
+      setShowPaymentProcessedOverlay(true);
+      setIsLoading(false);
+      return;
+    }
+    
     setShowQRCode(true);
   
-  // After 15 seconds, hide QR code and proceed with payment processing
+    // After 15 seconds, hide QR code and proceed with payment processing
     setTimeout(() => {
-    setShowQRCode(false);
-    processPayment('UPI');
+      setShowQRCode(false);
+      if (!isPaymentProcessed) {
+        processPayment('UPI');
+      } else {
+        setShowPaymentProcessedOverlay(true);
+        setIsLoading(false);
+      }
     }, 15000);
   };
 
@@ -179,7 +190,7 @@ const PaymentPage = () => {
       setTimeout(() => {
         setShowReceiptModal(false);
         navigate('/');
-      }, 2500000);
+      }, 25000);
 
     } catch (error) {
       setIsLoading(false);

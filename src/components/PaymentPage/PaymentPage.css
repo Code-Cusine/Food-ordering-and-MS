@@ -230,6 +230,17 @@
   z-index: 1000;
 }
 
+.close-icon {
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  font-size: 20px;
+  color: #888;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+
 .close-icon1:hover {
   color: #555;
 }
