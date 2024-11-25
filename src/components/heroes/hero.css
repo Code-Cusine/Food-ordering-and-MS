@@ -21,18 +21,7 @@
   height: 400px;
 }
 
-.food-box {
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  width: 350px; /* Width for desktop */
-  height: 200px; /* Height for desktop */
-  padding: 15px; /* Adjust padding if needed */
-  margin: 20px;
-  text-align: left; /* Align text to the left */
-  display: flex;
-  align-items: center;
-}
+
 
 .Bestseller {
   display: flex;
@@ -44,37 +33,15 @@
 }
 
 .bestseller-image {
-  width: 380px;  
+  width: 350px;  
   border-radius: 8px; 
   object-fit: cover; 
-  margin-top: -205px;
+  margin-top: -165px;
+  height:200px;
 
 }
 
-.food-image {
-  width: 80px; /* Set a fixed width for the image */
-  height: 90px; /* Set a fixed height for the image */
-  border-radius: 50%; /* Make the image circular */
-  object-fit: cover; /* Ensure the image covers the circle without distortion */
-  margin-right: 15px; /* Add some space between the image and the details */
-  border: 2px solid #ddd; /* Optional: add a border around the image for better visibility */
-}
 
-.food-details h3 {
-  font-size: 1.1rem;
-  margin: 0 0 10px 0;
-}
-
-.food-details p {
-  color: #555;
-  font-size: 0.9rem;
-  margin: 5px 0;
-}
-
-.food-price {
-  font-weight: bold;
-  margin: 10px 0;
-}
 
 .item-actions1 {
   display: flex;
@@ -83,37 +50,48 @@
   width: 100%;
 }
 
-/* Add Item Button */
-.add-item-button1 {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 8px 15px;
+
+.item-box1 {
+  background: linear-gradient(85deg,#ffffff,#ffffff);
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 375px;
+  padding: 7px;
+  margin: 5px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+.item-image1 {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+  border: 2px solid #ddd;
+  flex-shrink: 0;
+}
+
+.item-details1 {
+  flex-grow: 1;
+}
+
+.item-details1 h3 {
+  font-size: 1.1rem;
+  margin: 0 0 10px 0;
+}
+
+.item-details1 p {
+  color: #000000;
+  font-weight: 600;
   font-size: 0.9rem;
-  border-radius: 5px;
-  cursor: pointer;
-  flex: 1; /* Equal space for both buttons */
+  margin: 5px 0;
 }
 
-.add-item-button1:hover {
-  background-color: #45a049;
+.item-price1 {
+  font-weight: bold;
+  color: #333;
+  margin: 10px 0;
+  font-size: 1.1rem;
 }
-
-/* Add to Cart Button */
-.add-to-cart-button1 {
-  background-color: #FF9800; /* Orange color for Add to Cart */
-  color: white;
-  border: none;
-  padding: 8px 13px;
-  font-size: 0.9rem;
-  border-radius: 5px;
-  cursor: pointer;
-  flex: 1; /* Equal space for both buttons */
-  text-align: center;
-}
-
-.add-to-cart-button1:hover {
-  background-color: #FB8C00;
-}
-
-
