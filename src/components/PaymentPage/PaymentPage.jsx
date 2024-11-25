@@ -100,31 +100,52 @@ const PaymentPage = () => {
   const generateReceipt = (grandTotal, paymentType) => {
     const doc = new jsPDF();
     
+    // Header
     doc.setFont("helvetica", "bold");
     doc.setFontSize(16);
     doc.text("Receipt", 10, 10);
     
+    // Set normal font for all other content
     doc.setFont("helvetica", "normal");
     doc.setFontSize(12);
+    
+    // Customer name
     doc.text(`Customer Name: ${customerName}`, 10, 20);
     
+    // Order details header
     doc.text("Order Details:", 10, 30);
     
+    // Order items with proper formatting and line breaks
     let yPosition = 40;
-    const maxWidth = 190;
+    const lineHeight = 7; // Reduced line height for better spacing
+    const maxWidth = 180; // Slightly reduced max width to ensure margins
+    
     orderItems.forEach((item, index) => {
-      const itemDetails = `${index + 1}. ${item.name} | Quantity: ${item.quantity} | Amount: ₹${item.price.toFixed(2)} | Total: ₹${(item.price * item.quantity).toFixed(2)}`;
-      doc.text(itemDetails, 10, yPosition, { maxWidth: maxWidth, align: "left" });
-      yPosition += 10;
+        // Split item details into multiple parts for better control
+        const itemNumber = `${index + 1}.`;
+        const itemName = item.name;
+        const quantity = `Quantity: ${item.quantity}`;
+        const amount = `Amount: ₹${item.price.toFixed(2)}`;
+        const total = `Total: ₹${(item.price * item.quantity).toFixed(2)}`;
+        
+        // Calculate positions for each part
+        doc.text(itemNumber, 10, yPosition);
+        doc.text(itemName, 20, yPosition);
+        doc.text(quantity, 10, yPosition + lineHeight);
+        doc.text(amount, 80, yPosition + lineHeight);
+        doc.text(total, 150, yPosition + lineHeight);
+        
+        yPosition += lineHeight * 2; // Move to next item with spacing
     });
     
-    yPosition += 10;
+    // Grand total and payment method
+    yPosition += lineHeight;
     doc.text(`Grand Total: ₹${grandTotal.toFixed(2)}`, 10, yPosition);
-    yPosition += 10;
+    yPosition += lineHeight;
     doc.text(`Paid By: ${paymentType}`, 10, yPosition);
     
     doc.save(`receipt_${customerName}_${Date.now()}.pdf`);
-  };
+};
 
   const processPayment = async (paymentType) => {
     if (isPaymentProcessed) {
