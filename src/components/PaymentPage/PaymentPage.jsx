@@ -190,7 +190,10 @@ const PaymentPage = () => {
       setTimeout(() => {
         setShowReceiptModal(false);
         navigate('/');
-      }, 25000);
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
+      }, 7000);
 
     } catch (error) {
       setIsLoading(false);
