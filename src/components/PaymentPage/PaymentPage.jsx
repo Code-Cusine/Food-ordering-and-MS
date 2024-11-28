@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './PaymentPage.css';
-
 import phonepe from '../assets/phonepe-logo-icon.svg';
 import paytm from '../assets/paytm-icon_1.png';
 import googlepay from '../assets/google-pay-icon.webp';
@@ -14,6 +13,153 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import qrcode from "../assets/feb880db-a7c8-4411-a551-c40dcf083c0a_GooglePay_QR.png"
 
+const CardDetailsModal = ({ onClose, onSubmit }) => {
+  const [cardDetails, setCardDetails] = useState({
+    name: '',
+    number: '',
+    expiryMonth: '',
+    expiryYear: '',
+  });
+
+  const [isValidCardNumber, setIsValidCardNumber] = useState(true); 
+
+  const handleCardDetailsChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'number') {
+      const isValid = /^[0-9]{4}\s[0-9]{4}\s[0-9]{4}\s[0-9]{4}$/.test(value);
+      setIsValidCardNumber(isValid);
+    }
+    setCardDetails((prevCardDetails) => ({
+      ...prevCardDetails,
+      [name]: value,
+    }));
+  };
+
+  const handleEnterCardDetails = () => {
+    if (cardDetails.name === '' || cardDetails.number === '' || cardDetails.expiryMonth === '' || cardDetails.expiryYear === '') {
+      toast.error('All fields are required.', { position: "top-right" });
+      return;
+    }
+    
+    if (!isValidCardNumber) {
+      toast.error('Please enter a valid card number.', { position: "top-right" });
+      return;
+    }
+
+    onSubmit(cardDetails);
+  };
+
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <FaTimes className='cvv-close-icon1' onClick={onClose} />
+        <h2>Enter Card Details</h2>
+        <p>Please ensure your card is enabled for online transactions.</p>
+        <input
+          type="text"
+          name="name"
+          placeholder="Cardholder Name"
+          value={cardDetails.name}
+          onChange={handleCardDetailsChange}
+          required
+        />
+        <input
+          type="text"
+          name="number"
+          placeholder="Card Number"
+          value={cardDetails.number}
+          onChange={handleCardDetailsChange}
+          required 
+          className={isValidCardNumber ? '' : 'invalid-input'}
+        />
+       
+        <div className="expiry-date">
+          <select
+            name="expiryMonth"
+            value={cardDetails.expiryMonth}
+            onChange={handleCardDetailsChange} 
+            required
+          >
+            <option value="">Month</option>
+            {['January', 'February', 'March', 'April', 'May', 'June', 
+              'July', 'August', 'September', 'October', 'November', 'December']
+              .map((month, index) => (
+                <option key={month} value={String(index + 1).padStart(2, '0')}>
+                  {month}
+                </option>
+              ))
+            }
+          </select>
+          <select
+            name="expiryYear"
+            value={cardDetails.expiryYear}
+            onChange={handleCardDetailsChange}
+            required
+          >
+            <option value="">Year</option>
+            {[2024, 2025, 2026, 2027, 2028, 2029, 2030].map(year => (
+              <option key={year} value={year}>{year}</option>
+            ))}
+          </select>
+        </div>
+        <button 
+          className="enter-card-details" 
+          onClick={handleEnterCardDetails}
+        >
+          Enter Card Details
+        </button>
+        {!isValidCardNumber && <p className="error-message">Please enter a valid card number in the format "1234 5678 9012 3456"</p>}
+      </div>
+    </div>
+  );
+};
+
+const CvvModal = ({ onSubmit, onClose }) => {
+  const [cvv, setCvv] = useState('');
+  const [isValidCvv, setIsValidCvv] = useState(true);
+
+  const handleCvvChange = (e) => {
+    const enteredCvv = e.target.value;
+    const isValid = /^\d{3}$/.test(enteredCvv);
+    setIsValidCvv(isValid);
+    setCvv(enteredCvv);
+  };
+
+  const handleSubmit = () => {
+    if (/^\d{3}$/.test(cvv)) {
+      onSubmit(cvv);
+    } else {
+      setIsValidCvv(false);
+      toast.error('Please enter a valid 3-digit CVV', { position: "top-right" });
+    }
+  };
+
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <FaTimes className='close-icon1' onClick={onClose} />
+        <h2>Enter CVV</h2>
+        <input
+          type="text"
+          name="cvv"
+          placeholder="CVV"
+          value={cvv}
+          onChange={handleCvvChange} 
+          className={isValidCvv ? '' : 'invalid-input'}
+        />
+        {!isValidCvv && <p className="error-message">Please enter a valid 3-digit CVV</p>}
+        <button 
+          className="proceed-button" 
+          onClick={handleSubmit} 
+          disabled={!isValidCvv}
+        >
+          Proceed
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const PaymentPage = () => {
   const {
     orderItems,
@@ -24,6 +170,8 @@ const PaymentPage = () => {
 
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
   const [highlightedPaymentMethod, setHighlightedPaymentMethod] = useState(null);
+  const [showCardDetailsModal, setShowCardDetailsModal] = useState(false);
+  const [showCvvModal, setShowCvvModal] = useState(false);
   const [showCodOverlay, setShowCodOverlay] = useState(false);
   const [showUpiSuccessOverlay, setShowUpiSuccessOverlay] = useState(false);
   const [showCardDetailsSuccessOverlay, setShowCardDetailsSuccessOverlay] = useState(false);
@@ -37,7 +185,7 @@ const PaymentPage = () => {
   const navigate = useNavigate();
 
   const handlePaymentMethodClick = (method) => {
-    setIsLoading(true);
+    setIsLoading(false);
     if (selectedPaymentMethod === method) {
       setSelectedPaymentMethod(null);
       setHighlightedPaymentMethod(null);
@@ -83,12 +231,38 @@ const PaymentPage = () => {
   };
 
   const handleCardMethodClick = (method) => {
-    setIsLoading(true);
+    if (isPaymentProcessed) {
+      setShowPaymentProcessedOverlay(true);
+      setIsLoading(false);
+      return;
+    }
     setSelectedPaymentMethod(method);
     setHighlightedPaymentMethod(method);
-    handleCardPayment();
+    setShowCardDetailsModal(true);
+
   };
 
+  const handleCardDetailsSubmit = (cardDetails) => {
+    // Here you can add additional validation if needed
+    setShowCardDetailsModal(false);
+    setShowCvvModal(true);
+  };
+
+  const handleCvvSubmit = async (cvv) => {
+    try {
+      setIsLoading(true);
+      setShowCvvModal(false);
+      
+      // Process card payment with stored card details
+      await processPayment('Card');
+      
+    
+    } catch (error) {
+      toast.error('Payment processing failed', { position: "top-right" });
+    } finally {
+      setIsLoading(false);
+    }
+  };
   const handleCashPayment = () => {
     processPayment('Cash');
   };
@@ -437,6 +611,28 @@ const PaymentPage = () => {
           </div>
         </div>
       )}
+
+       {/* Existing overlays and modals */}
+       {showCardDetailsModal && (
+        <CardDetailsModal 
+          onClose={() => {
+            setShowCardDetailsModal(false);
+            setHighlightedPaymentMethod(null);
+          }}
+          onSubmit={handleCardDetailsSubmit}
+        />
+      )}
+
+      {showCvvModal && (
+        <CvvModal 
+          onClose={() => {
+            setShowCvvModal(false);
+            setHighlightedPaymentMethod(null);
+          }}
+          onSubmit={handleCvvSubmit}
+        />
+      )}
+
 
       {showPaymentProcessedOverlay && (
         <PaymentProcessedOverlay onClose={() => setShowPaymentProcessedOverlay(false)} />
