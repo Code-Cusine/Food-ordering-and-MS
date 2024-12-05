@@ -11,7 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import jsPDF from 'jspdf';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-import qrcode from "../assets/feb880db-a7c8-4411-a551-c40dcf083c0a_GooglePay_QR.png"
+import qrcode from "../assets/qrcodeimage.png"
 
 const CardDetailsModal = ({ onClose, onSubmit }) => {
   const [cardDetails, setCardDetails] = useState({
