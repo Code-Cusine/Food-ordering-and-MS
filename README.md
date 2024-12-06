@@ -2,35 +2,35 @@
 The Cuisine Code platform is designed to showcase the <b> Food Ordering Management System </b> developed for students and canteen owners. The system allows students to conveniently place orders through the website, eliminating the need to wait in long queues. Additionally, it provides canteen owners with real-time, in-depth sales analysis through a database seamlessly integrated with Power BI. This dual-purpose system enhances user experience for students and supports data-driven decision-making for canteen management.
 
 # Contributors:
-Nandan Upadhyaya
-Ankith Hebbar
-Sinchan A
-Tejas P Naik
+<p>Nandan Upadhyaya</p>
+<p>Ankith Hebbar </p>
+<p>Sinchan A </p>
+<p>Tejas P Naik </p>
 
 # Tech Stack
-Frontend : React, CSS
-Backend : Node, Express
-Database : Neon DB (Neon DB is a fully managed, serverless, and cloud-native implementation of PostgreSQL, designed to deliver high scalability, seamless integration, and optimal performance for modern 
-          application development)
+<p>Frontend : React, CSS</p>
+<p>Backend : Node, Express</p>
+<p>Database : Neon DB (Neon DB is a fully managed, serverless, and cloud-native implementation of PostgreSQL, designed to deliver high scalability, seamless integration, and optimal performance for modern 
+          application development)</p>
 
 # Additional Libraries Installed
-<b>react-toastify: </b> A React library for creating customizable, lightweight, and stylish toast notifications.
-<b>react-icons:  </b> A library providing a collection of popular icons for easy integration into React applications.
-<b>pg:  </b> A Node.js library for interacting with PostgreSQL databases, offering a robust and feature-rich API.
-<b>dotenv:  </b> A module for loading environment variables from a .env file into process.env, enhancing application security and configurability.
-<b>jspdf:  </b> A JavaScript library for generating PDF documents directly in the browser or Node.js environments.
-<b>axios:  </b> A promise-based HTTP client for making requests to servers, supporting RESTful APIs and asynchronous operations in both browser and Node.js environments.
-<b>cors:  </b> A Node.js package that enables Cross-Origin Resource Sharing (CORS), allowing servers to handle requests from different origins securely and flexibly.
-<b>concurrently: </b> A Node.js package that allows to run multiple processes, such as  frontend and backend servers, simultaneously in a single terminal window, streamlining development workflows.
-<b>nodemon: </b> A Node.js utility that automatically restarts the server whenever changes are detected in the source code, enhancing developer productivity by eliminating the need for manual restarts.
+<p><b>react-toastify: </b> A React library for creating customizable, lightweight, and stylish toast notifications.</p>
+<p><b>react-icons:  </b> A library providing a collection of popular icons for easy integration into React applications.</p>
+<p><b>pg:  </b> A Node.js library for interacting with PostgreSQL databases, offering a robust and feature-rich API.</p>
+<p><b>dotenv:  </b> A module for loading environment variables from a .env file into process.env, enhancing application security and configurability.</p>
+<p><b>jspdf:  </b> A JavaScript library for generating PDF documents directly in the browser or Node.js environments.</p>
+<p><b>axios:  </b> A promise-based HTTP client for making requests to servers, supporting RESTful APIs and asynchronous operations in both browser and Node.js environments.</p>
+<p><b>cors:  </b> A Node.js package that enables Cross-Origin Resource Sharing (CORS), allowing servers to handle requests from different origins securely and flexibly.</p>
+<p><b>concurrently: </b> A Node.js package that allows to run multiple processes, such as  frontend and backend servers, simultaneously in a single terminal window, streamlining development workflows.</p>
+<p><b>nodemon: </b> A Node.js utility that automatically restarts the server whenever changes are detected in the source code, enhancing developer productivity by eliminating the need for manual restarts.</p>
 
 # Features:
 
 # How to run the application
-Run the command 
-### npm run dev (It will restart the frontend and backend server simultaneously)
-or
-### npm start (It will only start the frontend server)
+<p> Run the command </p>
+<p>### npm run dev (It will restart the frontend and backend server simultaneously)</p>
+<p>or</p>
+<p>### npm start (It will only start the frontend server)</p>
 
 # Getting Started with Create React App
 
