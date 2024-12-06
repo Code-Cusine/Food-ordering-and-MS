@@ -1,5 +1,5 @@
 # Overview of the Project
-The Cuisine Code platform is designed to showcase the <b> Food Ordering Management System </b> developed for students and canteen owners. The system allows students to conveniently place orders through the website, eliminating the need to wait in long queues. Additionally, it provides canteen owners with real-time, in-depth sales analysis through a database seamlessly integrated with Power BI. This dual-purpose system enhances user experience for students and supports data-driven decision-making for canteen management.
+The <b>Cuisine Code </b> platform is designed to showcase the <b> Food Ordering Management System </b> developed for students and canteen owners. The system allows students to conveniently place orders through the website, eliminating the need to wait in long queues. Additionally, it provides canteen owners with real-time, in-depth sales analysis through a database seamlessly integrated with Power BI. This dual-purpose system enhances user experience for students and supports data-driven decision-making for canteen management.
 
 # Contributors:
 <p>Nandan Upadhyaya</p>
@@ -24,11 +24,18 @@ The Cuisine Code platform is designed to showcase the <b> Food Ordering Manageme
 <p><b>concurrently: </b> A Node.js package that allows to run multiple processes, such as  frontend and backend servers, simultaneously in a single terminal window, streamlining development workflows.</p>
 <p><b>nodemon: </b> A Node.js utility that automatically restarts the server whenever changes are detected in the source code, enhancing developer productivity by eliminating the need for manual restarts.</p>
 
+# Database structure
+<p><b> Entites and Attributes </b></p>
+<p><b> customer : custid (Primary Key), custname, contactno, noofvisits </b></p>
+<p><b> orders : orderid (Primary Key), custid (Foreign Key), time_of_order </b></p>
+<p><b> order_items : itemid (Primary Key), orderid (Foreign Key), custid (Foreign Key), itemname, quantity, price, foodtype (Veg/Non-Veg/Drinks) </b></p>
+<p><b> payment : paymentid (Primary Key), custid (Foreign Key), orderid (Foreign Key), paymenttype, paymentstatus, paymentdate, grandtotal  </b></p>
+
 # Features:
 
 # How to run the application
 <p> Run the command </p>
-<p> <b>npm run dev</b>(It will restart the frontend and backend server simultaneously)</p>
+<p> <b>npm run dev</b> (It will restart the frontend and backend server simultaneously)</p>
 <p>or</p>
 <p><b>npm start </b> (It will only start the frontend server)</p>
 
