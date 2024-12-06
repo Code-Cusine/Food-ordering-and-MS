@@ -8,9 +8,9 @@ The Cuisine Code platform is designed to showcase the <b> Food Ordering Manageme
 <p>Tejas P Naik </p>
 
 # Tech Stack
-<p><b>Frontend:</b> React, CSS </p>
-<p><b>Backend:</b>Node, Express</p>
-<p><b>Database:</b> Neon DB (Neon DB is a fully managed, serverless, and cloud-native implementation of PostgreSQL, designed to deliver high scalability, seamless integration, and optimal performance for modern 
+<p><b>Frontend:</b>  React, CSS </p>
+<p><b>Backend: </b> Node, Express</p>
+<p><b>Database:</b>  Neon DB (Neon DB is a fully managed, serverless, and cloud-native implementation of PostgreSQL, designed to deliver high scalability, seamless integration, and optimal performance for modern 
           application development)</p>
 
 # Additional Libraries Installed
