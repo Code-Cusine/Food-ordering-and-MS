@@ -28,9 +28,9 @@ The Cuisine Code platform is designed to showcase the <b> Food Ordering Manageme
 
 # How to run the application
 <p> Run the command </p>
-<p> ### `npm run dev`(It will restart the frontend and backend server simultaneously)</p>
+<p> <b>npm run dev</b>(It will restart the frontend and backend server simultaneously)</p>
 <p>or</p>
-<p>### `npm start` (It will only start the frontend server)</p>
+<p><b>npm start </b> (It will only start the frontend server)</p>
 
 # Getting Started with Create React App
 
