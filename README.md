@@ -8,9 +8,9 @@ The Cuisine Code platform is designed to showcase the <b> Food Ordering Manageme
 <p>Tejas P Naik </p>
 
 # Tech Stack
-<p>Frontend : React, CSS</p>
-<p>Backend : Node, Express</p>
-<p>Database : Neon DB (Neon DB is a fully managed, serverless, and cloud-native implementation of PostgreSQL, designed to deliver high scalability, seamless integration, and optimal performance for modern 
+<p><b>Frontend:</b> React, CSS </p>
+<p><b>Backend:</b>Node, Express</p>
+<p><b>Database:</b> Neon DB (Neon DB is a fully managed, serverless, and cloud-native implementation of PostgreSQL, designed to deliver high scalability, seamless integration, and optimal performance for modern 
           application development)</p>
 
 # Additional Libraries Installed
@@ -28,9 +28,9 @@ The Cuisine Code platform is designed to showcase the <b> Food Ordering Manageme
 
 # How to run the application
 <p> Run the command </p>
-<p>### npm run dev (It will restart the frontend and backend server simultaneously)</p>
+<p> ### `npm run dev`(It will restart the frontend and backend server simultaneously)</p>
 <p>or</p>
-<p>### npm start (It will only start the frontend server)</p>
+<p>### `npm start` (It will only start the frontend server)</p>
 
 # Getting Started with Create React App
 
