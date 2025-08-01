@@ -33,18 +33,26 @@ const ShopCategory = (props) => {
     });
 
     return (
-        <div className="shop-category">
-            {/* Only show the filter in the Food category */}
-            {props.category === 'Food' && (
-                <FoodFilter 
-                    currentFilter={foodFilter} 
-                    onFilterChange={setFoodFilter}
-                />
-            )}
-            <div className="items-container">
-                {filteredProducts.map((item, i) => (
-                    <Item key={i} {...item} />
-                ))}
+        <div className={`shop-category background-${props.category.toLowerCase()}`}>
+            <div className="shop-category-container">
+                {/* Only show the filter in the Food category */}
+                {props.category === 'Food' && (
+                    <FoodFilter 
+                        currentFilter={foodFilter} 
+                        onFilterChange={setFoodFilter}
+                    />
+                )}
+                <div className="items-container">
+                    {filteredProducts.map((item, i) => (
+                        <Item key={i} {...item} />
+                    ))}
+                </div>
+                {filteredProducts.length === 0 && (
+                    <div className="no-items-message">
+                        <h3>No items found</h3>
+                        <p>Try adjusting your filter selection.</p>
+                    </div>
+                )}
             </div>
         </div>
     );

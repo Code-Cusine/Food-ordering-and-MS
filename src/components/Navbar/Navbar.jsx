@@ -1,141 +1,116 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './Navbar.css';
 import logo from '../assets/l3.png';
 import cartIcon from '../assets/cart_icon.png';
 import { Link } from 'react-router-dom';
 import { ShopContext } from '../../context/ShopContext';
-import { FaBars, FaTimes } from 'react-icons/fa'; // Import icons
+import { FaBars, FaTimes } from 'react-icons/fa';
+import ThemeToggle from '../ThemeToggle/ThemeToggle';
 
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState("shop");
   const { getTotalCartItems } = useContext(ShopContext);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Mobile menu state
-  const [isUpdateOverlayOpen, setIsUpdateOverlayOpen] = useState(false); // State for the Update overlay
-
-  // Fields for the item form
-  const [itemName, setItemName] = useState('');
-  const [itemDescription, setItemDescription] = useState('');
-  const [itemImage, setItemImage] = useState(null);
-  const [itemCategory, setItemCategory] = useState('Veg');
-  const [itemPrice, setItemPrice] = useState('');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const handleMenuClick = (menuName) => {
     setActiveMenu(menuName);
-    setIsMobileMenuOpen(false); // Close mobile menu when an item is clicked
+    setIsMobileMenuOpen(false);
   };
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen); // Toggle mobile menu open/close
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const openUpdateOverlay = () => {
-    setIsUpdateOverlayOpen(true);
-  };
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 50);
+    };
 
-  const closeUpdateOverlay = () => {
-    setIsUpdateOverlayOpen(false);
-    resetFormFields();
-  };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  const resetFormFields = () => {
-    setItemName('');
-    setItemDescription('');
-    setItemImage(null);
-    setItemCategory('Veg');
-    setItemPrice('');
-  };
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isMobileMenuOpen && !event.target.closest('.navbar')) {
+        setIsMobileMenuOpen(false);
+      }
+    };
 
-  {/*const handleUpdateItem = () => {
-    // Logic to handle the "Update Item" action (e.g., making an API call to update the item)
-    console.log("Updating item with data:", {
-      itemName,
-      itemDescription,
-      itemImage,
-      itemCategory,
-      itemPrice,
-    });
-    // Here, you can add an API call to save the updated item
-    closeUpdateOverlay(); // Close the overlay after updating
-  };*/}
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [isMobileMenuOpen]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
 
   return (
-    <div className='navbar'>
+    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="nav-logo">
-        <img src={logo} alt="Cuisine Code Logo" />
+        <img src={logo} alt="FoodieHub Logo" />
+        <span className="brand-text">FoodieHub</span>
       </div>
-      <div className="hamburger" onClick={toggleMobileMenu}>
-        {isMobileMenuOpen ? <FaTimes /> : <FaBars />} {/* Toggle between hamburger and close icon */}
-      </div>
+      
+      <button 
+        className="hamburger" 
+        onClick={toggleMobileMenu}
+        aria-label="Toggle mobile menu"
+        aria-expanded={isMobileMenuOpen}
+      >
+        {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+      </button>
+      
       <ul className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
         <li onClick={() => handleMenuClick("shop")} className={activeMenu === "shop" ? "active" : ""}>
-          <Link style={{ textDecoration: 'none' }} to='/'>Home</Link>
-          {activeMenu === "shop" ? <hr /> : null}
+          <Link to='/' aria-label="Home">
+            <span className="menu-icon">🏠</span>
+            <span className="menu-text">Home</span>
+          </Link>
         </li>
         <li onClick={() => handleMenuClick("drink")} className={activeMenu === "drink" ? "active" : ""}>
-          <Link style={{ textDecoration: 'none' }} to='/drinks'>Drinks</Link>
-          {activeMenu === "drink" ? <hr /> : null}
+          <Link to='/drinks' aria-label="Drinks">
+            <span className="menu-icon">🥤</span>
+            <span className="menu-text">Drinks</span>
+          </Link>
         </li>
         <li onClick={() => handleMenuClick("food")} className={activeMenu === "food" ? "active" : ""}>
-          <Link style={{ textDecoration: 'none' }} to='/foods'>Food</Link>
-          {activeMenu === "food" ? <hr /> : null}
+          <Link to='/foods' aria-label="Food">
+            <span className="menu-icon">🍽️</span>
+            <span className="menu-text">Food</span>
+          </Link>
         </li>
         <li onClick={() => handleMenuClick("aboutus")} className={activeMenu === "aboutus" ? "active" : ""}>
-          <Link style={{ textDecoration: 'none' }} to='/aboutus'>About Us</Link>
-          {activeMenu === "aboutus" ? <hr /> : null}
+          <Link to='/aboutus' aria-label="About Us">
+            <span className="menu-icon">ℹ️</span>
+            <span className="menu-text">About Us</span>
+          </Link>
         </li>
       </ul>
+      
       <div className="nav-login-cart">
-       {/* <button onClick={openUpdateOverlay} className="update-menu-button">Update Menu Items</button>*/}
-        
-        <Link to='/cart'>
-          <img src={cartIcon} alt="Cart" />
-          <div className="nav-cart-count">{getTotalCartItems()}</div>
+        <ThemeToggle />
+        <Link to='/cart' className="nav-cart-icon" aria-label={`Shopping cart with ${getTotalCartItems()} items`}>
+          <img src={cartIcon} alt="Shopping Cart" />
+          {getTotalCartItems() > 0 && (
+            <div className="nav-cart-count">{getTotalCartItems()}</div>
+          )}
         </Link>
       </div>
-
-      {/*{isUpdateOverlayOpen && (
-        <div className="update-overlay" onClick={closeUpdateOverlay}>
-          <div className="update-overlay-content" onClick={(e) => e.stopPropagation()}>
-            <h2>Update Menu Item</h2>
-            <input
-              type="text"
-              placeholder="Item Name"
-              value={itemName}
-              onChange={(e) => setItemName(e.target.value)}
-              required
-            />
-            <textarea
-              placeholder="Item Description (Optional)"
-              value={itemDescription}
-              onChange={(e) => setItemDescription(e.target.value)}
-            ></textarea>
-            <input
-              type="file"
-              onChange={(e) => setItemImage(e.target.files[0])}
-            />
-            <select
-              value={itemCategory}
-              onChange={(e) => setItemCategory(e.target.value)}
-            >
-              <option value="Veg">Veg</option>
-              <option value="Non-Veg">Non-Veg</option>
-              <option value="Drinks">Drinks</option>
-            </select>
-            <input
-              type="number"
-              placeholder="Item Price"
-              value={itemPrice}
-              onChange={(e) => setItemPrice(e.target.value)}
-              required
-            />
-            <div className="overlay-buttons">
-              <button onClick={handleUpdateItem}>Update Item</button>
-              <button onClick={closeUpdateOverlay}>Cancel</button>
-            </div>
-          </div>
-        </div>
-      )}*/}
-    </div>
+    </nav>
   );
 };
 

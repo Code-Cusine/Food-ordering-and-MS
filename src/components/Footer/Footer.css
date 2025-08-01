@@ -1,108 +1,326 @@
-/* Footer Container */
+/* Modern Food-Themed Footer */
 .footer {
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    padding: 10px 20px; /* Adjusted padding to ensure it fits */
-   
-    width: 200%; /* Ensure it takes full width of the screen */
-   /* max-width: 100%; *//* Limit the width to 100% of the viewport */
-    color: #000000;
-   
-    height: 120px;
-    margin-right: 50px;
-    gap: 5px; /* Space between footer elements */
-    flex-wrap: wrap; /* Allow wrapping on small screens */
-    box-sizing: border-box; /* Include padding and borders in element's total width/height */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-
+  background: linear-gradient(135deg, var(--text-dark) 0%, #1A252F 100%);
+  color: var(--white);
+  padding: 60px 20px 30px;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Logo Section */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(74, 124, 89, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+/* Modern Logo Section */
 .footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-left: -70px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .footer-logo img {
-    width: 120px; /* Larger logo size */
-    height: 80px;
-    object-fit: contain;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: var(--border-radius-small);
 }
 
-.footer-logo p {
-    color: #000000;
-    font-size: 28px;
-    font-weight: 700;
+.footer-brand-text {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-orange), var(--primary-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* Links Section */
+.footer-description {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  max-width: 300px;
+}
+
+/* Footer Sections */
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.footer-section h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.footer-section h3::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--primary-orange);
+  border-radius: 1px;
+}
+
+/* Modern Links */
 .footer-links {
-    display: flex;
-    list-style: none;
-    gap: 25px; /* Increased gap for better spacing */
-    font-size: 18px;
-    color: #4b4b4b;
-    justify-content: center;
-    flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-/* Individual Link Item */
 .footer-links li {
-    cursor: pointer;
-    transition: color 0.3s;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  padding-left: 0;
 }
 
 .footer-links li:hover {
-    color: #ff6b6b;
+  color: var(--primary-orange);
+  transform: translateX(5px);
 }
 
-/* Social Icons Section */
+.footer-links li::before {
+  content: '▸';
+  position: absolute;
+  left: -15px;
+  opacity: 0;
+  transition: var(--transition);
+  color: var(--primary-orange);
+}
+
+.footer-links li:hover::before {
+  opacity: 1;
+  left: -20px;
+}
+
+/* Social Icons */
+.footer-social {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
 .footer-social-icon {
-    display: flex;
-    gap: 20px; /* Increased gap */
-    justify-content: center; /* Center the icons */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.footer-social-icon a {
-    color: #4b4b4b;
-    font-size: 20px; /* Larger icon size */
-    transition: transform 0.3s, color 0.3s;
+.footer-social-icon:hover {
+  background: var(--primary-orange);
+  color: var(--white);
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
 }
 
-.footer-social-icon a:hover {
-    color: #ff6b6b;
-    transform: scale(1.2);
+/* Contact Info */
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  margin-bottom: 10px;
 }
 
-/* Separator */
-.footer-logo::after {
-    content: "|";
-    margin-left: 15px;
-    margin-right: 15px;
-    color: #4b4b4b;
-    font-size: 24px;
+.contact-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--primary-orange);
+  flex-shrink: 0;
 }
 
-/* Icons Container */
-.footer-icons-container {
-    padding: 5px;
-    background: #ffecd2;
-    border-radius: 10px;
+/* Footer Bottom */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-/* Copyright Section */
 .footer-copyright {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    margin-top:-50px;
-    width: 100%;
-    color: #000000;
-    font-size: 16px;
-    text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
 }
+
+.footer-legal {
+  display: flex;
+  gap: 25px;
+}
+
+.footer-legal a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.footer-legal a:hover {
+  color: var(--primary-orange);
+}
+
+/* Newsletter Section */
+.newsletter {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 25px;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.newsletter h3 {
+  margin-bottom: 15px;
+  color: var(--white);
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.newsletter-input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-small);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+}
+
+.newsletter-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.newsletter-input:focus {
+  outline: none;
+  border-color: var(--primary-orange);
+  box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
+}
+
+.newsletter-btn {
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--primary-orange), #FF8A50);
+  color: var(--white);
+  border: none;
+  border-radius: var(--border-radius-small);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.newsletter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer {
+    padding: 40px 15px 20px;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .footer-legal {
+    gap: 15px;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 30px 10px 15px;
+  }
+
+  .footer-brand-text {
+    font-size: 1.5rem;
+  }
+
+  .footer-social-icon {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Animation for footer elements */
+.footer-section {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.footer-section:nth-child(2) { animation-delay: 0.1s; }
+.footer-section:nth-child(3) { animation-delay: 0.2s; }
+.footer-section:nth-child(4) { animation-delay: 0.3s; }
 
