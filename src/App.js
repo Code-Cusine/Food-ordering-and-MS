@@ -6,6 +6,7 @@ import Cart from './Pages/Cart';
 import Shop from './Pages/Shop';
 import ShopCategory from './Pages/ShopCategory';
 import Footer from './components/Footer/Footer';
+import DatabaseStatus from './components/DatabaseStatus/DatabaseStatus';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from './components/LoginPage/LoginPage';
 import Register from './components/Register/Register';
@@ -21,6 +22,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <OrderOverlay />
+        <DatabaseStatus />
         
         {/* Wrapping Routes in PageWrapper for custom backgrounds */}
         <PageWrapper>
