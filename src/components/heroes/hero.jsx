@@ -38,7 +38,7 @@ const Hero = () => {
     ];
 
     return (
-        <div style={{margin: 0, padding: 0}}>
+        <div style={{margin: 0, padding: 0, width: '100%'}}>
             {/* Modern Hero Section */}
             <section className="hero">
                 <div className="hero-content fade-in-up">

@@ -9,7 +9,6 @@ import Footer from './components/Footer/Footer';
 import DatabaseStatus from './components/DatabaseStatus/DatabaseStatus';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PaymentPage from './components/PaymentPage/PaymentPage';
-import OrderOverlay from './components/Items/OrderOverlay';
 import Aboutus from './components/Aboutus/Aboutus';
 import PageWrapper from './components/PageWrapper/PageWrapper'; // Import PageWrapper component
 import { ThemeProvider } from './context/ThemeContext'; // Import ThemeProvider
@@ -22,7 +21,6 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <Navbar />
-          <OrderOverlay />
           <DatabaseStatus />
           
           {/* Main Content Area */}

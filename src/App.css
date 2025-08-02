@@ -41,7 +41,8 @@
 .main-content {
   flex: 1;
   min-height: calc(100vh - 160px); /* Adjust based on navbar and footer height */
-  padding-top: 0; /* Remove padding to eliminate gaps */
+  padding: 0; /* Remove all padding to eliminate gaps */
+  margin: 0; /* Ensure no margins */
 }
 
 /* Modern Loading Spinner */

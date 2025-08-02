@@ -32,12 +32,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build", 
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "nodemon server/server.js",
-    "client": "react-scripts start",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "react-scripts start"
   },
   "eslintConfig": {
     "extends": [
@@ -63,7 +63,7 @@
     ],
     "plugins": [
       [
-        "@babel/plugin-proposal-private-property-in-object",
+        "@babel/plugin-transform-private-property-in-object",
         {
           "loose": true
         }
@@ -71,7 +71,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/plugin-transform-private-property-in-object": "^7.27.1",
     "concurrently": "^9.2.0",
     "eslint": "^8.57.0",

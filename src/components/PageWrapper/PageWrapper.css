@@ -47,10 +47,12 @@
   min-height: 100vh;
   display: flex; /* Optional: Flex for aligning content */
   align-items: flex-start; /* Optional: Content alignment */ 
+  padding: 0; /* Remove all padding */
+  margin: 0; /* Remove all margins */
 }
 
 .background-foods  {
-  background-image: url('../assets/drinks.jpg');
+  background-image: url('../assets/food_banner.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

@@ -1,95 +1,73 @@
 import React, { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Use useNavigate to redirect
+import { Link, useNavigate } from 'react-router-dom';
 import { ShopContext } from '../../context/ShopContext';
-import { useOrder } from '../../context/OrderContext'; // Ensure you import the OrderContext
+import { useOrder } from '../../context/OrderContext';
+import CustomerDetailsModal from './CustomerDetailsModal';
 import './combined-item-styles.css';
 
 const Item = (props) => {
     const { addToCart } = useContext(ShopContext);
     const {
         orderItems, setOrderItems,
-        showOrderOverlay, setShowOrderOverlay,
         customerName, setCustomerName,
         phoneNumber, setPhoneNumber
     } = useOrder();
 
-    const [showCustomerInput, setShowCustomerInput] = useState(false);
-    const [isSingleItemOrder, setIsSingleItemOrder] = useState(false); // Track whether it's a single item order
-    const navigate = useNavigate(); // To navigate to the PaymentPage
+    const [showCustomerModal, setShowCustomerModal] = useState(false);
+    const [isSingleItemOrder, setIsSingleItemOrder] = useState(false);
+    const navigate = useNavigate();
 
     const validatePhoneNumber = (number) => {
-        const phoneRegex = /^[0-9]{10}$/; // Regular expression for 10 digits
+        const phoneRegex = /^[0-9]{10}$/;
         return phoneRegex.test(number);
     };
 
     const handleAddToCart = () => {
-        setIsSingleItemOrder(false); // It's not a single item order
+        setIsSingleItemOrder(false);
         if (customerName && phoneNumber && validatePhoneNumber(phoneNumber)) {
             setOrderItems(prevItems => {
-                // Check if the current item already exists in the cart by its ID
                 const existingItem = prevItems.find(item => item.id === props.id);
                 if (existingItem) {
-                    // If it exists, increment the quantity of the existing item
                     return prevItems.map(item =>
                         item.id === props.id ? { ...item, quantity: item.quantity + 1 } : item
                     );
                 } else {
-                    // If it doesn't exist, add the new item with quantity 1
                     return [...prevItems, { ...props, quantity: 1 }];
                 }
             });
-            // Call addToCart from the ShopContext, but only for unique items
             addToCart(props.id); 
         } else {
-            // Ask for customer details if it's the first item
-            setShowCustomerInput(true);
+            setShowCustomerModal(true);
         }
     };
 
     const handleBuyNow = () => {
-        setIsSingleItemOrder(true); // Mark as a single item order
-        if (!customerName || !phoneNumber) {
-            setShowCustomerInput(true);
+        setIsSingleItemOrder(true);
+        if (!customerName || !phoneNumber || !validatePhoneNumber(phoneNumber)) {
+            setShowCustomerModal(true);
         } else {
             setOrderItems([{ ...props, quantity: 1 }]);
-            setShowOrderOverlay(true);
+            navigate('/payment');
         }
     };
 
     const handleCustomerSubmit = () => {
-        if (!customerName.trim()) {
-            alert('Please enter your name.');
-            return;
-        }
-        if (!phoneNumber.trim()) {
-            alert('Please enter your phone number.');
-            return;
-        }
-        if (!validatePhoneNumber(phoneNumber)) {
-            alert('Please enter a valid 10-digit phone number.');
-            return;
-        }
-    
         if (isSingleItemOrder) {
-            // For single item orders (Buy Now), navigate to the payment page
-            setOrderItems([{ ...props, quantity: 1 }]); // Add the current item as the only order
-            setShowCustomerInput(false);
-            navigate('/payment'); // Navigate to Payment Page after submitting customer details
+            setOrderItems([{ ...props, quantity: 1 }]);
+            setShowCustomerModal(false);
+            navigate('/payment');
         } else {
-            // For multi-item orders, just add the first item to the cart
             setOrderItems(prevItems => {
                 const existingItem = prevItems.find(item => item.id === props.id);
                 if (existingItem) {
-                    // If the item already exists in the cart, update its quantity
                     return prevItems.map(item =>
                         item.id === props.id ? { ...item, quantity: item.quantity + 1 } : item
                     );
                 }
-                // If it's a new item, add it to the cart with quantity 1
                 return [...prevItems, { ...props, quantity: 1 }];
             });
-            addToCart(props.id); // Call addToCart for context consistency
-            setShowCustomerInput(false);
+            addToCart(props.id);
+            setShowCustomerModal(false);
         }
     };
 
@@ -123,31 +101,17 @@ const Item = (props) => {
                 </div>
             </div>
 
-            {showCustomerInput && (
-                <div className="overlay">
-                    <div className="overlay-content">
-                        <h2>Customer Details</h2>
-                        <input
-                            type="text"
-                            placeholder="Your Name"
-                            value={customerName}
-                            onChange={(e) => setCustomerName(e.target.value)}
-                        />
-                        <input
-                            type="text"
-                            placeholder="Phone Number"
-                            value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
-                        />
-                        <div className="button-group">
-                            <button onClick={handleCustomerSubmit}>
-                                {isSingleItemOrder ? 'Make Payment' : 'Add More Items'}
-                            </button>
-                            <button onClick={() => setShowCustomerInput(false)}>Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            )}
+            <CustomerDetailsModal
+                isOpen={showCustomerModal}
+                onClose={() => setShowCustomerModal(false)}
+                onSubmit={handleCustomerSubmit}
+                customerName={customerName}
+                setCustomerName={setCustomerName}
+                phoneNumber={phoneNumber}
+                setPhoneNumber={setPhoneNumber}
+                buttonText={isSingleItemOrder ? 'Make Payment' : 'Add to Cart'}
+                title="Customer Details"
+            />
         </div>
     );
 };
