@@ -52,7 +52,7 @@
 }
 
 .background-foods  {
-  background-image: url('../assets/food_banner.jpg');
+  background-image: url('../assets/drinks.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -86,17 +86,17 @@
 
 @media (max-width: 768px) {
   .background-foods {
-      background-size: contain; /* Adjust for smaller screens */
+      background-size: cover;
       background-attachment: scroll;
   }
 
   .background-drinks {
-    background-size: contain; /* Adjust for smaller screens */
+    background-size: cover;
     background-attachment: scroll;
   }
 
   .background-aboutus {
-    background-size: contain; /* Adjust for smaller screens */
+    background-size: cover;
     background-attachment: scroll;
   }
   

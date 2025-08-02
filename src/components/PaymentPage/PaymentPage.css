@@ -532,13 +532,28 @@
   margin-bottom: 20px;
   padding: 10px 0;
   border-bottom: 1px solid #eee;
+  color: #000 !important; /* Ensure list items are black */
 }
 
 .receipt-content p {
-  color: #333;
+  color: #000 !important; /* Changed from #333 to black for better visibility */
   font-weight: 500;
   margin: 8px 0;
   line-height: 1.5;
+}
+
+.receipt-content ul {
+  color: #000 !important;
+}
+
+.receipt-content li {
+  color: #000 !important;
+}
+
+.receipt-total {
+  color: #000 !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
 }
 
 /* Move these sections out of receipt-content */

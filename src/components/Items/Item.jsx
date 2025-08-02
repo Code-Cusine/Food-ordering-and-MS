@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ShopContext } from '../../context/ShopContext';
 import { useOrder } from '../../context/OrderContext';
 import CustomerDetailsModal from './CustomerDetailsModal';
 import './combined-item-styles.css';
 
-const Item = (props) => {
+const Item = React.memo((props) => {
     const { addToCart } = useContext(ShopContext);
     const {
         orderItems, setOrderItems,
@@ -114,6 +114,6 @@ const Item = (props) => {
             />
         </div>
     );
-};
+});
 
 export default Item;

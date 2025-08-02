@@ -5,7 +5,8 @@
   background-image: url('../assets/drinks.jpg');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
   min-height: 100vh;
   width: 100%;
   padding: 40px 20px;
@@ -24,16 +25,17 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.1);
   pointer-events: none;
 }
 
 .background-food {
-  background-image: url('../assets/food_banner.jpg');
-  background-size: cover;
+
+  background-size: relative;
   background-position: center;
-  background-attachment: fixed;
+   background: rgba(0, 0, 0, 0.1);
+  background-attachment: scroll;
+  background-repeat: no-repeat;
   min-height: 100vh;
   width: 100%;
   padding: 40px 20px;
@@ -52,8 +54,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.1);
   pointer-events: none;
 }
 
@@ -109,6 +110,8 @@
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 30px;
   margin-top: 40px;
+  contain: layout style;
+  will-change: auto;
 }
 
 /* No Items Message with Better Readability */
@@ -762,6 +765,11 @@ textarea.error {
   .background-food {
     background-attachment: scroll;
     background-size: cover;
+  }
+
+  .background-drinks::before,
+  .background-food::before {
+    background: rgba(0, 0, 0, 0.1);
   }
   
   .items-container {

@@ -26,9 +26,9 @@
   --text-dark: #1E293B;
   
   /* Glass Effect - Enhanced for Better Readability */
-  --glass-bg: rgba(30, 41, 59, 0.8);
-  --glass-bg-light: rgba(51, 65, 85, 0.9);
-  --glass-bg-strong: rgba(15, 23, 42, 0.95);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-bg-light: rgba(255, 255, 255, 0.2);
+  --glass-bg-strong: rgba(30, 41, 59, 0.95);
   --glass-border: rgba(255, 255, 255, 0.2);
   --glass-shadow: rgba(0, 0, 0, 0.3);
   

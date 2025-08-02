@@ -328,6 +328,12 @@ const PaymentPage = () => {
       return;
     }
 
+    // Show loading toast
+    const loadingToastId = toast.loading('Processing your payment...', { 
+      position: "top-center",
+      autoClose: false 
+    });
+
     setIsLoading(true);
 
     try {
@@ -345,6 +351,13 @@ const PaymentPage = () => {
         })),
       };
 
+      // Update loading toast
+      toast.update(loadingToastId, { 
+        render: 'Creating order...', 
+        type: "info",
+        isLoading: true 
+      });
+
       const orderResponse = await axios.post('http://localhost:5000/api/orders', orderData);
       const { custid, orderid } = orderResponse.data;
 
@@ -356,12 +369,25 @@ const PaymentPage = () => {
         paymentstatus: 'Completed',
       };
 
+      // Update loading toast
+      toast.update(loadingToastId, { 
+        render: 'Finalizing payment...', 
+        type: "info",
+        isLoading: true 
+      });
+
       await axios.post('http://localhost:5000/api/payments', paymentData);
       
       setShowOrderOverlay(false);
       setIsLoading(false);
 
-      toast.success('Payment processed successfully!', { position: "top-right" });
+      // Update toast to success
+      toast.update(loadingToastId, {
+        render: 'Payment processed successfully!',
+        type: "success",
+        isLoading: false,
+        autoClose: 3000
+      });
 
       setIsPaymentProcessed(true);
 
@@ -392,7 +418,14 @@ const PaymentPage = () => {
 
     } catch (error) {
       setIsLoading(false);
-      toast.error('There was an error processing your order. Please try again.', { position: "top-right" });
+      
+      // Update toast to error
+      toast.update(loadingToastId, {
+        render: 'Payment failed. Please try again.',
+        type: "error",
+        isLoading: false,
+        autoClose: 5000
+      });
     }
   };
 
@@ -433,7 +466,21 @@ const PaymentPage = () => {
 
   return (
     <div className="payment-page-container">
-      <ToastContainer />
+      <ToastContainer 
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        style={{
+          zIndex: 99999
+        }}
+      />
        {showQRCode && <QRCodeOverlay />}
       {isLoading && (
         <div className="loading-overlay">
