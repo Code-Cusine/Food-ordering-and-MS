@@ -10,6 +10,8 @@ import DatabaseStatus from './components/DatabaseStatus/DatabaseStatus';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PaymentPage from './components/PaymentPage/PaymentPage';
 import Aboutus from './components/Aboutus/Aboutus';
+import Contact from './components/Contact/Contact';
+import PrivacyPolicy from './components/PrivacyPolicy/PrivacyPolicy';
 import PageWrapper from './components/PageWrapper/PageWrapper'; // Import PageWrapper component
 import { ThemeProvider } from './context/ThemeContext'; // Import ThemeProvider
 import './App.css';
@@ -32,7 +34,9 @@ function App() {
                 <Route path='/foods' element={<ShopCategory category="Food" />} />
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/aboutus' element={<Aboutus />} />
+                <Route path='/contact' element={<Contact />} />
                 <Route path='/payment' element={<PaymentPage />} />
+                <Route path='/privacy' element={<PrivacyPolicy />} />
               </Routes>
             </PageWrapper>
           </main>
